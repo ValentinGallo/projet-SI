@@ -6,7 +6,7 @@ const app = express()
  */
 const MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://localhost:27017';
-const dbName = 'projet-SI';
+const dbName = 'projetSI';
 let db
 
 MongoClient.connect(url, function(err, client) {
@@ -17,8 +17,8 @@ MongoClient.connect(url, function(err, client) {
 
 app.use(express.json())
 
-app.get('/users', (req,res) => {
-    db.collection('user').find({}).toArray(function(err, docs) {
+app.get('/messages', (req,res) => {
+    db.collection('messages').find({}).toArray(function(err, docs) {
         if (err) {
             console.log(err)
             throw err
@@ -27,10 +27,10 @@ app.get('/users', (req,res) => {
       }) 
 })
 
-app.get('/users/:id', async (req,res) => {
-    const id = parseInt(req.params.id)
+app.get('/messages/:_id', async (req,res) => {
+    const _id = parseInt(ObjectId(req.params._id))
     try {
-        const docs = await db.collection('user').findOne({id})
+        const docs = await db.collection('messages').findOne({_id})
         res.status(200).json(docs)
     } catch (err) {
         console.log(err)
