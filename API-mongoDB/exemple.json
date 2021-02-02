@@ -1,4 +1,4 @@
-{
+[
         {
             "idsDestinataire" : [0, 4, 9],
             "idExpéditeur" : 3,
@@ -6,4 +6,4 @@
             "dateEnvoi" : "02/02/2021",
             "messageLu" : false 
         }
-}
+]
