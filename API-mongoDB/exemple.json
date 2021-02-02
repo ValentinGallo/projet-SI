@@ -1,0 +1,12 @@
+{
+    "messages" : [
+        {
+            "idDestinataire" : 2,
+            "idExpéditeur" : 3,
+            "objet": "Envoie des informations",
+            "texte": "Bonjour Mr, nous sommes en crise...",
+            "dateEnvoi" : "02/02/2021",
+            "messageLu" : false 
+        }
+    ]
+}
