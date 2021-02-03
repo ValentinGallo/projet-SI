@@ -1,0 +1,10 @@
+db.messages.insert(
+        {
+            "idsDestinataire" : [0, 4, 9],
+            "idExpéditeur" : 3,
+            "message": "Bonjour Mr, nous sommes en crise...",
+            "dateEnvoi" : "02/02/2021",
+            "messageLu" : false 
+        }
+
+)
