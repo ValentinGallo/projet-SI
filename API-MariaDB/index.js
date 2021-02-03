@@ -14,7 +14,9 @@ connection.connect();
 
 //////////////////
 //GET
-//////////
+//////////////////
+
+    //Selection global
     app.get('/user', (req,res) => {
         connection.query('SELECT * from user', function (error, results) {
             if (error) throw error;
@@ -24,8 +26,65 @@ connection.connect();
        
     })
 
-    app.get('/user/prenom', (req,res) => {
-        connection.query('SELECT prenom from user', function (error, results) {
+    app.get('/cp', (req,res) => {
+        connection.query('SELECT * from cp', function (error, results) {
+            if (error) throw error;
+                console.log('result :', results);
+                res.status(200).json(results)
+        });
+       
+    })
+
+    app.get('/mf', (req,res) => {
+        connection.query('SELECT * from mf', function (error, results) {
+            if (error) throw error;
+                console.log('result :', results);
+                res.status(200).json(results)
+        });
+       
+    })
+
+    app.get('/nf', (req,res) => {
+        connection.query('SELECT * from nf', function (error, results) {
+            if (error) throw error;
+                console.log('result :', results);
+                res.status(200).json(results)
+        });
+       
+    })
+
+    app.get('/role', (req,res) => {
+        connection.query('SELECT * from role', function (error, results) {
+            if (error) throw error;
+                console.log('result :', results);
+                res.status(200).json(results)
+        });
+       
+    })
+
+    app.get('/up', (req,res) => {
+        connection.query('SELECT * from up', function (error, results) {
+            if (error) throw error;
+                console.log('result :', results);
+                res.status(200).json(results)
+        });
+       
+    })
+
+    //Select dans la table USER
+    app.get('/user/:id', (req,res) => {
+        const id = parseInt(req.params.id)
+        connection.query('SELECT id FROM user WHERE id ='+id, function (error, results) {
+            if (error) throw error;
+                console.log('result :', results);
+                res.status(200).json(results)
+        });
+       
+    })
+
+    app.get('/user/motDePasse/:id', (req,res) => {
+        const id = parseInt(req.params.id)
+        connection.query('SELECT motdepasse FROM user WHERE id ='+id, function (error, results) {
             if (error) throw error;
                 console.log('result :', results);
                 res.status(200).json(results)
@@ -37,6 +96,6 @@ connection.connect();
 //Serveur
 //////////////////
 
-app.listen(8080, () => {
+app.listen(7032, () => {
     console.log("Serveur à l'écoute")
 })
