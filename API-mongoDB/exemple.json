@@ -1,10 +1,10 @@
 db.messages.insert(
         {
-            "idsDestinataire" : [0, 4, 9],
-            "idExpéditeur" : 3,
-            "message": "Bonjour Mr, nous sommes en crise...",
-            "dateEnvoi" : "02/02/2021",
+            "id":1,
+            "idsDestinataire" : [2, 3, 4],
+            "idExpéditeur" : 1,
+            "message": "Bonjour je vous transmets ce message pour ...",
+            "dateEnvoi" : "06/02/2021",
             "messageLu" : false 
         }
-
 )

@@ -1,12 +1,13 @@
 const express = require('express')
 const app = express()
+require('dotenv').config()
 
 /**
- * Import MongoClient & connexion à la DB
+ * Connexion mongoDBF
  */
 const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://localhost:27017';
-const dbName = 'projetSI';
+const url = process.env.DB_HOST;
+const dbName = process.env.DB_DATABASE;
 let db
 
 MongoClient.connect(url, function(err, client) {
@@ -17,7 +18,7 @@ MongoClient.connect(url, function(err, client) {
 
 app.use(express.json())
 
-app.get('/messages', (req,res) => {
+app.get('/message', (req,res) => {
     db.collection('messages').find({}).toArray(function(err, docs) {
         if (err) {
             console.log(err)
@@ -27,15 +28,27 @@ app.get('/messages', (req,res) => {
       }) 
 })
 
-app.get('/messages/:_id', async (req,res) => {
-    const _id = parseInt(ObjectId(req.params._id))
+app.get('/message/:id', async (req,res) => {
+    const id = parseInt(req.params.id)
     try {
-        const docs = await db.collection('messages').findOne({_id})
-        res.status(200).json(docs)
+        const message = await db.collection('messages').findOne({id})
+        res.status(200).json(message)
     } catch (err) {
         console.log(err)
         throw err
     }
+})
+
+app.post('/message', async (req,res) => {
+    try {
+        const messageData = req.body
+        const message = await db.collection('messages').insertOne(messageData)
+        res.status(200).json(message)
+    } catch (err) {
+        console.log(err)
+        throw err
+    }
+    
 })
 
 app.listen(7033, () => {
