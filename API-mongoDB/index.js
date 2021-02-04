@@ -6,6 +6,7 @@ require('dotenv').config()
  * Connexion mongoDBF
  */
 const MongoClient = require('mongodb').MongoClient;
+var ObjectId = require('mongodb').ObjectID;
 const url = process.env.DB_HOST;
 const dbName = process.env.DB_DATABASE;
 let db
@@ -28,10 +29,11 @@ app.get('/message', (req,res) => {
       }) 
 })
 
-app.get('/message/:id', async (req,res) => {
-    const id = parseInt(req.params.id)
+app.get('/message/:_id', async (req,res) => {
+    const _id = req.params._id
+    console.log(_id)
     try {
-        const message = await db.collection('messages').findOne({id})
+        const message = await db.collection('messages').findOne(ObjectId(_id))
         res.status(200).json(message)
     } catch (err) {
         console.log(err)
@@ -48,7 +50,19 @@ app.post('/message', async (req,res) => {
         console.log(err)
         throw err
     }
-    
+})
+
+app.get('/disscussion/:idExpediteur/:idsDestinataire', async (req,res) => {
+    const idExpediteur = parseInt(req.params.idExpediteur)
+    const idsDestinataire = parseInt(req.params.idsDestinataire)
+    console.log(idExpediteur)
+    try {
+        const message = await db.collection('messages').find({ idExpéditeur: idExpediteur })
+        res.status(200).json(message)
+    } catch (err) {
+        console.log(err)
+        throw err
+    }
 })
 
 app.listen(7033, () => {
