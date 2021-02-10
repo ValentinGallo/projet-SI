@@ -91,7 +91,7 @@ app.use(cors(corsOptions));
        
     })
 
-    //Post
+    //Post create
     app.post('/user', (req,res)=>{
         const identifiant = req.body.identifiant
         const motDePasse = req.body.motDePasse
@@ -116,6 +116,58 @@ app.use(cors(corsOptions));
         });
     })
 
+    //Update
+    app.put('/role', (req,res)=>{
+
+        const id = req.body.id
+        const nom = req.body.nom
+
+        var sql = "UPDATE role SET nom = '"+nom+"' WHERE id='"+id+"'";
+        connection.query(sql, function (error, results) {
+            if (error) throw error;
+                console.log('result :', results);
+                res.status(200).json(results)
+        });
+    })
+
+    app.put('/user', (req,res)=>{
+
+        const id = req.body.id
+        const identifiant = req.body.identifiant
+        const motDePasse = req.body.motDePasse
+        const idRole = req.body.idRole
+
+        var sql = "UPDATE users SET identifiant='"+identifiant+"', motDePasse='"+motDePasse+"', idRole='"+idRole+"' WHERE id='"+id+"'";
+        connection.query(sql, function (error, results) {
+            if (error) throw error;
+                console.log('result :', results);
+                res.status(200).json(results)
+        });
+    })
+    //Delete
+    app.delete('/user', (req,res)=>{
+
+        const id = req.body.id
+
+        var sql = "Delete FROM users WHERE id='"+id+"'";
+        connection.query(sql, function (error, results) {
+            if (error) throw error;
+                console.log('result :', results);
+                res.status(200).json(results)
+        });
+    })
+
+    app.delete('/role', (req,res)=>{
+
+        const id = req.body.id
+
+        var sql = "Delete FROM role WHERE id='"+id+"'";
+        connection.query(sql, function (error, results) {
+            if (error) throw error;
+                console.log('result :', results);
+                res.status(200).json(results)
+        });
+    })
 
 
 //////////////////
