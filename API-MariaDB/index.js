@@ -140,9 +140,9 @@ app.use(cors());
         });
     })
     //Delete
-    app.delete('/user', (req,res)=>{
+    app.delete('/user/:id', (req,res)=>{
 
-        const id = req.body.id
+        const id = parseInt(req.params.id)
 
         var sql = "Delete FROM users WHERE id='"+id+"'";
         connection.query(sql, function (error, results) {
@@ -152,9 +152,9 @@ app.use(cors());
         });
     })
 
-    app.delete('/role', (req,res)=>{
+    app.delete('/role/:id', (req,res)=>{
 
-        const id = req.body.id
+        const id = parseInt(req.params.id)
 
         var sql = "Delete FROM role WHERE id='"+id+"'";
         connection.query(sql, function (error, results) {
