@@ -21,7 +21,7 @@ app.use(cors());
 
     //Selection global
     app.get('/user', (req,res) => {
-        connection.query('SELECT * from users', function (error, results) {
+        connection.query("SELECT users.id, identifiant, motDePasse, idRole, nom as nomRole FROM role INNER JOIN users ON role.id = users.idRole", function (error, results) {
             if (error) throw error;
                 console.log('result :', results);
                 res.status(200).json(results)
