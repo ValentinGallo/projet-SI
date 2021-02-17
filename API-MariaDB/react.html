@@ -1,0 +1,150 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type='text/babel'>
+        /*  class Zone extends React.Component{
+            constructor(props) {
+                super(props);
+                this.state = {
+                    text : null,
+                    voitures : ['bmw','renault']
+                };
+            };
+            componentDidMount() {
+                let monAPI = "http://localhost:7032";
+                fetch(monAPI)
+                .then(response => response.json())
+                .then(response => this.setState({text:response.test}))
+                .catch(err => console.error(err))
+            }
+            changeState(){
+                this.setState({voitures:['volvo']});
+            }
+            render() {
+                
+                return (
+                <div> 
+                    <Button props={this.changeState()}/>
+                    {this.state.text} 
+                    {this.state.voitures}
+                </div>
+                );
+            }
+        };*/
+        
+        
+        class Formulaire extends React.Component{
+
+
+            constructor(props) {
+                super(props);
+                this.state = {
+                    identifiantLocal: "",
+                    motDePasseLocal: "",
+                    identifiantsBdd: [],
+                    motDePasseBdd: ""
+                };
+                
+                this.handleInputChange = this.handleInputChange.bind(this);
+            }
+            
+            
+            componentDidMount() {
+                let monAPI = "http://obiwan2.univ-brest.fr:7032/user";
+                fetch(monAPI)
+                .then(response => response.json())
+                .then(response => this.setState({identifiant:response[0].identifiant}))
+                .then(response => this.setState({identifiant:response[0].motDePasse}))
+                .catch(err => console.error(err))
+            }
+
+            userExist(){
+                let monAPI = "http://obiwan2.univ-brest.fr:7032/user";
+                fetch(monAPI)
+                .then(response => response.json())
+                .then(response => this.setState({identifiantsBdd:response[0].identifiant}))
+                identifiantsBdd.forEach(monIdentifiant => {
+                    
+                });
+            }
+
+            handleInputChange(event) {
+                this.setState({
+                    [event.target.name]: event.target.value
+                });
+            }
+            
+            handleSubmit(event) {
+                alert('Bienvenue' + this.state.identifiant +' '+ this.state.motDePasse);
+                event.preventDefault();
+            }
+
+            render(){
+                return(
+                <div class="container mt-5"> 
+                    <form onSubmit={this.handleSubmit}>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Identifiant</label>
+                            <input type="text" class="form-control" id="identifiant" name="identifiant"  
+                            value={this.state.identifiant}
+                            onChange={this.handleInputChange} />
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="motDePasse" name="motDePasse"
+                            value={this.state.motDePasse}
+                            onChange={this.handleInputChange}/>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Connexion</button>
+                    </form>
+                </div> 
+                );
+            }
+        };
+        
+        class Navbar extends React.Component{
+            render(){
+                return(
+                <div> 
+                    <nav class="navbar navbar-expand-lg navbar-lite bg-dark">
+                        <div class="container-fluid">
+                            <a class="navbar-brand" href="#">QuipoQuizz</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div >
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Déconnexin</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Connexion</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div> 
+                );
+            }
+        };
+        
+        class Page extends React.Component{
+            render() {
+                return (<div><Navbar/><Formulaire/></div>);
+            }
+        };
+        
+        ReactDOM.render(<Page />, document.getElementById('root'));
+    </script>
+</body>
+</html>

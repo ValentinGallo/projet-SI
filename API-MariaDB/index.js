@@ -13,12 +13,7 @@ connection.connect();
 app.use(express.json())
 
 const cors = require('cors');
-const corsOptions ={
-    origin:'http://localhost:3000/', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
-}
-app.use(cors(corsOptions));
+app.use(cors());
 
 //////////////////
 //GET
@@ -80,10 +75,10 @@ app.use(cors(corsOptions));
     })
 
     //Select dans la table USER
-    app.get('/user/:id', (req,res) => {
-        const id = parseInt(req.params.id)
+    app.get('/user/:identifiant', (req,res) => {
+        const identifiant = req.params.identifiant
         
-        connection.query('SELECT users.id, identifiant, motDePasse, idRole, nom as nomRole FROM role INNER JOIN users ON role.id = users.idRole WHERE users.id='+id, function (error, results) {
+        connection.query("SELECT users.id, identifiant, motDePasse, idRole, nom as nomRole FROM role INNER JOIN users ON role.id = users.idRole WHERE users.identifiant='"+identifiant+"'", function (error, results) {
             if (error) throw error;
                 console.log('result :', results);
                 res.status(200).json(results)
@@ -169,6 +164,10 @@ app.use(cors(corsOptions));
         });
     })
 
+//REACT
+app.get('/formulaire',(req,res)=>{
+	res.sendFile(path.join(__dirname,"reactFetch.html"))
+});
 
 //////////////////
 //Serveur
