@@ -17,6 +17,9 @@ MongoClient.connect(url, function(err, client) {
 });
 
 
+const cors = require('cors');
+app.use(cors());
+
 app.use(express.json())
 
 app.get('/message', (req,res) => {
@@ -55,9 +58,8 @@ app.post('/message', async (req,res) => {
 app.get('/disscussion/:idExpediteur/:idsDestinataire', async (req,res) => {
     const idExpediteur = parseInt(req.params.idExpediteur)
     const idsDestinataire = parseInt(req.params.idsDestinataire)
-    console.log(idExpediteur)
     try {
-        const message = await db.collection('messages').find({ idExpéditeur: idExpediteur })
+        const message = await db.collection('messages').find( { idExpediteur: 1, idsDestinataire: { $all: [idsDestinataire] } } ).toArray()
         res.status(200).json(message)
     } catch (err) {
         console.log(err)
