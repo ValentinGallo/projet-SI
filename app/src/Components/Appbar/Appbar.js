@@ -27,6 +27,7 @@ class Appbar extends React.Component {
   <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div className="navbar-nav">
       <a className="nav-item nav-link active" href="/Connexion">Connexion</a>
+      <a className="nav-item nav-link active" href="/Messagerie">Messagerie</a>
     </div>
   </div>
 </nav>

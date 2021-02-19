@@ -6,6 +6,7 @@ import Appbar from './Components/Appbar/Appbar'
 //Et on met  <Route path="/maRoute" component={LeNomDuComposantDuImport}/>
 import Connexion from './Components/Connexion/Connexion'
 import Home from './Components/Home/Home'
+import Messagerie from './Components/messagerie/Messagerie.js'
 
 const App = () => (
   <Router>
@@ -13,6 +14,7 @@ const App = () => (
       <Switch>
         <Route exact path="/" component={Home}/>
         <Route path="/Connexion" component={Connexion}/>
+        <Route path="/Messagerie" component={Messagerie}/>
       </Switch>
   </Router>
 );
