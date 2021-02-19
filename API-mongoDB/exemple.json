@@ -1,10 +1,54 @@
 db.messages.insert(
         {
             "id":1,
-            "idsDestinataire" : [2, 3, 4],
+            "idExpediteur" : 2,
+            "idsDestinataire" : [3],
+            "message": "Bonjour, ça va ?",
+            "dateEnvoi" : Date(),
+            "messageLu" : false
+        }
+)
+
+db.messages.insert(
+        {
+            "id":2,
+            "idExpediteur" : 3,
+            "idsDestinataire" : [2],
+            "message": "Oui niquel et toi ?",
+            "dateEnvoi" : Date(),
+            "messageLu" : false
+        }
+)
+
+db.messages.insert(
+        {
+            "id":3,
+            "idExpediteur" : 2,
+            "idsDestinataire" : [3],
+            "message": "Ba ouais trkl",
+            "dateEnvoi" : Date(),
+            "messageLu" : false
+        }
+)
+
+db.messages.insert(
+        {
+            "id":4,
             "idExpediteur" : 1,
-            "message": "Bonjour je vous transmets ce message pour ...",
-            "dateEnvoi" : "06/02/2021",
-            "messageLu" : false 
+            "idsDestinataire" : [2],
+            "message": "Bonjour je suis l'admin",
+            "dateEnvoi" : Date(),
+            "messageLu" : false
+        }
+)
+
+db.messages.insert(
+        {
+            "id":5,
+            "idExpediteur" : 2,
+            "idsDestinataire" : [1],
+            "message": "Bonjour MR l'admin",
+            "dateEnvoi" : Date(),
+            "messageLu" : false
         }
 )
