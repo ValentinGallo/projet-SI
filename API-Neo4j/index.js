@@ -177,6 +177,19 @@ app.post('/utilisateur_up/:id_utilisateur/:id_up', (req,res) => {
     })
 })
 
+/* Backup Neo4j */
+app.get('/neo4j', (req,res) => {
+    session.run('CALL apoc.export.csv.all(null, {stream:true}) YIELD data RETURN data')
+    .then(function(result) {
+        res.charset = 'utf-8';
+        res.set({"Content-Disposition":"attachment; filename=\"neo4j.csv\""});
+        res.send(result.records[0]._fields[0]);
+    })
+    .catch(function (error) {
+        res.status(404).send(error)
+    })
+})
+
 /* Lancement du serveur */
 app.listen(7034, () => {
     console.log('--- SERVEUR NEO4J ---')
