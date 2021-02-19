@@ -5,6 +5,9 @@ export default {
     afficherUsers : function() {
         return fetch(burl+'/user');
     },
+    afficherRoles : function() {
+        return fetch(burl+'/role');
+    },
     postUser : function(id, mdp) {
             const requestOptions = {
                 method: 'POST',
