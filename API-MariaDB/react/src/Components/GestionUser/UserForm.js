@@ -1,8 +1,8 @@
 //Rien d'intéressant ici du pur affichage html/css
 import React from 'react';
-import API from '../utils/API';
+import API from '../../utils/API';
 
-class Home extends React.Component {
+class UserForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,7 +10,8 @@ class Home extends React.Component {
       isLoaded: false,
       items: [],
       identifiant: '',
-      motDePasse: ''
+      motDePasse: '',
+      roles:[]
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,6 +21,11 @@ class Home extends React.Component {
     API.afficherUsers()
     .then(response => response.json())
     .then(response => this.setState({isLoaded: true, items: response}))
+    .catch(err => console.error(err));
+    
+    API.afficherRoles()
+    .then(response => response.json())
+    .then(response => this.setState({roles: response}))
     .catch(err => console.error(err));
   }
   
@@ -39,36 +45,36 @@ class Home extends React.Component {
   }
   
   render() {
-    const { error, isLoaded, items } = this.state;
+    
+    const { error, isLoaded } = this.state;
     if (error) {
       return <div>Erreur : {error.message}</div>;
     } else if (!isLoaded) {
       return <div>Chargement…</div>;
     } else {
       return (
-        <div>
-        <ul>
-        {items.map(item => (
-          <li key={item.id}>
-          {item.id} {item.identifiant} {item.motDePasse} {item.idRole}
-          </li>
-          ))}
-          </ul>
-          <form onSubmit={this.handleSubmit}>
-          <label>
-          Identifiant :
-          <input name="identifiant" type="text" value={this.state.identifiant} onChange={this.handleChange} />
-          </label>
-          <label>
-          Mot De Passe :
-          <input name="motDePasse" type="text" value={this.state.motDePasse} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Envoyer" />
-          </form>
-          </div>
-          );
-        }
+        <div className="container">
+        <form className="contenair mt-5 mb-3" onSubmit={this.handleSubmit}>
+
+        <label  class="form-label">
+        Identifiant :
+        <input name="identifiant" class="form-control" type="text" value={this.state.identifiant} onChange={this.handleChange} />
+        </label>
+
+        <label  class="form-label">
+        Mot De Passe :
+        <input class="form-control" name="motDePasse" type="text" value={this.state.motDePasse} onChange={this.handleChange} />
+        </label>
+
+        <select class="form-select" aria-label="Default select example">
+        {this.state.roles.map(item => (<option value={item.id}>{item.nom}</option>))}
+        </select>
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+        </form>
+        </div>
+        );
       }
     }
-    
-    export default Home;
+  }
+  
+  export default UserForm;

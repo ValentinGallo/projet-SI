@@ -1,8 +1,11 @@
 const burl = "http://obiwan2.univ-brest.fr:7032"
-
+// eslint-disable-next-line
 export default {
     afficherUsers : function() {
         return fetch(burl+'/user');
+    },
+    afficherRoles : function() {
+        return fetch(burl+'/role');
     },
     supprimeUser : function(id) {
         const requestOptions = {

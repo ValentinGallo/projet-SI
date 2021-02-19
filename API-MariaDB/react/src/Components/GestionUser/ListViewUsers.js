@@ -1,6 +1,6 @@
 //Rien d'intéressant ici du pur affichage html/css
 import React from 'react';
-import API from '../utils/API';
+import API from '../../utils/API';
 
 class ListViewUsers extends React.Component {
     constructor(props) {
@@ -18,7 +18,15 @@ class ListViewUsers extends React.Component {
         .catch(err => console.error(err));
     }
     
-    handleSubmit(event) {
+    deleteUser(event) {
+        console.log(event.target.name)
+        /*API.supprimeUser(event.target.name)
+        .then(response => response.json())
+        .then(response => alert('L\'utilisateur : ' + this.state.identifiant + ' a été supprimé '+response))
+        .catch(err => console.error(err));*/
+    }
+
+    updateUser(event) {
         console.log(event.target.name)
         /*API.supprimeUser(event.target.name)
         .then(response => response.json())
@@ -33,14 +41,13 @@ class ListViewUsers extends React.Component {
             <th scope="row">{element.id}</th>
             <td>{element.identifiant}</td>
             <td>
-                <a type="button" onClick={this.handleSubmit} name={element.identifiant} className="fas fa-trash-alt"/>
-            <button type="button" className="btn btn-warning">Modifier</button>
-            {element.idRole}
+            <button type="submit" className="btn btn-danger fas fa-trash-alt" onClick={this.deleteUser} name={element.identifiant}/>
+            <button type="submit" className="btn btn-warning fas fa-trash-alt" onClick={this.updateUser} name={element.identifiant}/>
             </td>
             </tr>
             );
             return (
-                <div>
+                <div className="container mt-5">
                 <table className="table table-striped table-dark">
                 <thead>
                 <tr>
@@ -57,5 +64,4 @@ class ListViewUsers extends React.Component {
                 );
             }
         }
-        
         export default ListViewUsers;

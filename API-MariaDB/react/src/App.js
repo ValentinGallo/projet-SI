@@ -1,10 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
-import ListViewUsers from './Components/ListViewUsers'
+import GestionUserPage from './Components/GestionUser/GestionUserPage';
+
 function App() {
   return (
     <div className="App">
-        <ListViewUsers/>
+        <GestionUserPage/>
     </div>
   );
 }
