@@ -178,7 +178,7 @@ app.post('/utilisateur_up/:id_utilisateur/:id_up', (req,res) => {
 })
 
 /* Backup Neo4j */
-app.get('/neo4j', (req,res) => {
+app.get('/backup', (req,res) => {
     session.run('CALL apoc.export.csv.all(null, {stream:true}) YIELD data RETURN data')
     .then(function(result) {
         res.charset = 'utf-8';
