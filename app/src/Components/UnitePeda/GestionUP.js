@@ -1,6 +1,7 @@
 //Rien d'intéressant ici du pur affichage html/css
 import React from 'react';
 import ListViewUP from './ListViewUP';
+import UnitePedaForm from './UnitePedaForm';
 
 class GestionUP extends React.Component {
     
@@ -9,6 +10,7 @@ class GestionUP extends React.Component {
         return(
         <div>
             <ListViewUP/>
+            <UnitePedaForm/>
         </div>
         )
     }

@@ -29,8 +29,8 @@ app.use(cors());
        
     })
 
-    app.get('/cp', (req,res) => {
-        connection.query('SELECT * from cp', function (error, results) {
+    app.get('/cd', (req,res) => {
+        connection.query('SELECT * from cd', function (error, results) {
             if (error) throw error;
                 console.log('result :', results);
                 res.status(200).json(results)
@@ -144,8 +144,8 @@ app.use(cors());
 
     app.post('/unitePeda', (req,res)=>{
         const nom = req.body.nom
-
-        var sql = "INSERT INTO up (nom) VALUES ('"+nom+"')";
+        const url = req.body.url
+        var sql = "INSERT INTO up (nom,url) VALUES ('"+nom+","+url+"')";
         connection.query(sql, function (error, results) {
             if (error) throw error;
                 console.log('result :', results);
