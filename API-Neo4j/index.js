@@ -35,8 +35,8 @@ app.delete('/formation/:id', (req,res) => {
     const id = parseInt(req.params.id)
     
     session.run('MATCH (a:GRP2_formation {id: $id}) DETACH DELETE a', { id: id })
-    .then(function (result) {
-        res.status(200);
+    .then(function () {
+        res.status(200).send();
     })
     .catch(function (error) {
         res.status(404).send(error)
@@ -63,8 +63,8 @@ app.delete('/unite_pedagogique/:id', (req,res) => {
     const id = parseInt(req.params.id)
     
     session.run('MATCH (a:GRP2_unite_pedagogique {id: $id}) DETACH DELETE a', { id: id })
-    .then(function (result) {
-        res.status(200);
+    .then(function () {
+        res.status(200).send();
     })
     .catch(function (error) {
         res.status(404).send(error)
@@ -91,10 +91,9 @@ app.delete('/utilisateur/:id', (req,res) => {
     const id = parseInt(req.params.id)
     
     session.run('MATCH (a:GRP2_utilisateur {id: $id}) DETACH DELETE a', { id: id })
-    .then(function (result) {
-        res.status(200);
-    })
-    .catch(function (error) {
+    .then(function () {
+        res.status(200).send()
+    }).catch(function (error) {
         res.status(404).send(error)
     })
 })
