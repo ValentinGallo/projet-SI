@@ -1,6 +1,7 @@
 import React from 'react';
 import Contacts from './Contacts';
 import Messages from './Messages';
+import FormMessage from './FormMessage';
 import UserProfile from '../UserProfile/UserProfile';
 
 export default class Messagerie extends React.Component {
@@ -52,6 +53,7 @@ export default class Messagerie extends React.Component {
     </div>
     <div className="col-md-9">
     <Messages userSelected={this.state.userSelected} lesMessages={this.state.messages} myUser={this.state.myUser}></Messages>
+    <FormMessage></FormMessage>
     </div>
     </div>
     </div>;
