@@ -56,7 +56,7 @@ app.use(cors());
         });
        
     })
-
+    //return all niveauForm
     app.get('/niveauForm', (req,res) => {
         connection.query('SELECT * from nf', function (error, results) {
             if (error) throw error;
@@ -65,7 +65,7 @@ app.use(cors());
         });
        
     })
-
+    //return toutes les roles
     app.get('/role', (req,res) => {
         connection.query('SELECT * from role', function (error, results) {
             if (error) throw error;
@@ -74,7 +74,7 @@ app.use(cors());
         });
        
     })
-
+    //retourne toutes les Unite pedagogique
     app.get('/unitePeda', (req,res) => {
         connection.query('SELECT * from up', function (error, results) {
             if (error) throw error;
@@ -83,7 +83,7 @@ app.use(cors());
         });
        
     })
-
+    //return toutes les informations d'un up des id selectionner
     app.get('/selectUP/:identifiant', (req,res) => {
         const identifiant = req.params.identifiant
         connection.query("SELECT * FROM up WHERE id IN ("+identifiant+")", function (error, results) {
@@ -131,6 +131,27 @@ app.use(cors());
         });
     })
 
+    app.post('/moduleFormation', (req,res)=>{
+        const nom = req.body.nom
+
+        var sql = "INSERT INTO mf (nom) VALUES ('"+nom+"')";
+        connection.query(sql, function (error, results) {
+            if (error) throw error;
+                console.log('result :', results);
+                res.status(200).json(results)
+        });
+    })
+
+    app.post('/unitePeda', (req,res)=>{
+        const nom = req.body.nom
+
+        var sql = "INSERT INTO up (nom) VALUES ('"+nom+"')";
+        connection.query(sql, function (error, results) {
+            if (error) throw error;
+                console.log('result :', results);
+                res.status(200).json(results)
+        });
+    })
     //Update
     app.put('/role', (req,res)=>{
 

@@ -33,6 +33,8 @@ class ListViewUsers extends React.Component {
         .then(response => alert('L\'utilisateur : ' + this.state.identifiant + ' a été supprimé '+response))
         .catch(err => console.error(err));*/
     }
+
+    
     
     
     render() {

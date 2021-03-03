@@ -64,9 +64,9 @@ class UserForm extends React.Component {
         <div className="container">
         <form className="container mt-5 mb-3 bg-light" onSubmit={this.handleSubmit}>
 
-        <label  class="form-label">
+        <label  className="form-label">
         Identifiant :
-        <input name="identifiant" class="form-control" type="text" value={this.state.identifiant} onChange={this.handleChange} />
+        <input name="identifiant" className="form-control" type="text" value={this.state.identifiant} onChange={this.handleChange} />
         </label>
 
         <label  className="form-label ml-5">
@@ -75,7 +75,7 @@ class UserForm extends React.Component {
         </label>
 
         <select className="form-select" aria-label="Default select example" onChange={this.selectChange}>
-          {this.state.roles.map(item => (<option value={item.id}>{item.nom}</option>))}
+          {this.state.roles.map(item => (<option  key={item.id} value={item.id}>{item.nom}</option>))}
         </select>
         <button type="submit" className="btn btn-success mt-2">Ajouter</button>
         </form>
