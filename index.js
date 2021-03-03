@@ -24,21 +24,15 @@ function decryption (encrypted) {
 app.get('/message', (req,res) => {
     fetch('http://obiwan2.univ-brest.fr:7033/message')
     .then(res => res.json())
-    .then(json => res.status(200).json(json))
-    .catch(function (error) {
-        res.status(404).send(error)
-    });
+    .then(json => res.status(200).json(json));
 })
 
 app.get('/message/:id', (req,res) => {
-    const id = req.params.id
+    const id = parseInt(req.params.id)
 
     fetch('http://obiwan2.univ-brest.fr:7033/message/'+id)
     .then(res => res.json())
-    .then(json => res.status(200).json(json))
-    .catch(function (error) {
-        res.status(404).send(error)
-    });
+    .then(json => res.status(200).json(json));
 })
 
 app.post('/message', async (req,res) => {
@@ -50,22 +44,16 @@ app.post('/message', async (req,res) => {
 
     fetch('http://obiwan2.univ-brest.fr:7033/message', requestOptions)
     .then(res => res.json())
-    .then(json => res.status(200).json(json))
-    .catch(function (error) {
-        res.status(404).send(error)
-    });
+    .then(json => res.status(200).json(json));
 })
 
 app.get('/disscussion/:idExpediteur/:idsDestinataire', async (req,res) => {
-    const idExpediteur = req.params.idExpediteur
-    const idsDestinataire = req.params.idsDestinataire
+    const idExpediteur = parseInt(req.params.idExpediteur)
+    const idsDestinataire = parseInt(req.params.idsDestinataire)
 
     fetch('http://obiwan2.univ-brest.fr:7033/disscussion/'+idExpediteur+'/'+idsDestinataire)
     .then(res => res.json())
-    .then(json => res.status(200).json(json))
-    .catch(function (error) {
-        res.status(404).send(error)
-    });
+    .then(json => res.status(200).json(json));
 })
 
 /*
@@ -75,10 +63,7 @@ app.get('/disscussion/:idExpediteur/:idsDestinataire', async (req,res) => {
 app.get('/user', (req,res) => {
     fetch('http://obiwan2.univ-brest.fr:7032/user')
     .then(res => res.json())
-    .then(json => res.status(200).json(json))
-    .catch(function (error) {
-        res.status(404).send(error)
-    });
+    .then(json => res.status(200).json(json));
 })
 
 app.post('/check/:identifiant', (req,res) => {
@@ -93,28 +78,19 @@ app.post('/check/:identifiant', (req,res) => {
         else {
             res.status(200).json('{"Result": false}');
         }
-    })
-    .catch(function (error) {
-        res.status(404).send(error)
     });
 })
 
 app.get('/cp', (req,res) => {
     fetch('http://obiwan2.univ-brest.fr:7032/cp')
     .then(res => res.json())
-    .then(json => res.status(200).json(json))
-    .catch(function (error) {
-        res.status(404).send(error)
-    });
+    .then(json => res.status(200).json(json));
 })
 
 app.get('/moduleForm', (req,res) => {
     fetch('http://obiwan2.univ-brest.fr:7032/moduleForm')
     .then(res => res.json())
-    .then(json => res.status(200).json(json))
-    .catch(function (error) {
-        res.status(404).send(error)
-    });
+    .then(json => res.status(200).json(json));
 })
 
 app.get('/selectMF', (req,res) => {
@@ -126,28 +102,19 @@ app.get('/selectMF', (req,res) => {
 
     fetch('http://obiwan2.univ-brest.fr:7032/selectMF', requestOptions)
     .then(res => res.json())
-    .then(json => res.status(200).json(json))
-    .catch(function (error) {
-        res.status(404).send(error)
-    });
+    .then(json => res.status(200).json(json));
 })
 
 app.get('/niveauForm', (req,res) => {
     fetch('http://obiwan2.univ-brest.fr:7032/niveauForm')
     .then(res => res.json())
-    .then(json => res.status(200).json(json))
-    .catch(function (error) {
-        res.status(404).send(error)
-    });
+    .then(json => res.status(200).json(json));
 })
 
 app.get('/unitePeda', (req,res) => {
     fetch('http://obiwan2.univ-brest.fr:7032/unitePeda')
     .then(res => res.json())
-    .then(json => res.status(200).json(json))
-    .catch(function (error) {
-        res.status(404).send(error)
-    });
+    .then(json => res.status(200).json(json));
 })
 
 app.get('/selectUP', (req,res) => {
@@ -159,19 +126,13 @@ app.get('/selectUP', (req,res) => {
 
     fetch('http://obiwan2.univ-brest.fr:7032/selectUP', requestOptions)
     .then(res => res.json())
-    .then(json => res.status(200).json(json))
-    .catch(function (error) {
-        res.status(404).send(error)
-    });
+    .then(json => res.status(200).json(json));
 })
 
 app.get('/role', (req,res) => {
     fetch('http://obiwan2.univ-brest.fr:7032/role')
     .then(res => res.json())
-    .then(json => res.status(200).json(json))
-    .catch(function (error) {
-        res.status(404).send(error)
-    });
+    .then(json => res.status(200).json(json));
 })
 
 app.post('/user', (req,res)=>{
@@ -183,10 +144,7 @@ app.post('/user', (req,res)=>{
 
     fetch('http://obiwan2.univ-brest.fr:7032/user', requestOptions)
     .then(res => res.json())
-    .then(json => res.status(200).json(json))
-    .catch(function (error) {
-        res.status(404).send(error)
-    });
+    .then(json => res.status(200).json(json));
 })
 
 app.post('/role', (req,res)=>{
@@ -198,10 +156,7 @@ app.post('/role', (req,res)=>{
 
     fetch('http://obiwan2.univ-brest.fr:7032/role', requestOptions)
     .then(res => res.json())
-    .then(json => res.status(200).json(json))
-    .catch(function (error) {
-        res.status(404).send(error)
-    });
+    .then(json => res.status(200).json(json));
 })
 
 app.put('/role', (req,res)=>{
@@ -213,10 +168,7 @@ app.put('/role', (req,res)=>{
 
     fetch('http://obiwan2.univ-brest.fr:7032/role', requestOptions)
     .then(res => res.json())
-    .then(json => res.status(200).json(json))
-    .catch(function (error) {
-        res.status(404).send(error)
-    });
+    .then(json => res.status(200).json(json));
 })
 
 app.put('/user', (req,res)=>{
@@ -228,10 +180,7 @@ app.put('/user', (req,res)=>{
 
     fetch('http://obiwan2.univ-brest.fr:7032/user', requestOptions)
     .then(res => res.json())
-    .then(json => res.status(200).json(json))
-    .catch(function (error) {
-        res.status(404).send(error)
-    });
+    .then(json => res.status(200).json(json));
 })
 
 app.delete('/user/:id', (req,res)=>{
@@ -244,10 +193,7 @@ app.delete('/user/:id', (req,res)=>{
 
     fetch('http://obiwan2.univ-brest.fr:7032/user/'+id, requestOptions)
     .then(res => res.json())
-    .then(json => res.status(200).json(json))
-    .catch(function (error) {
-        res.status(404).send(error)
-    });
+    .then(json => res.status(200).json(json));
 })
 
 app.delete('/role/:id', (req,res)=>{
@@ -260,10 +206,7 @@ app.delete('/role/:id', (req,res)=>{
 
     fetch('http://obiwan2.univ-brest.fr:7032/role/'+id, requestOptions)
     .then(res => res.json())
-    .then(json => res.status(200).json(json))
-    .catch(function (error) {
-        res.status(404).send(error)
-    });
+    .then(json => res.status(200).json(json));
 })
 
 
@@ -277,10 +220,7 @@ app.get('/utilisateur_unitePedagogique/:id', (req,res) => {
 
     fetch('http://obiwan2.univ-brest.fr:7034/utilisateur/' + id)
     .then(res => res.json())
-    .then(json => res.status(200).json(json))
-    .catch(function (error) {
-        res.status(404).send(error)
-    });
+    .then(json => res.status(200).json(json));
 })
 
 // Permet d'obtenir les id d'UP d'un MF
@@ -289,10 +229,7 @@ app.get('/moduleFormation_unitePedagogique/:id', (req,res) => {
 
     fetch('http://obiwan2.univ-brest.fr:7034/formation/' + id)
     .then(res => res.json())
-    .then(json => res.status(200).json(json))
-    .catch(function (error) {
-        res.status(404).send(error)
-    });
+    .then(json => res.status(200).json(json));
 })
 
 /*
@@ -316,9 +253,6 @@ app.get('/liste_UP_utilisateur/:id', (req,res) => {
                 id_unite_pedagogique = id_unite_pedagogique + "," + unite_pedagogique.id
             }
             nbElement++;
-        })
-        .catch(function (error) {
-            res.status(404).send(error)
         });
 
         fetch('http://obiwan2.univ-brest.fr:7032/selectUP/' + id_unite_pedagogique)
@@ -331,39 +265,6 @@ app.get('/liste_UP_utilisateur/:id', (req,res) => {
         res.status(404).send(error)
     })
 }) 
-
-// Permet d'obtenir les infos des UP d'un MF
-app.get('/liste_UP_moduleFormation/:id', (req,res) => {
-    const id = parseInt(req.params.id)
-
-    var nbElement = 0;
-    var id_unite_pedagogique = "";
-
-    fetch('http://localhost:7034/formation/' + id)
-    .then(res => res.json())
-    .then(json => {
-        json.forEach(unite_pedagogique => {
-            if(nbElement == 0) {
-                id_unite_pedagogique = id_unite_pedagogique + unite_pedagogique.id
-            } else {
-                id_unite_pedagogique = id_unite_pedagogique + "," + unite_pedagogique.id
-            }
-            nbElement++;
-        })
-        .catch(function (error) {
-            res.status(404).send(error)
-        });
-
-        fetch('http://obiwan2.univ-brest.fr:7032/selectUP/' + id_unite_pedagogique)
-        .then(res => res.json())
-        .then(json => res.status(200).json(json))
-        .catch(function (error) {
-            res.status(404).send(error)
-        })
-    }).catch(function (error) {
-        res.status(404).send(error)
-    })
-})
 
 app.use(express.json())
 
