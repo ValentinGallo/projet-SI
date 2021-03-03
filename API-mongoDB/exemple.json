@@ -2,7 +2,7 @@ db.messages.insert(
         {
             "id":1,
             "idExpediteur" : 2,
-            "idsDestinataire" : [3],
+            "idDestinataire" : 3,
             "message": "Bonjour, ça va ?",
             "dateEnvoi" : Date(),
             "messageLu" : false
@@ -13,7 +13,7 @@ db.messages.insert(
         {
             "id":2,
             "idExpediteur" : 3,
-            "idsDestinataire" : [2],
+            "idDestinataire" : 2,
             "message": "Oui niquel et toi ?",
             "dateEnvoi" : Date(),
             "messageLu" : false
@@ -24,7 +24,7 @@ db.messages.insert(
         {
             "id":3,
             "idExpediteur" : 2,
-            "idsDestinataire" : [3],
+            "idDestinataire" : 3,
             "message": "Ba ouais trkl",
             "dateEnvoi" : Date(),
             "messageLu" : false
@@ -35,7 +35,7 @@ db.messages.insert(
         {
             "id":4,
             "idExpediteur" : 1,
-            "idsDestinataire" : [2],
+            "idDestinataire" : 2,
             "message": "Bonjour je suis l'admin",
             "dateEnvoi" : Date(),
             "messageLu" : false
@@ -46,7 +46,7 @@ db.messages.insert(
         {
             "id":5,
             "idExpediteur" : 2,
-            "idsDestinataire" : [1],
+            "idDestinataire" : 1,
             "message": "Bonjour MR l'admin",
             "dateEnvoi" : Date(),
             "messageLu" : false
