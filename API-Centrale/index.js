@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const fetch = require('node-fetch');
+app.use(express.json())
 const crypto = require('crypto')
 const fs = require('fs')
 const cors = require('cors');
@@ -364,8 +365,6 @@ app.get('/liste_UP_moduleFormation/:id', (req,res) => {
         res.status(404).send(error)
     })
 })
-
-app.use(express.json())
 
 app.listen(7031, () => {
     console.log('API Centrale à lécoute')
