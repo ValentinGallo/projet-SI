@@ -55,11 +55,12 @@ app.post('/message', async (req,res) => {
     }
 })
 
-app.get('/disscussion/:idExpediteur/:idsDestinataire', async (req,res) => {
+app.get('/disscussion/:idExpediteur/:idDestinataire', async (req,res) => {
     const idExpediteur = parseInt(req.params.idExpediteur)
-    const idsDestinataire = parseInt(req.params.idsDestinataire)
+    const idDestinataire = parseInt(req.params.idDestinataire)
     try {
-        const message = await db.collection('messages').find( { idExpediteur: 1, idsDestinataire: { $all: [idsDestinataire] } } ).toArray()
+        const message = await db.collection('messages').find( { idExpediteur: {"$in":[idExpediteur,idDestinataire]}, idDestinataire: {"$in":[idExpediteur,idDestinataire]} } ).sort({dateEnvoi: 1}).toArray()
+
         res.status(200).json(message)
     } catch (err) {
         console.log(err)

@@ -1,7 +1,7 @@
 import React from 'react';
 import Contacts from './Contacts';
 import Messages from './Messages';
-import UserProfile from './UserProfile';
+import UserProfile from '../UserProfile/UserProfile';
 
 export default class Messagerie extends React.Component {
   constructor(props) {
@@ -10,7 +10,13 @@ export default class Messagerie extends React.Component {
     this.state = {
       users: [
       ],
+      messages: [
+
+      ],
       userSelected: 1,
+      myUser: {
+        id:0
+      }
     };
   }
   
@@ -18,23 +24,34 @@ export default class Messagerie extends React.Component {
     fetch('http://obiwan2.univ-brest.fr:7032/user')
     .then(response => response.json())
     .then(response => this.setState({users: response}))
-    .then(response => UserProfile.setUser(this.state.users[0]))
+    .then(response => this.setState({myUser: this.state.users[1]}))
     .catch(err => console.error(err));
     
   }
-  handleClick(e) {
+  refreshMessage(e){
+    const id = this.state.myUser.id;
+    console.log("Mon id : "+id+" Desitinataire id : "+e);
+    
+    fetch('http://obiwan2.univ-brest.fr:7033/disscussion/'+id+'/'+e)
+    .then(response => response.json())
+    .then(response => this.setState({messages: response}))
+    .catch(err => console.error(err));
 
+  }
+  handleClick(e) {
+    console.log(e)
     this.setState({userSelected: e});
-    console.log(this.state.userSelected)
+    this.refreshMessage(e);
+    
   }
   render() {
     return <div className="container">
     <div className="row">
     <div className="col-md-3">
-    <Contacts users={this.state.users} userSelected={this.state.userSelected} handleClick={this.handleClick}></Contacts>
+    <Contacts users={this.state.users} userSelected={this.state.userSelected} handleClick={this.handleClick} myUser={this.state.myUser}></Contacts>
     </div>
     <div className="col-md-9">
-    <Messages userSelected={this.state.userSelected}></Messages>
+    <Messages userSelected={this.state.userSelected} lesMessages={this.state.messages} myUser={this.state.myUser}></Messages>
     </div>
     </div>
     </div>;

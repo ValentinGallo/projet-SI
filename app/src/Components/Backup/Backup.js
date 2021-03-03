@@ -14,7 +14,10 @@ class Backup extends React.Component {
     
 	render() {
           return (
-            <a href={this.state.neo4jbackup} download>Click to download</a>
+            <div>
+              <h1>Backup de la base Neo4j</h1>
+              <a type="button" class="btn btn-primary" href={this.state.neo4jbackup} download>Télécharger</a>
+            </div>
           );
         }
       }
