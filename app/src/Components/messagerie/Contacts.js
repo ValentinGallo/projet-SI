@@ -10,7 +10,6 @@ export default class Contacts extends React.Component {
         this.props.handleClick(e);
     }
     render() {
-        //const id = UserProfile.getId();
         const listUsers= this.props.users.map((user) => 
         <a className={`list-group-item list-group-item-action${this.props.userSelected === user.id ? " active" : ""}`} key={user.id} onClick={this.handleClick.bind(this, user.id)}>{user.identifiant}[{user.id}]</a>
         );

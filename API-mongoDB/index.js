@@ -3,8 +3,8 @@ const app = express()
 require('dotenv').config()
 
 /**
- * Connexion mongoDBF
- */
+* Connexion mongoDBF
+*/
 const MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectID;
 const url = process.env.DB_HOST;
@@ -12,8 +12,8 @@ const dbName = process.env.DB_DATABASE;
 let db
 
 MongoClient.connect(url, function(err, client) {
-  console.log("Connected successfully to server");
-  db = client.db(dbName);
+    console.log("Connected successfully to server");
+    db = client.db(dbName);
 });
 
 
@@ -29,12 +29,11 @@ app.get('/message', (req,res) => {
             throw err
         }
         res.status(200).json(docs)
-      }) 
+    }) 
 })
 
 app.get('/message/:_id', async (req,res) => {
     const _id = req.params._id
-    console.log(_id)
     try {
         const message = await db.collection('messages').findOne(ObjectId(_id))
         res.status(200).json(message)
@@ -55,12 +54,27 @@ app.post('/message', async (req,res) => {
     }
 })
 
+//Delete
+app.delete('/message/:_id', async (req,res) => {
+    console.log("Sup")
+    try {
+        const _id = req.params._id
+        console.log("delete de "+_id)
+        //db.messages.deleteOne( {"_id": ObjectId("603f878e0debf35980782aa6")})
+        const message = await db.collection('messages').deleteOne( {"_id": ObjectId(_id)})
+        res.status(200).json(message)
+    } catch (err) {
+        console.log(err)
+        throw err
+    } 
+})
+
 app.get('/disscussion/:idExpediteur/:idDestinataire', async (req,res) => {
     const idExpediteur = parseInt(req.params.idExpediteur)
     const idDestinataire = parseInt(req.params.idDestinataire)
     try {
         const message = await db.collection('messages').find( { idExpediteur: {"$in":[idExpediteur,idDestinataire]}, idDestinataire: {"$in":[idExpediteur,idDestinataire]} } ).sort({dateEnvoi: 1}).toArray()
-
+        
         res.status(200).json(message)
     } catch (err) {
         console.log(err)

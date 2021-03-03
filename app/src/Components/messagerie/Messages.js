@@ -1,36 +1,44 @@
 import React from 'react';
 import UserProfile from '../UserProfile/UserProfile';
 
+const burl = "http://obiwan2.univ-brest.fr:7033";
+
 export default class Messages extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            user: null
-        }
+        this.deleteMessage = this.deleteMessage.bind(this);
     }
-    componentDidMount() {
-        this.setState({user: UserProfile.getUser()});
+    deleteMessage(id){
+        console.log('delete de '+id)
+        fetch(burl+'/message/'+ id, {
+            method: 'DELETE',
+        })
+        .then(res => res.text()) // or res.json()
+        .then(res => console.log(res))
+        .then(this.props.refreshMessage(this.props.userSelected))
+    }
 
-    }
     render() {
         const listMessages= this.props.lesMessages.map((message) =>  
         <div className="row mb-3" key={message._id}>
         <div className={`${this.props.myUser.id === message.idExpediteur ? "" : "col-md-4"}`}></div>
         <div className="col-md-8">
-            <div className={`card ${this.props.myUser.id === message.idExpediteur ? "" : "text-white bg-primary"}`}>
-                <div className="card-body">
-                {this.props.myUser.id === message.idExpediteur ? "Moi : " : "Lui :"}{message.message} {message.idExpediteur}
-                </div>
-                <div className="card-footer">
-                {message.dateEnvoi}
-                </div>
-            </div>
+        <div className={`card ${this.props.myUser.id === message.idExpediteur ? "" : "text-white bg-primary"}`}>
+        <div className="card-body">
+        {this.props.myUser.id === message.idExpediteur ? "Moi : " : "Lui :"}{message.message} {message.idExpediteur}
+        </div>
+        <div className="card-footer">
+        {message.dateEnvoi}
+        </div>
+        <button type="button" className="btn btn-danger" onClick={() => this.deleteMessage(message._id)}>Supprimer</button>
+        </div>
         </div>
         </div>
         
-    );
+        );
+        
         return  <div>
-            <h1>Discussion avec {this.props.userSelected}</h1>
+        <h1>Discussion depuis {this.props.myUser.id} avec {this.props.userSelected}</h1>
         {listMessages}
         </div>;
     }
