@@ -9,6 +9,7 @@ import Home from './Components/Home/Home'
 import Messagerie from './Components/messagerie/Messagerie.js'
 import GestionUser from './Components/GestionUser/GestionUserPage.js'
 import Backup from './Components/Backup/Backup.js'
+import GestionModule from './Components/ModuleFormation/GestionModule';
 
 const App = () => (
   <Router>
@@ -18,6 +19,7 @@ const App = () => (
         <Route path="/Connexion" component={Connexion}/>
         <Route path="/Messagerie" component={Messagerie}/>
         <Route path="/Utilisateur" component={GestionUser}/>
+        <Route path="/ModuleFormation" component={GestionModule}/>
         <Route path="/Backup" component={Backup}/>
       </Switch>
   </Router>

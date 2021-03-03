@@ -47,9 +47,9 @@ app.use(cors());
        
     })
 
-    app.get('/selectMF', (req,res) => {
-        const param= req.body.param
-        connection.query("SELECT * FROM mf WHERE id IN ("+param+")", function (error, results) {
+    app.get('/selectMF/:identifiant', (req,res) => {
+        const identifiant = req.params.identifiant
+        connection.query("SELECT * FROM mf WHERE id IN ("+identifiant+")", function (error, results) {
             if (error) throw error;
                 console.log('result :', results);
                 res.status(200).json(results)
@@ -84,9 +84,9 @@ app.use(cors());
        
     })
 
-    app.get('/selectUP', (req,res) => {
-        const param= req.body.param
-        connection.query("SELECT * FROM up WHERE id IN ("+param+")", function (error, results) {
+    app.get('/selectUP/:identifiant', (req,res) => {
+        const identifiant = req.params.identifiant
+        connection.query("SELECT * FROM up WHERE id IN ("+identifiant+")", function (error, results) {
             if (error) throw error;
                 console.log('result :', results);
                 res.status(200).json(results)

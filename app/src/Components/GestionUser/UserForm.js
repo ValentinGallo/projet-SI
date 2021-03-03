@@ -12,7 +12,7 @@ class UserForm extends React.Component {
       identifiant: '',
       motDePasse: '',
       roles:[],
-      idRole:0
+      idRole:1
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
