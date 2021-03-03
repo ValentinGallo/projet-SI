@@ -145,7 +145,7 @@ app.use(cors());
     app.post('/unitePeda', (req,res)=>{
         const nom = req.body.nom
         const url = req.body.url
-        var sql = "INSERT INTO up (nom,url) VALUES ('"+nom+","+url+"')";
+        var sql = "INSERT INTO up (nom,url) VALUES ("+nom+","+url+")";
         connection.query(sql, function (error, results) {
             if (error) throw error;
                 console.log('result :', results);

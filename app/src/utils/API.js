@@ -24,5 +24,13 @@ export default {
             body: JSON.stringify({ identifiant: id, motDePasse:  mdp, idRole: 1})
         };
         return fetch(burl+'/check/'+id, requestOptions)
+    },
+    postUP : function(idUtilisateur, nom, url) {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nom: nom, url: url})
+        };
+        return fetch(burl+'/unitePeda', requestOptions)
     }
 }
