@@ -2,7 +2,7 @@ import React from 'react';
 import Contacts from './Contacts';
 import Messages from './Messages';
 import FormMessage from './FormMessage';
-import UserProfile from '../UserProfile/UserProfile';
+//import UserProfile from '../UserProfile/UserProfile';
 
 const burl = "http://obiwan2.univ-brest.fr:7033";
 const burlUser = "http://obiwan2.univ-brest.fr:7032";
