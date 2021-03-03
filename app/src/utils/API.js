@@ -9,11 +9,11 @@ export default {
     afficherRoles : function() {
         return fetch(burl+'/role');
     },
-    postUser : function(id, mdp) {
+    postUser : function(id, mdp, id_Role) {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ identifiant: id, motDePasse:  mdp, idRole: 1})
+            body: JSON.stringify({ identifiant: id, motDePasse:  mdp, idRole: id_Role})
         };
         return fetch(burl+'/user', requestOptions)
     },

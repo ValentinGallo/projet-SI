@@ -38,7 +38,7 @@ app.use(cors());
        
     })
 
-    app.get('/mf', (req,res) => {
+    app.get('/moduleForm', (req,res) => {
         connection.query('SELECT * from mf', function (error, results) {
             if (error) throw error;
                 console.log('result :', results);
@@ -47,7 +47,17 @@ app.use(cors());
        
     })
 
-    app.get('/nf', (req,res) => {
+    app.get('/selectMF', (req,res) => {
+        const param= req.body.param
+        connection.query("SELECT * FROM mf WHERE id IN ("+param+")", function (error, results) {
+            if (error) throw error;
+                console.log('result :', results);
+                res.status(200).json(results)
+        });
+       
+    })
+
+    app.get('/niveauForm', (req,res) => {
         connection.query('SELECT * from nf', function (error, results) {
             if (error) throw error;
                 console.log('result :', results);
@@ -65,8 +75,18 @@ app.use(cors());
        
     })
 
-    app.get('/up', (req,res) => {
+    app.get('/unitePeda', (req,res) => {
         connection.query('SELECT * from up', function (error, results) {
+            if (error) throw error;
+                console.log('result :', results);
+                res.status(200).json(results)
+        });
+       
+    })
+
+    app.get('/selectUP', (req,res) => {
+        const param= req.body.param
+        connection.query("SELECT * FROM up WHERE id IN ("+param+")", function (error, results) {
             if (error) throw error;
                 console.log('result :', results);
                 res.status(200).json(results)

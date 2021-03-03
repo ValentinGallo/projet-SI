@@ -11,10 +11,13 @@ class UserForm extends React.Component {
       items: [],
       identifiant: '',
       motDePasse: '',
-      roles:[]
+      roles:[],
+      idRole:0
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.selectChange = this.selectChange.bind(this);
+
   }    
   
   componentDidMount() {       
@@ -34,9 +37,14 @@ class UserForm extends React.Component {
       [event.target.name]: event.target.value
     });
   }
+
+  selectChange(event){
+    const valueSelectedByUser = parseInt(event.target.value);
+    this.setState({idRole: valueSelectedByUser });
+  }
   
   handleSubmit(event) {
-    API.postUser(this.state.identifiant, this.state.motDePasse)
+    API.postUser(this.state.identifiant, this.state.motDePasse, this.state.idRole)
     .then(response => response.json())
     .then(response => alert('L\'utilisateur : ' + this.state.identifiant + ' a été enregistré, réponse du serveur : '+response))
     .catch(err => console.error(err));
@@ -54,22 +62,22 @@ class UserForm extends React.Component {
     } else {
       return (
         <div className="container">
-        <form className="contenair mt-5 mb-3" onSubmit={this.handleSubmit}>
+        <form className="container mt-5 mb-3 bg-light" onSubmit={this.handleSubmit}>
 
         <label  class="form-label">
         Identifiant :
         <input name="identifiant" class="form-control" type="text" value={this.state.identifiant} onChange={this.handleChange} />
         </label>
 
-        <label  class="form-label">
+        <label  className="form-label ml-5">
         Mot De Passe :
-        <input class="form-control" name="motDePasse" type="text" value={this.state.motDePasse} onChange={this.handleChange} />
+        <input className="form-control" name="motDePasse" type="text" value={this.state.motDePasse} onChange={this.handleChange} />
         </label>
 
-        <select class="form-select" aria-label="Default select example">
-        {this.state.roles.map(item => (<option value={item.id}>{item.nom}</option>))}
+        <select className="form-select" aria-label="Default select example" onChange={this.selectChange}>
+          {this.state.roles.map(item => (<option value={item.id}>{item.nom}</option>))}
         </select>
-        <button type="submit" class="btn btn-primary">Ajouter</button>
+        <button type="submit" className="btn btn-success mt-2">Ajouter</button>
         </form>
         </div>
         );
