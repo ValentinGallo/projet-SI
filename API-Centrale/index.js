@@ -307,7 +307,7 @@ app.get('/liste_UP_utilisateur/:id', (req,res) => {
     var nbElement = 0;
     var id_unite_pedagogique = "";
 
-    fetch('http://localhost:7034/utilisateur/' + id)
+    fetch('http://obiwan2.univ-brest.fr:7034/utilisateur/' + id)
     .then(res => res.json())
     .then(json => {
         json.forEach(unite_pedagogique => {
@@ -318,9 +318,6 @@ app.get('/liste_UP_utilisateur/:id', (req,res) => {
             }
             nbElement++;
         })
-        .catch(function (error) {
-            res.status(404).send(error)
-        });
 
         fetch('http://obiwan2.univ-brest.fr:7032/selectUP/' + id_unite_pedagogique)
         .then(res => res.json())
@@ -340,7 +337,7 @@ app.get('/liste_UP_moduleFormation/:id', (req,res) => {
     var nbElement = 0;
     var id_unite_pedagogique = "";
 
-    fetch('http://localhost:7034/formation/' + id)
+    fetch('http://obiwan2.univ-brest.fr:7034/formation/' + id)
     .then(res => res.json())
     .then(json => {
         json.forEach(unite_pedagogique => {
@@ -351,9 +348,6 @@ app.get('/liste_UP_moduleFormation/:id', (req,res) => {
             }
             nbElement++;
         })
-        .catch(function (error) {
-            res.status(404).send(error)
-        });
 
         fetch('http://obiwan2.univ-brest.fr:7032/selectUP/' + id_unite_pedagogique)
         .then(res => res.json())

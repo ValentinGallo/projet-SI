@@ -30,6 +30,7 @@ class Appbar extends React.Component {
                     <a className="nav-item nav-link active" href="/Messagerie">Messagerie</a>
                     <a className="nav-item nav-link active" href="/Utilisateur">Utilisateurs</a>
                     <a className="nav-item nav-link active" href="/ModuleFormation">ModuleFormation</a>
+                    <a className="nav-item nav-link active" href="/Backup">Backup</a>
                   </div>
                 </div>
               </nav>
