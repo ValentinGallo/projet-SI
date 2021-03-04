@@ -34,7 +34,14 @@ class Appbar extends React.Component {
                     <a className="nav-item nav-link active" href="/Utilisateur">Utilisateurs</a>
                     <a className="nav-item nav-link active" href="/ModuleFormation">ModuleFormation</a>
                     <a className="nav-item nav-link active" href="/Backup">Backup</a>
-                    <a className="nav-item nav-link disable" onClick={ this.endSession } href="/">Se déconnecter</a>
+                    <ul className="navbar-nav">
+                      <li className="nav-item mr-auto">
+                        <a className="nav-item nav-link active" href="/Profil">{ localStorage.getItem("identifiant")+"("+localStorage.getItem("nomRole")+")"}</a>
+                      </li>
+                      <li className="nav-item">
+                        <a className="nav-item nav-link disable" onClick={ this.endSession } href="/">Se déconnecter</a>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </nav>

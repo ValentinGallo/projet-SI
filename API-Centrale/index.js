@@ -57,6 +57,22 @@ app.post('/message', async (req,res) => {
     });
 })
 
+app.delete('/message/:id', async (req,res) => {
+    const id = req.params.id
+
+    const requestOptions = {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+    };
+
+    fetch('http://obiwan2.univ-brest.fr:7033/message/'+id, requestOptions)
+    .then(res => res.json())
+    .then(json => res.status(200).json(json))
+    .catch(function (error) {
+        res.status(404).send(error)
+    });
+})
+
 app.get('/disscussion/:idExpediteur/:idsDestinataire', async (req,res) => {
     const idExpediteur = req.params.idExpediteur
     const idsDestinataire = req.params.idsDestinataire
@@ -89,7 +105,7 @@ app.post('/check/:identifiant', (req,res) => {
     .then(res => res.json())
     .then(json => {
         if(decryption(json[0].motDePasse) == decryption(mdp)) {
-            res.status(200).json({ "Result": json[0].id });
+            res.status(200).json({ "Result": true, "id": json[0].id, "identifiant": json[0].identifiant, "nomRole": json[0].nomRole });
         }
         else {
             res.status(200).json({ "Result": false });

@@ -26,9 +26,11 @@ class Connexion extends React.Component {
         .then(response => response.json())
         .then(response => {
           if(response.Result !== false && response.Result !== null && response.Result !== undefined)  {
-            localStorage.setItem('id', response.Result);
+            localStorage.setItem('id', response.id);
+            localStorage.setItem('nomRole', response.nomRole);
+            localStorage.setItem('identifiant', response.identifiant);
+            this.props.history.push("/");
             alert('L\'utilisateur : ' + this.state.identifiant + ' est connecté')
-            this.setState({})
           }
           else {
             alert('ALERTE, C\'EST PAS LE BON MDP')
