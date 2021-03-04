@@ -35,6 +35,7 @@ export default class Messagerie extends React.Component {
       liste_users.splice(liste_users.indexOf(this.state.myUser), 1);
       this.setState({users: liste_users});
     })
+    .then(response => this.refreshMessage(this.state.userSelected))
     .catch(err => console.error(err));
     
   }
