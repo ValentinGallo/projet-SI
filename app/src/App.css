@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  background: repeat url("http://localhost:3000/background.png");
+}

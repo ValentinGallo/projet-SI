@@ -22,27 +22,29 @@ class Appbar extends React.Component {
         </nav>;
         } else {
           return (
-              <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <a className="navbar-brand" href="/">GRPN</a>
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+                <a className="navbar-brand" href="/" style={{marginLeft: '1rem'}}>GRPN</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                   <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                   <div className="navbar-nav">
-                    <a className="nav-item nav-link active" href="/Profil">Profil</a>
-                    <a className="nav-item nav-link active" href="/Messagerie">Messagerie</a>
-                    <a className="nav-item nav-link active" href="/Utilisateur">Utilisateurs</a>
-                    <a className="nav-item nav-link active" href="/ModuleFormation">ModuleFormation</a>
-                    <a className="nav-item nav-link active" href="/Backup">Backup</a>
-                    <ul className="navbar-nav">
+                    <a className="nav-item nav-link active" href="/Messagerie"><i class="far fa-comments"></i> Messagerie</a>
+                    <a className="nav-item nav-link active" href="/Utilisateur"><i class="fas fa-users"></i> Utilisateurs</a>
+                    <a className="nav-item nav-link active" href="/ModuleFormation"><i class="fas fa-cubes"></i> ModuleFormation</a>
+                    <a className="nav-item nav-link active" href="/UnitePedagogique"><i class="fas fa-book"></i> UnitePedagogique</a>
+                    <a className="nav-item nav-link active" href="/Backup"><i class="far fa-save"></i> Backup</a>
+
+                  </div>
+                  <ul className="navbar-nav pull-right" style={{position: 'absolute', right: '0'}}>
                       <li className="nav-item mr-auto">
-                        <a className="nav-item nav-link active" href="/Profil">{ localStorage.getItem("identifiant")+"("+localStorage.getItem("nomRole")+")"}</a>
+                        <a className="nav-item nav-link active" href="/Profil"><i class="far fa-user"></i> { localStorage.getItem("identifiant")+"("+localStorage.getItem("nomRole")+")"}</a>
                       </li>
                       <li className="nav-item">
-                        <a className="nav-item nav-link disable" onClick={ this.endSession } href="/">Se déconnecter</a>
+                        <a className="nav-item nav-link disable" onClick={ this.endSession } href="/"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
                       </li>
                     </ul>
-                  </div>
+                  
                 </div>
               </nav>
           );
