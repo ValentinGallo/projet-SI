@@ -16,12 +16,12 @@ export default class Messagerie extends React.Component {
       users: [
       ],
       messages: [
-
+        
       ],
       userSelected: {
         id:1,
         identifiant:'Admin',
-
+        
       }
     };
   }
@@ -32,7 +32,12 @@ export default class Messagerie extends React.Component {
     .then(response => this.setState({users: response}))
     .then((valeur) => {
       var liste_users = this.state.users;
-      //liste_users.splice(liste_users.indexOf(localStorage.getItem("id"), 1))  ;
+      // get index of object with id:37
+      var removeIndex = liste_users.map(function(item) { return item.id; }).indexOf(localStorage.getItem("id"));
+      console.log(liste_users)
+      console.log(removeIndex)
+      // remove object
+      liste_users.splice(removeIndex, 1);
       this.setState({users: liste_users});
     })
     .then(response => this.refreshMessage(this.state.userSelected))
@@ -44,10 +49,9 @@ export default class Messagerie extends React.Component {
     .then(response => response.json())
     .then(response => this.setState({messages: response}))
     .catch(err => console.error(err));
-
+    
   }
   handleClick(e) {
-    console.log(e)
     this.setState({userSelected: e});
     this.refreshMessage(e);
     
