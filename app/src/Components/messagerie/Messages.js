@@ -9,7 +9,6 @@ export default class Messages extends React.Component {
         this.deleteMessage = this.deleteMessage.bind(this);
     }
     deleteMessage(id){
-        console.log('delete de '+id)
         fetch(burl+'/message/'+ id, {
             method: 'DELETE',
         })
@@ -19,7 +18,6 @@ export default class Messages extends React.Component {
     }
 
     render() {
-        console.log(localStorage.getItem("id"))
         const listMessages= this.props.lesMessages.map((message) =>  
         <div className="row mb-3" key={message._id}>
         <div className={`${localStorage.getItem("id") == message.idExpediteur ? "" : "col-md-4"}`}></div>

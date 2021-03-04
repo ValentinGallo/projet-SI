@@ -29,19 +29,19 @@ class Appbar extends React.Component {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                   <div className="navbar-nav">
-                    <a className="nav-item nav-link active" href="/Messagerie"><i class="far fa-comments"></i> Messagerie</a>
-                    <a className="nav-item nav-link active" href="/Utilisateur"><i class="fas fa-users"></i> Utilisateurs</a>
-                    <a className="nav-item nav-link active" href="/ModuleFormation"><i class="fas fa-cubes"></i> ModuleFormation</a>
-                    <a className="nav-item nav-link active" href="/UnitePedagogique"><i class="fas fa-book"></i> UnitePedagogique</a>
-                    <a className="nav-item nav-link active" href="/Backup"><i class="far fa-save"></i> Backup</a>
+                    <a className="nav-item nav-link active" href="/Messagerie"><i className="far fa-comments"></i> Messagerie</a>
+                    <a className="nav-item nav-link active" href="/Utilisateur"><i className="fas fa-users"></i> Utilisateurs</a>
+                    <a className="nav-item nav-link active" href="/ModuleFormation"><i className="fas fa-cubes"></i> ModuleFormation</a>
+                    <a className="nav-item nav-link active" href="/UnitePedagogique"><i className="fas fa-book"></i> UnitePedagogique</a>
+                    <a className="nav-item nav-link active" href="/Backup"><i className="far fa-save"></i> Backup</a>
 
                   </div>
                   <ul className="navbar-nav pull-right" style={{position: 'absolute', right: '0'}}>
                       <li className="nav-item mr-auto">
-                        <a className="nav-item nav-link active" href="/Profil"><i class="far fa-user"></i> { localStorage.getItem("identifiant")+"("+localStorage.getItem("nomRole")+")"}</a>
+                        <a className="nav-item nav-link active" href="/Profil"><i className="far fa-user"></i> { localStorage.getItem("identifiant")+"("+localStorage.getItem("nomRole")+")"}</a>
                       </li>
                       <li className="nav-item">
-                        <a className="nav-item nav-link disable" onClick={ this.endSession } href="/"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
+                        <a className="nav-item nav-link disable" onClick={ this.endSession } href="/"><i className="fas fa-sign-out-alt"></i> Se déconnecter</a>
                       </li>
                     </ul>
                   

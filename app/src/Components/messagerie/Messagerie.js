@@ -33,11 +33,15 @@ export default class Messagerie extends React.Component {
     .then((valeur) => {
       var liste_users = this.state.users;
       // get index of object with id:37
-      var removeIndex = liste_users.map(function(item) { return item.id; }).indexOf(localStorage.getItem("id"));
-      console.log(liste_users)
-      console.log(removeIndex)
+      var i = 0;
+      liste_users.map(function(item) { 
+        if(item.id == localStorage.getItem("id")){
+          liste_users.splice(i, 1);
+        }
+        i++;
+      }).indexOf(localStorage.getItem("id"));
       // remove object
-      liste_users.splice(removeIndex, 1);
+      
       this.setState({users: liste_users});
     })
     .then(response => this.refreshMessage(this.state.userSelected))
