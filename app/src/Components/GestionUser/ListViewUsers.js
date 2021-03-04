@@ -6,8 +6,7 @@ class ListViewUsers extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            users:[],
-            identifiant:''
+            users:[]
         };
     }    
     
@@ -15,12 +14,12 @@ class ListViewUsers extends React.Component {
       this.refresh();
     }
     
-    deleteUser(event) {
-        console.log(event.target.name)
-        API.deleteUser(event.target.name)
+    deleteUser(user) {
+        console.log(user.id)
+        API.deleteUser(user.id)
         .then(response => response.json())
-        .then(response => alert('L\'utilisateur : ' + this.state.identifiant + ' a été supprimé '+response))
-        .then(()=>this.setState())
+        .then(response => alert('L\'utilisateur : ' + user.identifiant + ' a été supprimé '+response))
+        .then(()=>this.refresh())
         .catch(err => console.error(err));
     }
 
@@ -46,8 +45,8 @@ class ListViewUsers extends React.Component {
             <th scope="row">{element.id}</th>
             <td>{element.identifiant}</td>
             <td>
-            <button type="submit" className="btn btn-danger fas fa-trash-alt" onClick={this.deleteUser} name={element.id}/>
-            <button type="submit" className="btn btn-warning fas fa-pencil-alt" onClick={this.updateUser} name={element.id}/>
+            <button className="btn btn-danger fas fa-trash-alt" onClick={() => this.deleteUser(element)}/>
+            <button className="btn btn-warning fas fa-pencil-alt" onClick={this.updateUser} name={element.id}/>
             </td>
             </tr>
             );
