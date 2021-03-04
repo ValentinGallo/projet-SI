@@ -14,7 +14,7 @@ function decryption (encrypted) {
         var decrypt = Buffer.from(encrypted,'base64')
         return (crypto.privateDecrypt(privateKey,decrypt)).toString()
     } catch(err) {
-      console.log('Error, les mdp ne correspondent pas')
+      console.log(err)
     }
  }
 
@@ -104,7 +104,7 @@ app.post('/check/:identifiant', (req,res) => {
     fetch('http://obiwan2.univ-brest.fr:7032/user/'+identifiant)
     .then(res => res.json())
     .then(json => {
-        if(decryption(json[0].motDePasse) == decryption(mdp)) {
+        if(decryption(json[0].motDePasse) == decryption(mdp) && decryption(json[0].motDePasse) != undefined && decryption(mdp) != undefined) {
             res.status(200).json({ "Result": true, "id": json[0].id, "identifiant": json[0].identifiant, "nomRole": json[0].nomRole });
         }
         else {
