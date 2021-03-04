@@ -5,59 +5,66 @@ import API from '../../utils/API';
 //PAS FINI
 
 class Connexion extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          identifiant: '',
-          motDePasse: ''
-        };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-      }    
-
-      handleChange(event) {
-        this.setState({
-          [event.target.name]: event.target.value
-        });
+  constructor(props) {
+    super(props);
+    this.state = {
+      identifiant: '',
+      motDePasse: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }    
+  
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  }
+  
+  handleSubmit(event) {
+    API.checkUser(this.state.identifiant, this.state.motDePasse)
+    .then(response => response.json())
+    .then(response => {
+      if(response.Result !== false && response.Result !== null && response.Result !== undefined)  {
+        localStorage.setItem('id', response.id);
+        localStorage.setItem('nomRole', response.nomRole);
+        localStorage.setItem('identifiant', response.identifiant);
+        this.props.history.push("/");
+        alert('L\'utilisateur : ' + this.state.identifiant + ' est connecté')
       }
-
-      handleSubmit(event) {
-        API.checkUser(this.state.identifiant, this.state.motDePasse)
-        .then(response => response.json())
-        .then(response => {
-          if(response.Result !== false && response.Result !== null && response.Result !== undefined)  {
-            localStorage.setItem('id', response.id);
-            localStorage.setItem('nomRole', response.nomRole);
-            localStorage.setItem('identifiant', response.identifiant);
-            this.props.history.push("/");
-            alert('L\'utilisateur : ' + this.state.identifiant + ' est connecté')
-          }
-          else {
-            alert('ALERTE, C\'EST PAS LE BON MDP')
-          }
-        })
-        .catch(err => console.error(err));
-
-        event.preventDefault();
+      else {
+        alert('ALERTE, C\'EST PAS LE BON MDP')
       }
-
-	render() {
-          return (
-            <div>
-            <form onSubmit={this.handleSubmit}>
-            <label>
-            Identifiant :
-              <input name="identifiant" type="text" value={this.state.identifiant} onChange={this.handleChange} />
-            </label>
-            <label>
-            Mot De Passe :
-              <input name="motDePasse" type="text" value={this.state.motDePasse} onChange={this.handleChange} />
-            </label>
-            <input type="submit" value="Envoyer" />
-          </form>
-          </div>
-          );
-        }
+    })
+    .catch(err => console.error(err));
+    
+    event.preventDefault();
+  }
+  
+  render() {
+    return (
+      <div className="container">
+      <div className="card" style={{position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)',width: '20rem'}}>
+      <div className="card-body">
+      <h5 className="card-title text-center">Connexion</h5>
+      <form onSubmit={this.handleSubmit}>
+      <div className="form-group mb-3">
+      <label >Identifiant</label>
+      <input className="form-control " name="identifiant" type="text" value={this.state.identifiant} onChange={this.handleChange} />
+      </div>
+      <div className="form-group mb-3">
+      <label >Mot De Passe</label>
+      <input className="form-control" name="motDePasse" type="text" value={this.state.motDePasse} onChange={this.handleChange} />
+      </div>
+      <div className="text-center">
+      <input class="btn btn-primary" type="submit" value="Se connecter" />
+      </div>
+      </form>
+      </div>
+      </div>
+      </div>
+      );
     }
-
-export default Connexion;
+  }
+  
+  export default Connexion;
