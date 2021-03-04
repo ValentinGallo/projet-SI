@@ -14,7 +14,7 @@ export default class Messages extends React.Component {
         })
         .then(res => res.text()) // or res.json()
         .then(res => console.log(res))
-        //.then(this.props.refreshMessage(this.props.userSelected))
+        .then(() => this.props.refreshMessage(this.props.userSelected))
     }
 
     render() {
@@ -37,7 +37,8 @@ export default class Messages extends React.Component {
         );
         
         return  <div>
-        <h1><i className="far fa-comments"></i> Discussion avec {this.props.userSelected.identifiant}</h1>
+        <h1><i className="far fa-comments"></i> Discussion avec {this.props.userSelected.identifiant}<i className="fas fa-sync-alt" style={{marginLeft:'25rem',cursor:'pointer'}} onClick={() => this.props.refreshMessage(this.props.userSelected)}></i></h1>
+        
         {listMessages}
         </div>;
     }

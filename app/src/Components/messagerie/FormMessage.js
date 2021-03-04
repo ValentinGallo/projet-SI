@@ -28,7 +28,9 @@ export default class FormMessage extends React.Component {
         };
         
         fetch(burl+'/message', requestOptions)
+        .then(() => this.props.refreshMessage(this.props.userSelected))
         .catch(err => console.error(err));
+
         event.preventDefault();
     }
     

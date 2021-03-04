@@ -50,6 +50,7 @@ export default class Messagerie extends React.Component {
     
   }
   refreshMessage(user){
+    this.setState({userSelected: user});
     fetch(burl+'/disscussion/'+localStorage.getItem("id")+'/'+user.id)
     .then(response => response.json())
     .then(response => this.setState({messages: response}))
@@ -65,11 +66,11 @@ export default class Messagerie extends React.Component {
     return <div className="container">
     <div className="row">
     <div className="col-md-3">
-    <Contacts users={this.state.users} userSelected={this.state.userSelected} handleClick={this.handleClick} refreshMessage={this.refreshMessage}></Contacts>
+    <Contacts users={this.state.users} userSelected={this.state.userSelected} refreshMessage={this.refreshMessage}></Contacts>
     </div>
     <div className="col-md-9">
-    <Messages userSelected={this.state.userSelected} lesMessages={this.state.messages}></Messages>
-    <FormMessage userSelected={this.state.userSelected}></FormMessage>
+    <Messages userSelected={this.state.userSelected} lesMessages={this.state.messages} refreshMessage={this.refreshMessage}></Messages>
+    <FormMessage userSelected={this.state.userSelected} refreshMessage={this.refreshMessage}></FormMessage>
     </div>
     </div>
     </div>;
