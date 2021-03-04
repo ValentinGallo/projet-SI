@@ -64,19 +64,21 @@ class UserForm extends React.Component {
         <div className="container">
         <form className="container mt-5 mb-3 bg-light" onSubmit={this.handleSubmit}>
 
-        <label  className="form-label">
+        <div class="col-auto">
         Identifiant :
         <input name="identifiant" className="form-control" type="text" value={this.state.identifiant} onChange={this.handleChange} />
-        </label>
+        </div>
 
-        <label  className="form-label ml-5">
+        <div class="col-auto">
         Mot De Passe :
         <input className="form-control" name="motDePasse" type="text" value={this.state.motDePasse} onChange={this.handleChange} />
-        </label>
+        </div>
 
+        <div class="col-auto mt-3">
         <select className="form-select" aria-label="Default select example" onChange={this.selectChange}>
           {this.state.roles.map(item => (<option  key={item.id} value={item.id}>{item.nom}</option>))}
         </select>
+        </div>
         <button type="submit" className="btn btn-success mt-2">Ajouter</button>
         </form>
         </div>

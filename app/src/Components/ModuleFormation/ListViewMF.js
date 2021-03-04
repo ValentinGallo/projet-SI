@@ -2,7 +2,7 @@
 import React from 'react';
 import ApiMF from './ApiMF'
 
-class ListViewUP extends React.Component {
+class ListViewMF extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -42,4 +42,4 @@ class ListViewUP extends React.Component {
                 );
             }
         }
-export default ListViewUP;
+export default ListViewMF;
