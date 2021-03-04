@@ -18,9 +18,10 @@ export default class Messagerie extends React.Component {
       messages: [
 
       ],
-      userSelected: 1,
-      myUser: {
-        id:0
+      userSelected: {
+        id:1,
+        identifiant:'Admin',
+
       }
     };
   }
@@ -29,21 +30,17 @@ export default class Messagerie extends React.Component {
     fetch(burlUser+'/user')
     .then(response => response.json())
     .then(response => this.setState({users: response}))
-    .then(response => this.setState({myUser: this.state.users[1]}))
     .then((valeur) => {
       var liste_users = this.state.users;
-      liste_users.splice(liste_users.indexOf(this.state.myUser), 1);
+      //liste_users.splice(liste_users.indexOf(localStorage.getItem("id"), 1))  ;
       this.setState({users: liste_users});
     })
     .then(response => this.refreshMessage(this.state.userSelected))
     .catch(err => console.error(err));
     
   }
-  refreshMessage(e){
-    const id = this.state.myUser.id;
-    console.log("Mon id : "+id+" Desitinataire id : "+e);
-    
-    fetch(burl+'/disscussion/'+id+'/'+e)
+  refreshMessage(user){
+    fetch(burl+'/disscussion/'+localStorage.getItem("id")+'/'+user.id)
     .then(response => response.json())
     .then(response => this.setState({messages: response}))
     .catch(err => console.error(err));
@@ -59,11 +56,11 @@ export default class Messagerie extends React.Component {
     return <div className="container">
     <div className="row">
     <div className="col-md-3">
-    <Contacts users={this.state.users} userSelected={this.state.userSelected} handleClick={this.handleClick} refreshMessage={this.refreshMessage} myUser={this.state.myUser}></Contacts>
+    <Contacts users={this.state.users} userSelected={this.state.userSelected} handleClick={this.handleClick} refreshMessage={this.refreshMessage}></Contacts>
     </div>
     <div className="col-md-9">
-    <Messages userSelected={this.state.userSelected} lesMessages={this.state.messages} myUser={this.state.myUser}></Messages>
-    <FormMessage userSelected={this.state.userSelected} myUser={this.state.myUser}></FormMessage>
+    <Messages userSelected={this.state.userSelected} lesMessages={this.state.messages}></Messages>
+    <FormMessage userSelected={this.state.userSelected}></FormMessage>
     </div>
     </div>
     </div>;

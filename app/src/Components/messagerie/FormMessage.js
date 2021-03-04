@@ -17,8 +17,8 @@ export default class FormMessage extends React.Component {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(
-                { idExpediteur: this.props.myUser.id,
-                    idDestinataire:  this.props.userSelected,
+                { idExpediteur: localStorage.getItem("id"),
+                    idDestinataire:  this.props.userSelected.id,
                     message: this.state.value,
                     dateEnvoi: Date(),
                     messageLu: false

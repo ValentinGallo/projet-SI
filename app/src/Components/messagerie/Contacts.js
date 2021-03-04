@@ -11,10 +11,10 @@ export default class Contacts extends React.Component {
     }
     render() {
         const listUsers= this.props.users.map((user) => 
-        <button className={`list-group-item list-group-item-action${this.props.userSelected === user.id ? " active" : ""}`} key={user.id} onClick={this.handleClick.bind(this, user.id)}>{user.identifiant}[{user.id}]</button>
+        <button className={`list-group-item list-group-item-action${this.props.userSelected.id === user.id ? " active" : ""}`} key={user.id} onClick={this.handleClick.bind(this, user)}>{user.identifiant}[{user.id}]</button>
         );
         return <div>
-        <h3>Mes contacts</h3>
+        <h3><i className="far fa-address-book"></i> Mes contacts</h3>
         <div className="list-group">
         {listUsers}
         </div>

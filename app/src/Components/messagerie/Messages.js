@@ -15,17 +15,18 @@ export default class Messages extends React.Component {
         })
         .then(res => res.text()) // or res.json()
         .then(res => console.log(res))
-        .then(this.props.refreshMessage(this.props.userSelected))
+        //.then(this.props.refreshMessage(this.props.userSelected))
     }
 
     render() {
+        console.log(localStorage.getItem("id"))
         const listMessages= this.props.lesMessages.map((message) =>  
         <div className="row mb-3" key={message._id}>
-        <div className={`${this.props.myUser.id === message.idExpediteur ? "" : "col-md-4"}`}></div>
+        <div className={`${localStorage.getItem("id") === message.idExpediteur ? "" : "col-md-4"}`}></div>
         <div className="col-md-8">
-        <div className={`card ${this.props.myUser.id === message.idExpediteur ? "" : "text-white bg-primary"}`}>
+        <div className={`card ${localStorage.getItem("id") === message.idExpediteur ? "" : "text-white bg-primary"}`}>
         <div className="card-body">
-        {this.props.myUser.id === message.idExpediteur ? "Moi : " : "Lui :"}{message.message} {message.idExpediteur}
+        {localStorage.getItem("id") === message.idExpediteur ? "Moi : " : "Lui :"}{message.message} {message.idExpediteur}
         </div>
         <div className="card-footer">
         {message.dateEnvoi}
@@ -38,7 +39,7 @@ export default class Messages extends React.Component {
         );
         
         return  <div>
-        <h1>Discussion depuis {this.props.myUser.id} avec {this.props.userSelected}</h1>
+        <h1><i className="far fa-comments"></i> Discussion avec {this.props.userSelected.identifiant}</h1>
         {listMessages}
         </div>;
     }
