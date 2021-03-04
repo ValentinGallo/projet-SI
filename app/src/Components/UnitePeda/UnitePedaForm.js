@@ -23,7 +23,6 @@ class UnitePedaForm extends React.Component {
 
   handleSubmit(event) {
     API.postUP(this.state.identifiant, this.state.nom, this.state.url)
-    .then(response => response.json())
     .catch(err => console.error(err));
 
     event.preventDefault();
@@ -40,10 +39,10 @@ class UnitePedaForm extends React.Component {
           <form className="container mt-5 mb-3 bg-light" onSubmit={this.handleSubmit}>
             <div class="row g-3 align-items-center">
               <div class="col-auto">
-              < input name="nom" type="text" value={this.state.nom} onChange={this.handleChange} />
+              < input name="nom" type="text" className="form-control" value={this.state.nom} onChange={this.handleChange} />
               </div>
               <div class="col-auto">
-                <input name="url" type="text" value={this.state.url} onChange={this.handleChange} />
+                <input name="url" type="text" className="form-control" value={this.state.url} onChange={this.handleChange} />
               </div>
               <div class="col-auto">
                 <button type="submit" className="btn btn-success">Créer une unité pédagogique</button>
