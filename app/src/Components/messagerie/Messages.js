@@ -20,11 +20,11 @@ export default class Messages extends React.Component {
     render() {
         const listMessages= this.props.lesMessages.map((message) =>  
         <div className="row mb-3" key={message._id}>
-        <div className={`${localStorage.getItem("id") == message.idExpediteur ? "" : "col-md-4"}`}></div>
+        <div className={`${parseInt(localStorage.getItem("id")) === message.idExpediteur ? "" : "col-md-4"}`}></div>
         <div className="col-md-8">
-        <div className={`card ${localStorage.getItem("id") == message.idExpediteur ? "" : "text-white bg-primary"}`}>
+        <div className={`card ${parseInt(localStorage.getItem("id")) === message.idExpediteur ? "" : "text-white bg-primary"}`}>
         <div className="card-body">
-        {localStorage.getItem("id") == message.idExpediteur ? "Moi : " : "Lui :"}{message.message}
+        {parseInt(localStorage.getItem("id")) === message.idExpediteur ? "Moi : " : "Lui :"}{message.message}
         </div>
         <div className="card-footer">
         {message.dateEnvoi}

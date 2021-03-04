@@ -35,10 +35,11 @@ export default class Messagerie extends React.Component {
       // get index of object with id:37
       var i = 0;
       liste_users.map(function(item) { 
-        if(item.id == localStorage.getItem("id")){
+        if(item.id === parseInt(localStorage.getItem("id"))){
           liste_users.splice(i, 1);
         }
         i++;
+        return i;
       }).indexOf(localStorage.getItem("id"));
       // remove object
       
