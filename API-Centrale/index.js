@@ -14,7 +14,7 @@ function decryption (encrypted) {
         var decrypt = Buffer.from(encrypted,'base64')
         return (crypto.privateDecrypt(privateKey,decrypt)).toString()
     } catch(err) {
-      console.log('Error')
+      console.log('Error, les mdp ne correspondent pas')
     }
  }
 
@@ -89,10 +89,10 @@ app.post('/check/:identifiant', (req,res) => {
     .then(res => res.json())
     .then(json => {
         if(decryption(json[0].motDePasse) == decryption(mdp)) {
-            res.status(200).json('{"Result": true}');
+            res.status(200).json({ "Result": json[0].id });
         }
         else {
-            res.status(200).json('{"Result": false}');
+            res.status(200).json({ "Result": false });
         }
     })
     .catch(function (error) {

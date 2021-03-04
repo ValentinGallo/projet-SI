@@ -6,11 +6,15 @@ class GestionModule extends React.Component {
     
     
     render() {
+        if (localStorage.getItem("id") == null) {
+            return <p>TU VAS OU JEUNE HOMME</p>
+          } else {
         return(
         <div>
             <ListViewMF/>
         </div>
         )
     }
+}
 }
 export default GestionModule;

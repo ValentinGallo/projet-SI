@@ -8,22 +8,12 @@ class Connexion extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          error: null,
-          isLoaded: false,
-          items: [],
           identifiant: '',
           motDePasse: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
       }    
-
-      componentDidMount() {       
-            API.afficherUsers()
-            .then(response => response.json())
-            .then(response => this.setState({isLoaded: true, items: response}))
-            .catch(err => console.error(err));
-      }
 
       handleChange(event) {
         this.setState({
@@ -32,30 +22,26 @@ class Connexion extends React.Component {
       }
 
       handleSubmit(event) {
-        API.postUser(this.state.identifiant, this.state.motDePasse)
+        API.checkUser(this.state.identifiant, this.state.motDePasse)
         .then(response => response.json())
-        .then(response => alert('L\'utilisateur : ' + this.state.identifiant + ' a été enregistré, réponse du serveur : '+response))
+        .then(response => {
+          if(response.Result !== false && response.Result !== null && response.Result !== undefined)  {
+            localStorage.setItem('id', response.Result);
+            alert('L\'utilisateur : ' + this.state.identifiant + ' est connecté')
+            this.setState({})
+          }
+          else {
+            alert('ALERTE, C\'EST PAS LE BON MDP')
+          }
+        })
         .catch(err => console.error(err));
 
         event.preventDefault();
       }
 
 	render() {
-        const { error, isLoaded, items } = this.state;
-        if (error) {
-          return <div>Erreur : {error.message}</div>;
-        } else if (isLoaded) {
-          return <div>Chargement…</div>;
-        } else {
           return (
             <div>
-            <ul>
-              {items.map(item => (
-                <li key={item.id}>
-                  {item.id} {item.identifiant} {item.motDePasse} {item.idRole}
-                </li>
-              ))}
-            </ul>
             <form onSubmit={this.handleSubmit}>
             <label>
             Identifiant :
@@ -70,7 +56,6 @@ class Connexion extends React.Component {
           </div>
           );
         }
-      }
     }
 
 export default Connexion;
