@@ -61,26 +61,28 @@ class UserForm extends React.Component {
       return <div>Chargement…</div>;
     } else {
       return (
-        <div className="container">
-        <form className="container mt-5 mb-3 bg-light" onSubmit={this.handleSubmit}>
+        <div className="card text-white bg-dark mb-3 mx-auto mt-5 col-md-6" >
+          <div className="card-body">
+            <form onSubmit={this.handleSubmit}>
 
-        <div className="col-auto">
-        Identifiant :
-        <input name="identifiant" className="form-control" type="text" value={this.state.identifiant} onChange={this.handleChange} />
-        </div>
+            <div className="col-auto">
+            Identifiant :
+            <input name="identifiant" className="form-control" type="text" value={this.state.identifiant} onChange={this.handleChange} />
+            </div>
 
-        <div className="col-auto">
-        Mot De Passe :
-        <input className="form-control" name="motDePasse" type="text" value={this.state.motDePasse} onChange={this.handleChange} />
-        </div>
+            <div className="col-auto">
+            Mot De Passe :
+            <input className="form-control" name="motDePasse" type="text" value={this.state.motDePasse} onChange={this.handleChange} />
+            </div>
 
-        <div className="col-auto mt-3">
-        <select className="form-select" aria-label="Default select example" onChange={this.selectChange}>
-          {this.state.roles.map(item => (<option  key={item.id} value={item.id}>{item.nom}</option>))}
-        </select>
-        </div>
-        <button type="submit" className="btn btn-success mt-2">Ajouter</button>
-        </form>
+            <div className="col-auto mt-3">
+            <select className="form-select" aria-label="Default select example" onChange={this.selectChange}>
+              {this.state.roles.map(item => (<option  key={item.id} value={item.id}>{item.nom}</option>))}
+            </select>
+            </div>
+            <button type="submit" className="btn btn-success mt-2">Ajouter</button>
+            </form>
+          </div>
         </div>
         );
       }

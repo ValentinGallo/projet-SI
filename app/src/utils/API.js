@@ -39,5 +39,8 @@ export default {
             headers: { 'Content-Type': 'application/json' }
         };
         return fetch(burl+'/user/'+id, requestOptions)
+    },
+    loadNF : function(){
+        return fetch(burl+'/niveauForm')
     }
 }

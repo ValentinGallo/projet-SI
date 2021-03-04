@@ -9,46 +9,63 @@ class UnitePedaForm extends React.Component {
       error: null,
       identifiant: 1,
       nom: '',
-      url: ''
+      url: '',
+      niveauxForma:[]
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }    
+  
+  componentDidMount() {       
+    API.loadNF()
+    .then(response => response.json())
+    .then(response => this.setState({niveauxForma:response}))
+    .catch(err => console.error(err));
+  }
   
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value
     });
   }
-
+  
   handleSubmit(event) {
     API.postUP(this.state.identifiant, this.state.nom, this.state.url)
     .catch(err => console.error(err));
-
+    
     event.preventDefault();
   }
   
   render() {
-    
     const { error } = this.state;
     if (error) {
       return <div>Erreur : {error.message}</div>;
     } else {
       return (
-        <div className="container">
-          <form className="container mt-5 mb-3 bg-light" onSubmit={this.handleSubmit}>
-            <div class="row g-3 align-items-center">
-              <div class="col-auto">
-              < input name="nom" type="text" className="form-control" value={this.state.nom} onChange={this.handleChange} />
+        <div className="card text-white bg-dark mb-3 col-6 mx-auto">
+          <div className="card-body">
+            <form onSubmit={this.handleSubmit}>
+              <div className="row g-3 align-items-center">
+                <div className="col-auto">
+                  <label>nom:</label>
+                  < input name="nom" type="text" className="form-control" value={this.state.nom} onChange={this.handleChange} />
+                </div>
+                <div className="col-auto">
+                  <label>url:</label>
+                  <input name="url" type="text" className="form-control" value={this.state.url} onChange={this.handleChange} />
+                </div>
+                <div className="col-auto">
+                <label>niveau formation :</label>
+                <select className="form-select" aria-label="Default select example" onChange={this.selectChange}>
+                  {this.state.niveauxForma.map(item => (<option  key={item.id} value={item.id}>{item.nom}</option>))}
+                </select>
+                </div>
+                <div className="col-auto">
+                  <button type="submit" className="btn btn-success mt-4">Créer une unité pédagogique</button>
+                </div>
               </div>
-              <div class="col-auto">
-                <input name="url" type="text" className="form-control" value={this.state.url} onChange={this.handleChange} />
-              </div>
-              <div class="col-auto">
-                <button type="submit" className="btn btn-success">Créer une unité pédagogique</button>
-              </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
         );
       }
@@ -56,3 +73,4 @@ class UnitePedaForm extends React.Component {
   }
   
   export default UnitePedaForm;
+  
