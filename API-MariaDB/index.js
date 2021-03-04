@@ -135,10 +135,20 @@ app.use(cors());
         const nom = req.body.nom
 
         var sql = "INSERT INTO mf (nom) VALUES ('"+nom+"')";
+        var sql2 = "SELECT id FROM mf WHERE nom='"+nom+"';";
         connection.query(sql, function (error, results) {
-            if (error) throw error;
-                console.log('result :', results);
-                res.status(200).json(results)
+            if (error){
+                res.status(404).json(results)
+            };
+
+            console.log('result :', results);
+            connection.query(sql2, function (error, results) {
+                if (error){
+                    res.status(404).json(results)
+                };
+                    console.log('result :', results.get('id'));
+                    res.status(200).json(results.get('id'))
+            });
         });
     })
 
@@ -151,16 +161,18 @@ app.use(cors());
             if (error){
                 res.status(404).json(results)
             };
-                console.log('result :', results);
-                connection.query(sql2, function (error, results) {
-                    if (error){
-                        res.status(404).json(results)
-                    };
-                        console.log('result :', results.get('id'));
-                        res.status(200).json(results.get('id'))
-                });
+
+            console.log('result :', results);
+            connection.query(sql2, function (error, results) {
+                if (error){
+                    res.status(404).json(results)
+                };
+                    console.log('result :', results.get('id'));
+                    res.status(200).json(results.get('id'))
+            });
         });
     })
+
     //Update
     app.put('/role', (req,res)=>{
 

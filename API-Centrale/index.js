@@ -167,6 +167,55 @@ app.get('/unitePeda', (req,res) => {
     });
 })
 
+// Permet d'ajouter une unité pédagogique
+app.post('/unitePeda', (req,res) => {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nom: req.body.nom, url: req.body.url })
+    };
+
+    // Création de l'UP dans MariaDB
+    fetch('http://obiwan2.univ-brest.fr:7032/unitePeda', requestOptions)
+    .then(res => res.json())
+    .then(json => {
+        // Création de l'UP dans Neo4j
+        var id_up = json[0].id
+        fetch('http://obiwan2.univ-brest.fr:7034/unite_pedagogique/' + id_up)
+        // Fait la relation avec l'utilisateur dans Neo4j
+        fetch('http://obiwan2.univ-brest.fr:7034/utilisateur_up/' + req.body.id_utilisateur + '/' + id_up)
+        res.status(200).send()
+    })
+    .catch(function (error) {
+        res.status(404).send(error)
+    });
+})
+
+// Permet d'ajouter un module de formation
+app.post('/moduleFormation', (req,res) => {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nom: req.body.nom })
+    };
+
+    // Création du MF dans MariaDB
+    fetch('http://obiwan2.univ-brest.fr:7032/moduleFormation', requestOptions)
+    .then(res => res.json())
+    .then(json => {
+        // Création du MF dans Neo4j
+        var id_mf = json[0].id
+        console.log(id_mf)
+        fetch('http://obiwan2.univ-brest.fr:7034/formation/' + id_mf)
+        // Fait la relation avec l'utilisateur dans Neo4j
+        fetch('http://obiwan2.univ-brest.fr:7034/utilisateur_mf/' + req.body.id_utilisateur + '/' + id_mf)
+        res.status(200).send()
+    })
+    .catch(function (error) {
+        res.status(404).send(error)
+    });
+})
+
 app.get('/selectUP', (req,res) => {
     const requestOptions = {
         method: 'GET',

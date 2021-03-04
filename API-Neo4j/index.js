@@ -177,6 +177,22 @@ app.post('/utilisateur_up/:id_utilisateur/:id_up', (req,res) => {
     })
 })
 
+app.post('/utilisateur_mf/:id_utilisateur/:id_mf', (req,res) => {
+    const id_utilisateur = parseInt(req.params.id_utilisateur)
+    const id_mf          = parseInt(req.params.id_mf)
+    
+    session.run('MATCH (a:GRP2_utilisateur), (b:GRP2_formation) WHERE a.id = $id_utilisateur AND b.id = $id_mf CREATE (a)-[r:RELTYPE]->(b) RETURN type(r)', { id_utilisateur: id_utilisateur, id_mf: id_mf})
+    .then(function (result) {
+        const singleRecord = result.records[0]
+        const node = singleRecord.get(0)
+
+        res.send(node.properties);
+    })
+    .catch(function (error) {
+        res.status(404).send(error)
+    })
+})
+
 /* Backup Neo4j */
 app.get('/backup', (req,res) => {
     session.run('CALL apoc.export.csv.all(null, {stream:true}) YIELD data RETURN data')
