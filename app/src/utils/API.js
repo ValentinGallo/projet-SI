@@ -32,5 +32,12 @@ export default {
             body: JSON.stringify({ nom: nom, url: url})
         };
         return fetch(burl+'/unitePeda', requestOptions)
+    },
+    deleteUser : function(id){
+        const requestOptions = {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+        };
+        return fetch(burl+'/user/'+id, requestOptions)
     }
 }

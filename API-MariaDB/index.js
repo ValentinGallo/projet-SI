@@ -146,10 +146,19 @@ app.use(cors());
         const nom = req.body.nom
         const url = req.body.url
         var sql = "INSERT INTO up (nom,url) VALUES ("+nom+","+url+")";
+        var sql2 = "SELECT id FROM up WHERE nom='"+nom+"' AND url='"+url+"';";
         connection.query(sql, function (error, results) {
-            if (error) throw error;
+            if (error){
+                res.status(404).json(results)
+            };
                 console.log('result :', results);
-                res.status(200).json(results)
+                connection.query(sql2, function (error, results) {
+                    if (error){
+                        res.status(404).json(results)
+                    };
+                        console.log('result :', results.get('id'));
+                        res.status(200).json(results.get('id'))
+                });
         });
     })
     //Update

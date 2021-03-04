@@ -12,18 +12,23 @@ class ListViewUsers extends React.Component {
     }    
     
     componentDidMount() {       
-        API.afficherUsers()
-        .then(response => response.json())
-        .then(response => this.setState({users:response}))
-        .catch(err => console.error(err));
+      this.refresh();
     }
     
     deleteUser(event) {
         console.log(event.target.name)
-        /*API.supprimeUser(event.target.name)
+        API.deleteUser(event.target.name)
         .then(response => response.json())
         .then(response => alert('L\'utilisateur : ' + this.state.identifiant + ' a été supprimé '+response))
-        .catch(err => console.error(err));*/
+        .then(()=>this.setState())
+        .catch(err => console.error(err));
+    }
+
+    refresh(){
+        API.afficherUsers()
+        .then(response => response.json())
+        .then(response => this.setState({users:response}))
+        .catch(err => console.error(err));
     }
 
     updateUser(event) {
@@ -35,16 +40,14 @@ class ListViewUsers extends React.Component {
     }
 
     
-    
-    
     render() {
         const bodyTab = this.state.users.map(element => 
             <tr key={element.id}>
             <th scope="row">{element.id}</th>
             <td>{element.identifiant}</td>
             <td>
-            <button type="submit" className="btn btn-danger fas fa-trash-alt" onClick={this.deleteUser} name={element.identifiant}/>
-            <button type="submit" className="btn btn-warning fas fa-pencil-alt" onClick={this.updateUser} name={element.identifiant}/>
+            <button type="submit" className="btn btn-danger fas fa-trash-alt" onClick={this.deleteUser} name={element.id}/>
+            <button type="submit" className="btn btn-warning fas fa-pencil-alt" onClick={this.updateUser} name={element.id}/>
             </td>
             </tr>
             );

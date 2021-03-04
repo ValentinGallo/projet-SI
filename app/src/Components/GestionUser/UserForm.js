@@ -64,17 +64,17 @@ class UserForm extends React.Component {
         <div className="container">
         <form className="container mt-5 mb-3 bg-light" onSubmit={this.handleSubmit}>
 
-        <div class="col-auto">
+        <div className="col-auto">
         Identifiant :
         <input name="identifiant" className="form-control" type="text" value={this.state.identifiant} onChange={this.handleChange} />
         </div>
 
-        <div class="col-auto">
+        <div className="col-auto">
         Mot De Passe :
         <input className="form-control" name="motDePasse" type="text" value={this.state.motDePasse} onChange={this.handleChange} />
         </div>
 
-        <div class="col-auto mt-3">
+        <div className="col-auto mt-3">
         <select className="form-select" aria-label="Default select example" onChange={this.selectChange}>
           {this.state.roles.map(item => (<option  key={item.id} value={item.id}>{item.nom}</option>))}
         </select>
