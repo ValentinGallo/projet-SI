@@ -69,8 +69,8 @@ export default class Messagerie extends React.Component {
     <Contacts users={this.state.users} userSelected={this.state.userSelected} refreshMessage={this.refreshMessage}></Contacts>
     </div>
     <div className="col-md-9">
-    <div class="card bg-dark mb-3">
-    <div class="card-body">
+    <div className="card bg-dark mb-3">
+    <div className="card-body">
     <Messages userSelected={this.state.userSelected} lesMessages={this.state.messages} refreshMessage={this.refreshMessage}></Messages>
     <FormMessage userSelected={this.state.userSelected} refreshMessage={this.refreshMessage}></FormMessage>
     </div>

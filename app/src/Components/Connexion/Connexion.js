@@ -30,7 +30,7 @@ class Connexion extends React.Component {
         localStorage.setItem('nomRole', response.nomRole);
         localStorage.setItem('identifiant', response.identifiant);
         this.props.history.push("/");
-        alert('L\'utilisateur : ' + this.state.identifiant + ' est connecté')
+        window.location.reload(true);
       }
       else {
         alert('ALERTE, C\'EST PAS LE BON MDP')
@@ -57,7 +57,7 @@ class Connexion extends React.Component {
       <input className="form-control" name="motDePasse" type="text" value={this.state.motDePasse} onChange={this.handleChange} />
       </div>
       <div className="text-center">
-      <input class="btn btn-primary" type="submit" value="Se connecter" />
+      <input className="btn btn-primary" type="submit" value="Se connecter" />
       </div>
       </form>
       </div>

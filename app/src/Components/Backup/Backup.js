@@ -14,10 +14,10 @@ class Backup extends React.Component {
   render() {
     return (
       <div style={{position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)'}}>
-      <div class="card bg-dark">
-      <div class="card-body">
-      <h2 class="card-title text-center text-white">Sauvegardes des bases de données</h2>
-      <div class="d-grid gap-2">
+      <div className="card bg-dark">
+      <div className="card-body">
+      <h2 className="card-title text-center text-white">Sauvegardes des bases de données</h2>
+      <div className="d-grid gap-2">
       <a type="button" className="btn btn-light mb-2" href={this.state.neo4jbackup} download>Télécharger backup Neo4J</a>
       <a type="button" className="btn btn-light mb-2" href="http://obiwan2.univ-brest.fr:7033/message" download>Télécharger backup mongoDB</a>
       <a type="button" className="btn btn-light disabled" download>Télécharger backup mariaDB</a>

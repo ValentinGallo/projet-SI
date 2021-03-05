@@ -5,7 +5,10 @@ class Home extends React.Component {
 
 	render() {
           return (
-            <h1>Accueil Carrément</h1>
+  <h1 className="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+ Bienvenue sur
+  <small class="text-muted"> GRPN</small>
+</h1>
           );
         }
       }
