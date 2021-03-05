@@ -16,10 +16,10 @@ app.get('/', (req,res) => {
 })
 
 /* Module de formation */
-app.post('/formation/:id', (req,res) => {
+app.post('/module_formation/:id', (req,res) => {
     const id = parseInt(req.params.id)
     
-    session.run('CREATE (a:GRP2_formation {id: $id}) RETURN a', { id: id })
+    session.run('CREATE (a:GRP2_module_formation {id: $id}) RETURN a', { id: id })
     .then(function (result) {
         const singleRecord = result.records[0]
         const node = singleRecord.get(0)
@@ -31,10 +31,10 @@ app.post('/formation/:id', (req,res) => {
     })
 })
 
-app.delete('/formation/:id', (req,res) => {
+app.delete('/module_formation/:id', (req,res) => {
     const id = parseInt(req.params.id)
     
-    session.run('MATCH (a:GRP2_formation {id: $id}) DETACH DELETE a', { id: id })
+    session.run('MATCH (a:GRP2_module_formation {id: $id}) DETACH DELETE a', { id: id })
     .then(function () {
         res.status(200).send();
     })
@@ -63,6 +63,34 @@ app.delete('/unite_pedagogique/:id', (req,res) => {
     const id = parseInt(req.params.id)
     
     session.run('MATCH (a:GRP2_unite_pedagogique {id: $id}) DETACH DELETE a', { id: id })
+    .then(function () {
+        res.status(200).send();
+    })
+    .catch(function (error) {
+        res.status(404).send(error)
+    })
+})
+
+/* Niveau de formation */
+app.post('/niveau_formation/:id', (req,res) => {
+    const id = parseInt(req.params.id)
+    
+    session.run('CREATE (a:GRP2_niveau_formation {id: $id}) RETURN a', { id: id })
+    .then(function (result) {
+        const singleRecord = result.records[0]
+        const node = singleRecord.get(0)
+
+        res.send(node.properties);
+    })
+    .catch(function (error) {
+        res.status(404).send(error)
+    })
+})
+
+app.delete('/niveau_formation/:id', (req,res) => {
+    const id = parseInt(req.params.id)
+    
+    session.run('MATCH (a:GRP2_niveau_formation {id: $id}) DETACH DELETE a', { id: id })
     .then(function () {
         res.status(200).send();
     })
@@ -121,12 +149,11 @@ app.get('/utilisateur/:id', (req,res) => {
     })
 })
 
-
-app.get('/formation/:id', (req,res) => {
+app.get('/module_formation/:id', (req,res) => {
     const id = parseInt(req.params.id)
 
     // Permet d'obtenir les unités pédagogique d'un module de formation
-    session.run('MATCH (a:GRP2_formation {id: $id})-[b]-(c) RETURN c', {id: id})
+    session.run('MATCH (a:GRP2_module_formation {id: $id})-[b]-(c) RETURN c', {id: id})
     .then(function (results) {
         var module_formation = []
         results.records.forEach((record) => {
@@ -145,11 +172,12 @@ app.get('/formation/:id', (req,res) => {
 })
     
 /* CREER DES RELATIONS */
-app.post('/formation_up/:id_formation/:id_up', (req,res) => {
+app.post('/mf_up/:id_formation/:id_up', (req,res) => {
     const id_formation = parseInt(req.params.id_formation)
     const id_up        = parseInt(req.params.id_up)
     
-    session.run('MATCH (a:GRP2_formation), (b:GRP2_unite_pedagogique) WHERE a.id = $id_formation AND b.id = $id_unite_pedagogique CREATE (a)-[r:RELTYPE]->(b) RETURN type(r)', { id_formation: id_formation, id_unite_pedagogique: id_up})
+    // Permet de créer une relation entre un MF et une UP
+    session.run('MATCH (a:GRP2_module_formation), (b:GRP2_unite_pedagogique) WHERE a.id = $id_formation AND b.id = $id_unite_pedagogique CREATE (a)-[r:RELTYPE]->(b) RETURN type(r)', { id_formation: id_formation, id_unite_pedagogique: id_up})
     .then(function (result) {
         const singleRecord = result.records[0]
         const node = singleRecord.get(0)
@@ -165,6 +193,7 @@ app.post('/utilisateur_up/:id_utilisateur/:id_up', (req,res) => {
     const id_utilisateur = parseInt(req.params.id_utilisateur)
     const id_up          = parseInt(req.params.id_up)
     
+    // Permet de créer une relation entre un utilisateur et une UP
     session.run('MATCH (a:GRP2_utilisateur), (b:GRP2_unite_pedagogique) WHERE a.id = $id_utilisateur AND b.id = $id_unite_pedagogique CREATE (a)-[r:RELTYPE]->(b) RETURN type(r)', { id_utilisateur: id_utilisateur, id_unite_pedagogique: id_up})
     .then(function (result) {
         const singleRecord = result.records[0]
@@ -181,7 +210,42 @@ app.post('/utilisateur_mf/:id_utilisateur/:id_mf', (req,res) => {
     const id_utilisateur = parseInt(req.params.id_utilisateur)
     const id_mf          = parseInt(req.params.id_mf)
     
-    session.run('MATCH (a:GRP2_utilisateur), (b:GRP2_formation) WHERE a.id = $id_utilisateur AND b.id = $id_mf CREATE (a)-[r:RELTYPE]->(b) RETURN type(r)', { id_utilisateur: id_utilisateur, id_mf: id_mf})
+    // Permet de créer une relation entre un MF et un utilisateur
+    session.run('MATCH (a:GRP2_utilisateur), (b:GRP2_module_formation) WHERE a.id = $id_utilisateur AND b.id = $id_mf CREATE (a)-[r:RELTYPE]->(b) RETURN type(r)', { id_utilisateur: id_utilisateur, id_mf: id_mf})
+    .then(function (result) {
+        const singleRecord = result.records[0]
+        const node = singleRecord.get(0)
+
+        res.send(node.properties);
+    })
+    .catch(function (error) {
+        res.status(404).send(error)
+    })
+})
+
+app.post('/up_nf/:id_up/:id_nf', (req,res) => {
+    const id_up = parseInt(req.params.id_up)
+    const id_nf = parseInt(req.params.id_nf)
+    
+    // Permet de créer une relation entre une UP et un NF
+    session.run('MATCH (a:GRP2_unite_pedagogique), (b:GRP2_niveau_formation) WHERE a.id = $id_up AND b.id = $id_nf CREATE (a)-[r:RELTYPE]->(b) RETURN type(r)', { id_up: id_up, id_nf: id_nf})
+    .then(function (result) {
+        const singleRecord = result.records[0]
+        const node = singleRecord.get(0)
+
+        res.send(node.properties);
+    })
+    .catch(function (error) {
+        res.status(404).send(error)
+    })
+})
+
+app.post('/mf_up/:id_mf/:id_up', (req,res) => {
+    const id_mf = parseInt(req.params.id_mf)
+    const id_up = parseInt(req.params.id_up)
+    
+    // Permet de créer une relation entre une UP et un NF
+    session.run('MATCH (a:GRP2_module_formation), (b:GRP2_unite_pedagogique) WHERE a.id = $id_mf AND b.id = $id_up CREATE (a)-[r:RELTYPE]->(b) RETURN type(r)', { id_mf: id_mf, id_up: id_up})
     .then(function (result) {
         const singleRecord = result.records[0]
         const node = singleRecord.get(0)

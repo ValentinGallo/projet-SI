@@ -113,10 +113,20 @@ app.use(cors());
         const idRole = parseInt(req.body.idRole)
 
         var sql = "INSERT INTO users (identifiant, motDePasse, idRole) VALUES ('"+identifiant+"','"+motDePasse+"','"+idRole+"')";
+        var sql2 = "SELECT id FROM users WHERE identifiant='"+nom+"';";
         connection.query(sql, function (error, results) {
-            if (error) throw error;
-                console.log('result :', results);
-                res.status(200).json(results)
+            if (error){
+                res.status(404).json(results)
+            };
+
+            console.log('result :', results);
+            connection.query(sql2, function (error, results) {
+                if (error){
+                    res.status(404).json(results)
+                };
+                    console.log('result :', results.get('id'));
+                    res.status(200).json(results.get('id'))
+            });
         });
     })
 

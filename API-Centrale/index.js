@@ -184,6 +184,10 @@ app.post('/unitePeda', (req,res) => {
         fetch('http://obiwan2.univ-brest.fr:7034/unite_pedagogique/' + id_up)
         // Fait la relation avec l'utilisateur dans Neo4j
         fetch('http://obiwan2.univ-brest.fr:7034/utilisateur_up/' + req.body.id_utilisateur + '/' + id_up)
+        // Fait la relation avec le MF dans Neo4j
+        fetch('http://obiwan2.univ-brest.fr:7034/mf_up/' + req.body.id_mf + '/' + id_up)
+        // Fait la relation avec le NF dans Neo4j
+        fetch('http://obiwan2.univ-brest.fr:7034/up_nf/' + id_up + '/' + req.body.id_nf)
         res.status(200).send()
     })
     .catch(function (error) {
@@ -205,8 +209,7 @@ app.post('/moduleFormation', (req,res) => {
     .then(json => {
         // Création du MF dans Neo4j
         var id_mf = json[0].id
-        console.log(id_mf)
-        fetch('http://obiwan2.univ-brest.fr:7034/formation/' + id_mf)
+        fetch('http://obiwan2.univ-brest.fr:7034/module_formation/' + id_mf)
         // Fait la relation avec l'utilisateur dans Neo4j
         fetch('http://obiwan2.univ-brest.fr:7034/utilisateur_mf/' + req.body.id_utilisateur + '/' + id_mf)
         res.status(200).send()
@@ -249,7 +252,12 @@ app.post('/user', (req,res)=>{
 
     fetch('http://obiwan2.univ-brest.fr:7032/user', requestOptions)
     .then(res => res.json())
-    .then(json => res.status(200).json(json))
+    .then(json => {
+        // Création de l'utilisateur dans Neo4j
+        var id_utilisateur = json[0].id
+        fetch('http://obiwan2.univ-brest.fr:7034/utilisateur/' + id_utilisateur)
+        res.status(200).send()
+    })
     .catch(function (error) {
         res.status(404).send(error)
     });
@@ -353,7 +361,7 @@ app.get('/utilisateur_unitePedagogique/:id', (req,res) => {
 app.get('/moduleFormation_unitePedagogique/:id', (req,res) => {
     const id = parseInt(req.params.id)
 
-    fetch('http://obiwan2.univ-brest.fr:7034/formation/' + id)
+    fetch('http://obiwan2.univ-brest.fr:7034/module_formation/' + id)
     .then(res => res.json())
     .then(json => res.status(200).json(json))
     .catch(function (error) {
@@ -402,7 +410,7 @@ app.get('/liste_UP_moduleFormation/:id', (req,res) => {
     var nbElement = 0;
     var id_unite_pedagogique = "";
 
-    fetch('http://obiwan2.univ-brest.fr:7034/formation/' + id)
+    fetch('http://obiwan2.univ-brest.fr:7034/module_formation/' + id)
     .then(res => res.json())
     .then(json => {
         json.forEach(unite_pedagogique => {

@@ -10,9 +10,12 @@ class UnitePedaForm extends React.Component {
       identifiant: 1,
       nom: '',
       url: '',
+      id_mf: 1,
+      id_nf: 1,
       niveauxForma:[]
     };
     this.handleChange = this.handleChange.bind(this);
+    this.selectChange = this.selectChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }    
   
@@ -27,6 +30,10 @@ class UnitePedaForm extends React.Component {
     this.setState({
       [event.target.name]: event.target.value
     });
+  }
+
+  selectChange(event){
+    this.state.id_nf = parseInt(event.target.value)
   }
   
   handleSubmit(event) {
