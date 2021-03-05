@@ -6,6 +6,9 @@ export default {
     afficherUP : function(id) {
         return fetch(burl+'/liste_UP_utilisateur/'+id);
     },
+    afficherUP_MF : function(id,idMF) {
+        return fetch(burl+'/liste_UP_utilisateur_MF/'+id+'/'+idMF);
+    }
     /*postUser : function(id, mdp, id_Role) {
         const requestOptions = {
             method: 'POST',
