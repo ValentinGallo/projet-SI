@@ -340,35 +340,6 @@ app.delete('/role/:id', (req,res)=>{
     });
 })
 
-
-/*
- * BDD NEO4J 
-*/
-
-// Permet d'obtenir les id d'UP d'un utilisateur
-app.get('/utilisateur_unitePedagogique/:id', (req,res) => {
-    const id = parseInt(req.params.id)
-
-    fetch('http://obiwan2.univ-brest.fr:7034/utilisateur/' + id)
-    .then(res => res.json())
-    .then(json => res.status(200).json(json))
-    .catch(function (error) {
-        res.status(404).send(error)
-    });
-})
-
-// Permet d'obtenir les id d'UP d'un MF
-app.get('/moduleFormation_unitePedagogique/:id', (req,res) => {
-    const id = parseInt(req.params.id)
-
-    fetch('http://obiwan2.univ-brest.fr:7034/module_formation/' + id)
-    .then(res => res.json())
-    .then(json => res.status(200).json(json))
-    .catch(function (error) {
-        res.status(404).send(error)
-    });
-})
-
 /*
  * NEO4J VERS MARIADB
 */
@@ -423,36 +394,6 @@ app.get('/utilisateur_mf/:id', (req,res) => {
         })
 
         fetch('http://obiwan2.univ-brest.fr:7032/selectMF/' + id_module_formation)
-        .then(res => res.json())
-        .then(json => res.status(200).json(json))
-        .catch(function (error) {
-            res.status(404).send(error)
-        })
-    }).catch(function (error) {
-        res.status(404).send(error)
-    })
-}) 
-
-// Permet d'obtenir le NF d'un utilisateur
-app.get('/utilisateur_nf/:id', (req,res) => {
-    const id = parseInt(req.params.id)
-
-    var nbElement = 0;
-    var id_niveau_formation = "";
-
-    fetch('http://obiwan2.univ-brest.fr:7034/utilisateur_up/' + id)
-    .then(res => res.json())
-    .then(json => {
-        json.forEach(niveau_formation => {
-            if(nbElement == 0) {
-                id_niveau_formation = id_niveau_formation + niveau_formation.id
-            } else {
-                id_niveau_formation = id_niveau_formation + "," + niveau_formation.id
-            }
-            nbElement++;
-        })
-
-        fetch('http://obiwan2.univ-brest.fr:7032/selectMF/' + id_niveau_formation)
         .then(res => res.json())
         .then(json => res.status(200).json(json))
         .catch(function (error) {
@@ -577,7 +518,7 @@ app.get('/utilisateur_mf_up/:id_utilisateur/:id_module_formation', (req,res) => 
         .then(res => res.json())
         .then(json => res.status(200).json(json))
         .catch(function (error) {
-            res.status(404).send("{}")
+            res.status(200).send("{}")
         })
     }).catch(function (error) {
         res.status(404).send(error)
