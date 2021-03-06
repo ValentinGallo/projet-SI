@@ -403,6 +403,126 @@ app.get('/utilisateur_up/:id', (req,res) => {
     })
 }) 
 
+// Permet d'obtenir une liste de MF d'un utilisateur
+app.get('/utilisateur_mf/:id', (req,res) => {
+    const id = parseInt(req.params.id)
+
+    var nbElement = 0;
+    var id_module_formation = "";
+
+    fetch('http://obiwan2.univ-brest.fr:7034/utilisateur_up/' + id)
+    .then(res => res.json())
+    .then(json => {
+        json.forEach(module_formation => {
+            if(nbElement == 0) {
+                id_module_formation = id_module_formation + module_formation.id
+            } else {
+                id_module_formation = id_module_formation + "," + module_formation.id
+            }
+            nbElement++;
+        })
+
+        fetch('http://obiwan2.univ-brest.fr:7032/selectMF/' + id_module_formation)
+        .then(res => res.json())
+        .then(json => res.status(200).json(json))
+        .catch(function (error) {
+            res.status(404).send(error)
+        })
+    }).catch(function (error) {
+        res.status(404).send(error)
+    })
+}) 
+
+// Permet d'obtenir le NF d'un utilisateur
+app.get('/utilisateur_nf/:id', (req,res) => {
+    const id = parseInt(req.params.id)
+
+    var nbElement = 0;
+    var id_niveau_formation = "";
+
+    fetch('http://obiwan2.univ-brest.fr:7034/utilisateur_up/' + id)
+    .then(res => res.json())
+    .then(json => {
+        json.forEach(niveau_formation => {
+            if(nbElement == 0) {
+                id_niveau_formation = id_niveau_formation + niveau_formation.id
+            } else {
+                id_niveau_formation = id_niveau_formation + "," + niveau_formation.id
+            }
+            nbElement++;
+        })
+
+        fetch('http://obiwan2.univ-brest.fr:7032/selectMF/' + id_niveau_formation)
+        .then(res => res.json())
+        .then(json => res.status(200).json(json))
+        .catch(function (error) {
+            res.status(404).send(error)
+        })
+    }).catch(function (error) {
+        res.status(404).send(error)
+    })
+}) 
+
+// Permet d'obtenir le NF d'un utilisateur
+app.get('/utilisateur_nf/:id', (req,res) => {
+    const id = parseInt(req.params.id)
+
+    var nbElement = 0;
+    var id_niveau_formation = "";
+
+    fetch('http://obiwan2.univ-brest.fr:7034/utilisateur_up/' + id)
+    .then(res => res.json())
+    .then(json => {
+        json.forEach(niveau_formation => {
+            if(nbElement == 0) {
+                id_niveau_formation = id_niveau_formation + niveau_formation.id
+            } else {
+                id_niveau_formation = id_niveau_formation + "," + niveau_formation.id
+            }
+            nbElement++;
+        })
+
+        fetch('http://obiwan2.univ-brest.fr:7032/selectMF/' + id_niveau_formation)
+        .then(res => res.json())
+        .then(json => res.status(200).json(json))
+        .catch(function (error) {
+            res.status(404).send(error)
+        })
+    }).catch(function (error) {
+        res.status(404).send(error)
+    })
+}) 
+
+// Permet d'obtenir une liste d'UP d'un MF
+app.get('/up_mf/:id', (req,res) => {
+    const id = parseInt(req.params.id)
+
+    var nbElement = 0;
+    var id_unite_pedagogique = "";
+
+    fetch('http://obiwan2.univ-brest.fr:7034/up_mf/' + id)
+    .then(res => res.json())
+    .then(json => {
+        json.forEach(unite_pedagogique => {
+            if(nbElement == 0) {
+                id_unite_pedagogique = id_unite_pedagogique + unite_pedagogique.id
+            } else {
+                id_unite_pedagogique = id_unite_pedagogique + "," + unite_pedagogique.id
+            }
+            nbElement++;
+        })
+
+        fetch('http://obiwan2.univ-brest.fr:7032/selectUP/' + id_unite_pedagogique)
+        .then(res => res.json())
+        .then(json => res.status(200).json(json))
+        .catch(function (error) {
+            res.status(404).send(error)
+        })
+    }).catch(function (error) {
+        res.status(404).send(error)
+    })
+})
+
 // Permet d'obtenir les infos des UP d'un MF
 app.get('/up_mf/:id', (req,res) => {
     const id = parseInt(req.params.id)
@@ -411,6 +531,37 @@ app.get('/up_mf/:id', (req,res) => {
     var id_unite_pedagogique = "";
 
     fetch('http://obiwan2.univ-brest.fr:7034/up_mf/' + id)
+    .then(res => res.json())
+    .then(json => {
+        json.forEach(unite_pedagogique => {
+            if(nbElement == 0) {
+                id_unite_pedagogique = id_unite_pedagogique + unite_pedagogique.id
+            } else {
+                id_unite_pedagogique = id_unite_pedagogique + "," + unite_pedagogique.id
+            }
+            nbElement++;
+        })
+
+        fetch('http://obiwan2.univ-brest.fr:7032/selectUP/' + id_unite_pedagogique)
+        .then(res => res.json())
+        .then(json => res.status(200).json(json))
+        .catch(function (error) {
+            res.status(404).send(error)
+        })
+    }).catch(function (error) {
+        res.status(404).send(error)
+    })
+})
+
+// Permet d'obtenir les infos des UP d'un MF également lié à un utilisateur
+app.get('/utilisateur_mf_up/:id_utilisateur/:id_module_formation', (req,res) => {
+    const id_utilisateur = parseInt(req.params.id_utilisateur)
+    const id_module_formation = parseInt(req.params.id_module_formation)
+
+    var nbElement = 0;
+    var id_unite_pedagogique = "";
+
+    fetch('http://obiwan2.univ-brest.fr:7034/utilisateur_mf_up/' + id_utilisateur + '/' + id_module_formation)
     .then(res => res.json())
     .then(json => {
         json.forEach(unite_pedagogique => {

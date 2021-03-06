@@ -236,6 +236,29 @@ app.get('/utilisateur_up/:id', (req,res) => {
         res.status(404).send(error)
     })
 })
+
+app.get('/utilisateur_mf_up/:id_utilisateur/:id_module_formation', (req,res) => {
+    const id_utilisateur = parseInt(req.params.id_utilisateur)
+    const id_module_formation = parseInt(req.params.id_module_formation)
+
+    // Permet d'obtenir les unités pédagogique d'un utilisateur
+    session.run('MATCH (a:GRP2_utilisateur {id: $id_utilisateur})-[b]-(c:GRP2_unite_pedagogique)-[d]-(e:GRP2_module_formation {id: $id_module_formation}) RETURN c', {id_utilisateur: id_utilisateur, id_module_formation: id_module_formation})
+    .then(function (results) {
+        var unite_pedagogique = []
+        results.records.forEach((record) => {
+            if (record._fields[0].properties.id != null) {
+                unite_pedagogique.push({
+                    id: record._fields[0].properties.id,
+                })
+            }
+        })
+
+        res.send(unite_pedagogique)
+    })
+    .catch(function (error) {
+        res.status(404).send(error)
+    })
+})
     
 /* CREER DES RELATIONS */
 app.post('/mf_up/:id_formation/:id_up', (req,res) => {
