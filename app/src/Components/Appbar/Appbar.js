@@ -32,9 +32,9 @@ class Appbar extends React.Component {
                   <div className="navbar-nav me-auto mb-2 mb-lg-0">
                     <a className="nav-item nav-link active" href="/Messagerie"><i className="far fa-comments"></i> Messagerie</a>
                     <a className="nav-item nav-link active" href="/Utilisateur"><i className="fas fa-users"></i> Utilisateurs</a>
-                    <a className="nav-item nav-link active" href="/ModuleFormation"><i className="fas fa-cubes"></i> ModuleFormation</a>
-                    <a className="nav-item nav-link active" href="/UnitePedagogique"><i className="fas fa-book"></i> UnitePedagogique</a>
-                    <a className="nav-item nav-link active" href="/Backup"><i className="far fa-save"></i> Backup</a>
+                    <a className="nav-item nav-link active" href="/ModuleFormation"><i className="fas fa-cubes"></i> Module formation</a>
+                    <a className="nav-item nav-link active" href="/UnitePedagogique"><i className="fas fa-book"></i> Unités pédagogiques</a>
+                    <a className="nav-item nav-link active" href="/Backup"><i className="far fa-save"></i> Sauvegarde</a>
 
                   </div>
                   <div className="navbar-nav d-flex">

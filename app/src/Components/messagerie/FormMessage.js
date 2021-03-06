@@ -1,5 +1,5 @@
 import React from 'react';
-const burl = "http://obiwan2.univ-brest.fr:7033";
+const burl = "http://obiwan2.univ-brest.fr:7031";
 
 export default class FormMessage extends React.Component {
     constructor(props) {

@@ -4,7 +4,7 @@ import Messages from './Messages';
 import FormMessage from './FormMessage';
 //import UserProfile from '../UserProfile/UserProfile';
 
-const burl = "http://obiwan2.univ-brest.fr:7033";
+const burl = "http://obiwan2.univ-brest.fr:7031";
 const burlUser = "http://obiwan2.univ-brest.fr:7032";
 
 export default class Messagerie extends React.Component {
@@ -27,7 +27,7 @@ export default class Messagerie extends React.Component {
   }
   
   componentDidMount() {
-    fetch(burlUser+'/user')
+    fetch(burl+'/user')
     .then(response => response.json())
     .then(response => this.setState({users: response}))
     .then((valeur) => {

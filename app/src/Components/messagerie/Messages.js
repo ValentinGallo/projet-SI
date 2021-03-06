@@ -1,7 +1,7 @@
 import React from 'react';
 //import UserProfile from '../UserProfile/UserProfile';
 
-const burl = "http://obiwan2.univ-brest.fr:7033";
+const burl = "http://obiwan2.univ-brest.fr:7031";
 
 export default class Messages extends React.Component {
     constructor(props) {
@@ -31,8 +31,8 @@ export default class Messages extends React.Component {
         <div className={`${parseInt(localStorage.getItem("id")) === message.idExpediteur ? "" : "col-md-4"}`}></div>
         <div className="col-md-8">
         <div className={`card ${parseInt(localStorage.getItem("id")) === message.idExpediteur ? "" : "text-white bg-primary"}`}>
-        <div class="card-header" style={{fontSize:'13px',padding: '.2rem 1rem'}}>
-        <i class="fas fa-user"></i> {parseInt(localStorage.getItem("id")) === message.idExpediteur ? localStorage.getItem("identifiant") : this.props.userSelected.identifiant}
+        <div className="card-header" style={{fontSize:'13px',padding: '.2rem 1rem'}}>
+        <i className="fas fa-user"></i> {parseInt(localStorage.getItem("id")) === message.idExpediteur ? localStorage.getItem("identifiant") : this.props.userSelected.identifiant}
   </div>
         <div className="card-body">
         {message.message}
