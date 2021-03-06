@@ -16,5 +16,12 @@ export default {
             body: JSON.stringify({ id_nf: id_NF, id_mf: id_MF, id_utilisateur: id_User, nom:nom, url:url})
         };
         return fetch(burl+'/unitePeda', requestOptions)
+    },
+    deleteUP : function(idUP) {
+        const requestOptions = {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+        };
+        return fetch(burl+'/unite_pedagogique/'+idUP, requestOptions)
     }
 }

@@ -24,6 +24,11 @@ class ModalListUP_MF extends React.Component {
         .then(response => this.setState({unitePeda:response,idMF:idModuleForm}))
         .catch(err => console.error(err));
     }
+
+    deleteUP(up){
+        ApiUP.deleteUP(up.id)
+    }
+
     render() {
         var bodyTab
         if(this.state.unitePeda.length==null){
@@ -40,6 +45,7 @@ class ModalListUP_MF extends React.Component {
                 <th scope="row">{element.id}</th>
                 <td >{element.nom}</td>
                 <td >{element.url}</td>
+                <td><button className="btn btn-danger fas fa-trash-alt" onClick={() => this.deleteUser(element)}/></td>
                 </tr>
                 );
         }
@@ -58,6 +64,7 @@ class ModalListUP_MF extends React.Component {
                                             <th scope="col">id</th>
                                             <th scope="col">nom</th>
                                             <th scope="col">URL</th>
+                                            <th scope="col"/>
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -19,13 +19,24 @@ class ListViewUP extends React.Component {
     }
     
     render() {
-        const bodyTab = this.state.unitePeda.map(element => 
-            <tr key={element.id}>
-            <th scope="row">{element.id}</th>
-            <td >{element.nom}</td>
-            <td >{element.url}</td>
-            </tr>
-            );
+        var bodyTab 
+        if(this.state.unitePeda.length==null){
+            bodyTab = this.state.unitePeda.map(element => 
+                <tr key="0">
+                <th scope="row">-</th>
+                <td >Pas d'unité pédagogique</td>
+                <td >-</td>
+                </tr>
+                );
+        }else{
+            bodyTab = this.state.unitePeda.map(element => 
+                <tr key={element.id}>
+                <th scope="row">{element.id}</th>
+                <td >{element.nom}</td>
+                <td >{element.url}</td>
+                </tr>
+                );
+        }
             return (
                 <div className="container mt-5">
                 <table className="table table-striped table-dark">
