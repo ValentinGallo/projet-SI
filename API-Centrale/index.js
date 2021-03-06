@@ -181,13 +181,13 @@ app.post('/unitePeda', (req,res) => {
     .then(json => {
         // Création de l'UP dans Neo4j
         var id_up = json[0].id
-        fetch('http://obiwan2.univ-brest.fr:7034/unite_pedagogique/' + id_up)
+        fetch('http://obiwan2.univ-brest.fr:7034/unite_pedagogique/' + id_up, requestOptions)
         // Fait la relation avec l'utilisateur dans Neo4j
-        fetch('http://obiwan2.univ-brest.fr:7034/utilisateur_up/' + req.body.id_utilisateur + '/' + id_up)
+        fetch('http://obiwan2.univ-brest.fr:7034/utilisateur_up/' + req.body.id_utilisateur + '/' + id_up, requestOptions)
         // Fait la relation avec le MF dans Neo4j
-        fetch('http://obiwan2.univ-brest.fr:7034/mf_up/' + req.body.id_mf + '/' + id_up)
+        fetch('http://obiwan2.univ-brest.fr:7034/mf_up/' + req.body.id_mf + '/' + id_up, requestOptions)
         // Fait la relation avec le NF dans Neo4j
-        fetch('http://obiwan2.univ-brest.fr:7034/up_nf/' + id_up + '/' + req.body.id_nf)
+        fetch('http://obiwan2.univ-brest.fr:7034/up_nf/' + id_up + '/' + req.body.id_nf, requestOptions)
         res.status(200).send()
     })
     .catch(function (error) {
