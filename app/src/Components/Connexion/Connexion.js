@@ -54,7 +54,7 @@ class Connexion extends React.Component {
       </div>
       <div className="form-group mb-3">
       <label >Mot De Passe</label>
-      <input className="form-control" name="motDePasse" type="text" value={this.state.motDePasse} onChange={this.handleChange} />
+      <input className="form-control" name="motDePasse" type="password" value={this.state.motDePasse} onChange={this.handleChange} />
       </div>
       <div className="text-center">
       <input className="btn btn-primary" type="submit" value="Se connecter" />

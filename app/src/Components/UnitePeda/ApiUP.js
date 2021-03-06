@@ -4,7 +4,7 @@ export const neo4jurl = "http://obiwan2.univ-brest.fr:7034"
 //Ajouter une fonction pour créer une nouvelle requête,  voir le composant Home pour un exemple de l'utilisation
 export default {
     afficherUP : function(id) {
-        return fetch(burl+'/liste_UP_utilisateur/'+id);
+        return fetch(burl+'/utilisateur_up/'+id);
     },
     afficherUP_MF : function(id,idMF) {
         return fetch(burl+'/liste_UP_utilisateur_MF/'+id+'/'+idMF);

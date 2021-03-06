@@ -127,11 +127,11 @@ app.delete('/utilisateur/:id', (req,res) => {
 })
 
 /* OBTENIR DES RELATIONS */
-app.get('/utilisateur/:id', (req,res) => {
+app.get('/utilisateur_up/:id', (req,res) => {
     const id = parseInt(req.params.id)
 
      // Permet d'obtenir les UP d'un utilisateur
-    session.run('MATCH (a:GRP2_utilisateur {id: $id})-[b]-(c) RETURN c', {id: id})
+    session.run('MATCH (a:GRP2_utilisateur {id: $id})-[b]-(c:GRP2_unite_pedagogique) RETURN c', {id: id})
     .then(function (results) {
             var unite_pedagogique = []
             results.records.forEach((record) => {
@@ -149,22 +149,88 @@ app.get('/utilisateur/:id', (req,res) => {
     })
 })
 
-app.get('/module_formation/:id', (req,res) => {
+app.get('/mf_up/:id', (req,res) => {
     const id = parseInt(req.params.id)
 
-    // Permet d'obtenir les unités pédagogique d'un module de formation
-    session.run('MATCH (a:GRP2_module_formation {id: $id})-[b]-(c) RETURN c', {id: id})
+     // Permet d'obtenir les UP d'un MF
+    session.run('MATCH (a:GRP2_module_formation {id: $id})-[b]-(c:GRP2_unite_pedagogique) RETURN c', {id: id})
     .then(function (results) {
-        var module_formation = []
+            var unite_pedagogique = []
+            results.records.forEach((record) => {
+                if (record._fields[0].properties.id != null) {
+                    unite_pedagogique.push({
+                        id: record._fields[0].properties.id,
+                    })
+                }
+            })
+
+            res.send(unite_pedagogique)
+    })
+    .catch(function (error) {
+        res.status(404).send(error)
+    })
+})
+
+app.get('/utilisateur_nf/:id', (req,res) => {
+    const id = parseInt(req.params.id)
+
+     // Permet d'obtenir le niveau de formation d'un utilisateur
+    session.run('MATCH (a:GRP2_utilisateur {id: $id})-[b]-(c:GRP2_niveau_formation) RETURN c', {id: id})
+    .then(function (results) {
+            var niveau_formation = []
+            results.records.forEach((record) => {
+                if (record._fields[0].properties.id != null) {
+                    niveau_formation.push({
+                        id: record._fields[0].properties.id,
+                    })
+                }
+            })
+
+            res.send(niveau_formation)
+    })
+    .catch(function (error) {
+        res.status(404).send(error)
+    })
+})
+
+app.get('/utilisateur_mf/:id', (req,res) => {
+    const id = parseInt(req.params.id)
+
+     // Permet d'obtenir les modules de formation d'un utilisateur
+    session.run('MATCH (a:GRP2_utilisateur {id: $id})-[b]-(c:GRP2_module_formation) RETURN c', {id: id})
+    .then(function (results) {
+            var module_formation = []
+            results.records.forEach((record) => {
+                if (record._fields[0].properties.id != null) {
+                    module_formation.push({
+                        id: record._fields[0].properties.id,
+                    })
+                }
+            })
+
+            res.send(module_formation)
+    })
+    .catch(function (error) {
+        res.status(404).send(error)
+    })
+})
+
+app.get('/utilisateur_up/:id', (req,res) => {
+    const id = parseInt(req.params.id)
+
+    // Permet d'obtenir les unités pédagogique d'un utilisateur
+    session.run('MATCH (a:GRP2_utilisateur {id: $id})-[b]-(c:GRP2_unite_pedagogique) RETURN c', {id: id})
+    .then(function (results) {
+        var unite_pedagogique = []
         results.records.forEach((record) => {
             if (record._fields[0].properties.id != null) {
-                module_formation.push({
+                unite_pedagogique.push({
                     id: record._fields[0].properties.id,
                 })
             }
         })
 
-        res.send(module_formation)
+        res.send(unite_pedagogique)
     })
     .catch(function (error) {
         res.status(404).send(error)

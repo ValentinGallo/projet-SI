@@ -374,13 +374,13 @@ app.get('/moduleFormation_unitePedagogique/:id', (req,res) => {
 */
 
 // Permet d'obtenir une liste d'UP d'un utilisateur
-app.get('/liste_UP_utilisateur/:id', (req,res) => {
+app.get('/utilisateur_up/:id', (req,res) => {
     const id = parseInt(req.params.id)
 
     var nbElement = 0;
     var id_unite_pedagogique = "";
 
-    fetch('http://obiwan2.univ-brest.fr:7034/utilisateur/' + id)
+    fetch('http://obiwan2.univ-brest.fr:7034/utilisateur_up/' + id)
     .then(res => res.json())
     .then(json => {
         json.forEach(unite_pedagogique => {
@@ -404,13 +404,13 @@ app.get('/liste_UP_utilisateur/:id', (req,res) => {
 }) 
 
 // Permet d'obtenir les infos des UP d'un MF
-app.get('/liste_UP_moduleFormation/:id', (req,res) => {
+app.get('/up_mf/:id', (req,res) => {
     const id = parseInt(req.params.id)
 
     var nbElement = 0;
     var id_unite_pedagogique = "";
 
-    fetch('http://obiwan2.univ-brest.fr:7034/module_formation/' + id)
+    fetch('http://obiwan2.univ-brest.fr:7034/up_mf/' + id)
     .then(res => res.json())
     .then(json => {
         json.forEach(unite_pedagogique => {
