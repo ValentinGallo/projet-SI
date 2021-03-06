@@ -13,18 +13,28 @@ import GestionModule from './Components/ModuleFormation/GestionModule';
 import GestionUP from './Components/UnitePeda/GestionUP';
 import Profil from './Components/Profil/Profil';
 
+var routeUtlisateur;
+if (localStorage.getItem("nomRole") == "Admin") {
+  routeUtlisateur = <Route path="/Utilisateur" component={GestionUser}/>;
+}
+
+var routeBackup;
+if (localStorage.getItem("nomRole") == "Admin") {
+  routeBackup =  <Route path="/Backup" component={Backup}/>;
+}
+
 const App = () => (
   <Router>
     <Appbar/>
       <Switch>
         <Route exact path="/" component={Home}/>
         <Route path="/Connexion" component={Connexion}/>
+        <Route path="/Profil" component={Profil}/>
         <Route path="/Messagerie" component={Messagerie}/>
-        <Route path="/Utilisateur" component={GestionUser}/>
         <Route path="/ModuleFormation" component={GestionModule}/>
         <Route path="/UnitePedagogique" component={GestionUP}/>
-        <Route path="/Backup" component={Backup}/>
-        <Route path="/Profil" component={Profil}/>
+        {routeUtlisateur}
+        {routeBackup}
       </Switch>
   </Router>
 );

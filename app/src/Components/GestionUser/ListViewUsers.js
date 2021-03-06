@@ -15,7 +15,6 @@ class ListViewUsers extends React.Component {
     }
     
     deleteUser(user) {
-        console.log(user.id)
         API.deleteUser(user.id)
         .then(response => response.json())
         .then(response => alert('L\'utilisateur : ' + user.identifiant + ' a été supprimé '+response))

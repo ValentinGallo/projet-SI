@@ -8,6 +8,16 @@ class Appbar extends React.Component {
       }
 
 	render() {
+    var routeUtlisateur;
+    if (localStorage.getItem("nomRole") == "Admin") {
+      routeUtlisateur = <a className="nav-item nav-link active" href="/Utilisateur"><i className="fas fa-users"></i> Utilisateurs</a>;
+    }
+    
+    var routeBackup;
+    if (localStorage.getItem("nomRole") == "Admin") {
+      routeBackup =  <a className="nav-item nav-link active" href="/Backup"><i className="far fa-save"></i> Sauvegarde</a>;
+    }
+
           if (localStorage.getItem("id") == null) {
           return <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
           <a className="navbar-brand" href="/" style={{marginLeft: '1rem'}}>GRPN</a>
@@ -31,10 +41,13 @@ class Appbar extends React.Component {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                   <div className="navbar-nav me-auto mb-2 mb-lg-0">
                     <a className="nav-item nav-link active" href="/Messagerie"><i className="far fa-comments"></i> Messagerie</a>
-                    <a className="nav-item nav-link active" href="/Utilisateur"><i className="fas fa-users"></i> Utilisateurs</a>
+
+                    {routeUtlisateur}
+
                     <a className="nav-item nav-link active" href="/ModuleFormation"><i className="fas fa-cubes"></i> Module formation</a>
                     <a className="nav-item nav-link active" href="/UnitePedagogique"><i className="fas fa-book"></i> Unités pédagogiques</a>
-                    <a className="nav-item nav-link active" href="/Backup"><i className="far fa-save"></i> Sauvegarde</a>
+
+                    {routeBackup}
 
                   </div>
                   <div className="navbar-nav d-flex">
