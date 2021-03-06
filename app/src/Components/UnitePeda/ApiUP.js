@@ -7,7 +7,7 @@ export default {
         return fetch(burl+'/utilisateur_up/'+id);
     },
     afficherUP_MF : function(id,idMF) {
-        return fetch(burl+'/liste_UP_utilisateur_MF/'+id+'/'+idMF);
+        return fetch(burl+'/utilisateur_mf_up/'+id+'/'+idMF);
     }
     /*postUser : function(id, mdp, id_Role) {
         const requestOptions = {

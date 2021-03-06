@@ -6,7 +6,7 @@ class ListViewUP extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            identifiant:1,
+            identifiant:parseInt(localStorage.getItem("id")),
             unitePeda:[]
         };
     }    

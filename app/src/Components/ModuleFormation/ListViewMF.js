@@ -9,7 +9,8 @@ class ListViewMF extends React.Component {
         this.state = {
             identifiant: parseInt(localStorage.getItem("id")),
             modulesFormation:[],
-            idMF:null
+            idMF:null,
+            nomMF:null
         };
         this.tabSelect = this.tabSelect.bind(this);
     }    
@@ -23,32 +24,40 @@ class ListViewMF extends React.Component {
 
     tabSelect(event){
         this.state.idMF = parseInt(event.target.value);
-        console.log(this.state.idRole);
+        this.state.nomMF = event.target.name;
+        console.log(this.state.idMF);
+        console.log(this.state.nomMF);
     }
     
     render() {
         const bodyTab = this.state.modulesFormation.map(element => 
             <tr key={element.id}>
             <th scope="row">{element.id}</th>
-            <td ><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">{element.nom}</button></td>
+            <td >
+                <button onClick={this.tabSelect} value={element.id} name={element.nom} type="button" className="btn btn-secondary col-12 mx-auto" 
+                    data-bs-toggle="modal" data-bs-target="#exampleModal">{element.nom}
+                </button>
+            </td>
             </tr>
             );
             return (
                 <div>
-                <div className="container mt-5">
-                <table className="table table-striped table-dark">
-                <thead>
-                <tr>
-                <th scope="col">id</th>
-                <th scope="col">nom</th>
-                </tr>
-                </thead>
-                <tbody>
-                {bodyTab}
-                </tbody>
-                </table>
-                </div>
-                <ModalListUP_MF id_MF={this.state.idMF}/>
+                    <div className="mt-5 col-10 mx-auto">
+                        <table className="table table-striped table-dark">
+                            <thead>
+                                <tr>
+                                    <th scope="col">id</th>
+                                    <th scope="col">nom</th>
+                                </tr>
+                            </thead>
+                                <tbody>
+                                {bodyTab}
+                            </tbody>
+                        </table>
+                    </div>
+                        <ModalListUP_MF>
+                            id_MF={this.state.idMF} nom_MF={this.state.nomMF}
+                        </ModalListUP_MF>
                 </div>
                 );
             }

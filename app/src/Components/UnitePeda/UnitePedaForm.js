@@ -49,7 +49,7 @@ class UnitePedaForm extends React.Component {
       return <div>Erreur : {error.message}</div>;
     } else {
       return (
-        <div className="card text-white bg-dark mb-3 col-6 mx-auto">
+        <div className="card text-white bg-dark mb-3 col-12 mx-auto">
           <div className="card-body">
             <form onSubmit={this.handleSubmit}>
               <div className="row g-3 align-items-center">
@@ -68,7 +68,7 @@ class UnitePedaForm extends React.Component {
                 </select>
                 </div>
                 <div className="col-auto">
-                  <button type="submit" className="btn btn-success mt-4">Créer une unité pédagogique</button>
+                  <button type="submit" className="btn btn-success mt-4">Ajouter</button>
                 </div>
               </div>
             </form>
