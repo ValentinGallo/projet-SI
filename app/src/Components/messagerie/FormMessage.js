@@ -35,15 +35,19 @@ export default class FormMessage extends React.Component {
     }
     
     render() {
-        return <div className="card border-primary mb-3 col-md-7">
+        return <div className="card border-primary">
         <div className="card-header">Ecrire un message</div>
         <div className="card-body text-primary">
         <form onSubmit={this.handleSubmit}>
         <div className="form-group">
-        <textarea className="form-control mb-3" value={this.state.value} onChange={this.handleChange} rows="3"></textarea>
         <div className="row">
-            <div className="col-md-9"></div>
-        <input type="submit" className="btn btn-primary col-md-3" value="Envoyer"/>
+            <div className="col-md-9">
+            <textarea className="form-control" value={this.state.value} onChange={this.handleChange} rows="3"></textarea>
+            </div>
+            <div className="d-grid gap-2 col-md-3">
+            <button type="submit" className="btn btn-primary">Envoyer <i class="fas fa-paper-plane"></i></button>
+            </div>
+
         </div>
         </div>
         </form>
