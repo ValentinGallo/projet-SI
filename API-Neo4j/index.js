@@ -215,28 +215,6 @@ app.get('/utilisateur_mf/:id', (req,res) => {
     })
 })
 
-app.get('/utilisateur_up/:id', (req,res) => {
-    const id = parseInt(req.params.id)
-
-    // Permet d'obtenir les unités pédagogique d'un utilisateur
-    session.run('MATCH (a:GRP2_utilisateur {id: $id})-[b]-(c:GRP2_unite_pedagogique) RETURN c', {id: id})
-    .then(function (results) {
-        var unite_pedagogique = []
-        results.records.forEach((record) => {
-            if (record._fields[0].properties.id != null) {
-                unite_pedagogique.push({
-                    id: record._fields[0].properties.id,
-                })
-            }
-        })
-
-        res.send(unite_pedagogique)
-    })
-    .catch(function (error) {
-        res.status(404).send(error)
-    })
-})
-
 app.get('/utilisateur_mf_up/:id_utilisateur/:id_module_formation', (req,res) => {
     const id_utilisateur = parseInt(req.params.id_utilisateur)
     const id_module_formation = parseInt(req.params.id_module_formation)
@@ -281,17 +259,14 @@ app.post('/mf_up/:id_formation/:id_up', (req,res) => {
 app.post('/utilisateur_up/:id_utilisateur/:id_up', (req,res) => {
     const id_utilisateur = parseInt(req.params.id_utilisateur)
     const id_up          = parseInt(req.params.id_up)
-    
+
     // Permet de créer une relation entre un utilisateur et une UP
-    session.run('MATCH (a:GRP2_utilisateur), (b:GRP2_unite_pedagogique) WHERE a.id = $id_utilisateur AND b.id = $id_unite_pedagogique CREATE (a)-[r:RELTYPE]->(b) RETURN type(r)', { id_utilisateur: id_utilisateur, id_unite_pedagogique: id_up})
+    session.run('MATCH (a:GRP2_utilisateur), (b:GRP2_unite_pedagogique) WHERE a.id = $id_utilisateur AND b.id = $id_up CREATE (a)-[r:RELTYPE]->(b) RETURN type(r)', { id_utilisateur: id_utilisateur, id_up: id_up})
     .then(function (result) {
         const singleRecord = result.records[0]
         const node = singleRecord.get(0)
 
-        res.send(node.properties);
-    })
-    .catch(function (error) {
-        res.status(404).send(error)
+        res.status(200).send(node.properties);
     })
 })
 

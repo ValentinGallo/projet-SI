@@ -182,13 +182,21 @@ app.post('/unitePeda', (req,res) => {
         // Création de l'UP dans Neo4j
         var id_up = json[0].id
         fetch('http://obiwan2.univ-brest.fr:7034/unite_pedagogique/' + id_up, requestOptions)
-        // Fait la relation avec l'utilisateur dans Neo4j
-        fetch('http://obiwan2.univ-brest.fr:7034/utilisateur_up/' + req.body.id_utilisateur + '/' + id_up, requestOptions)
-        // Fait la relation avec le MF dans Neo4j
-        fetch('http://obiwan2.univ-brest.fr:7034/mf_up/' + req.body.id_mf + '/' + id_up, requestOptions)
-        // Fait la relation avec le NF dans Neo4j
-        fetch('http://obiwan2.univ-brest.fr:7034/up_nf/' + id_up + '/' + req.body.id_nf, requestOptions)
-        res.status(200).send()
+        .then(json => {
+            // Fait la relation avec l'utilisateur dans Neo4j
+            fetch('http://obiwan2.univ-brest.fr:7034/utilisateur_up/' + req.body.id_utilisateur + '/' + id_up, requestOptions)
+            .then(json => {
+                // Fait la relation avec le MF dans Neo4j
+                fetch('http://obiwan2.univ-brest.fr:7034/mf_up/' + req.body.id_mf + '/' + id_up, requestOptions)
+                .then(json => {
+                    // Fait la relation avec le NF dans Neo4j
+                    fetch('http://obiwan2.univ-brest.fr:7034/up_nf/' + id_up + '/' + req.body.id_nf, requestOptions)
+                    .then(json => {
+                        res.status(200).send()
+                    })
+                })    
+            })
+        })
     })
     .catch(function (error) {
         res.status(404).send(error)
@@ -210,9 +218,11 @@ app.post('/moduleFormation', (req,res) => {
         // Création du MF dans Neo4j
         var id_mf = json[0].id
         fetch('http://obiwan2.univ-brest.fr:7034/module_formation/' + id_mf)
-        // Fait la relation avec l'utilisateur dans Neo4j
-        fetch('http://obiwan2.univ-brest.fr:7034/utilisateur_mf/' + req.body.id_utilisateur + '/' + id_mf)
-        res.status(200).send()
+        .then(json => {
+            // Fait la relation avec l'utilisateur dans Neo4j
+            fetch('http://obiwan2.univ-brest.fr:7034/utilisateur_mf/' + req.body.id_utilisateur + '/' + id_mf)
+            res.status(200).send()
+        })
     })
     .catch(function (error) {
         res.status(404).send(error)
@@ -526,5 +536,5 @@ app.get('/utilisateur_mf_up/:id_utilisateur/:id_module_formation', (req,res) => 
 })
 
 app.listen(7031, () => {
-    console.log('API Centrale à lécoute')
+    console.log('API Centrale à l\'écoute')
 })
