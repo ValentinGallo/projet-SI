@@ -11,6 +11,7 @@ import GestionUser from './Components/GestionUser/GestionUserPage.js'
 import Backup from './Components/Backup/Backup.js'
 import GestionModule from './Components/ModuleFormation/GestionModule';
 import GestionUP from './Components/UnitePeda/GestionUP';
+import Profil from './Components/Profil/Profil';
 
 const App = () => (
   <Router>
@@ -23,6 +24,7 @@ const App = () => (
         <Route path="/ModuleFormation" component={GestionModule}/>
         <Route path="/UnitePedagogique" component={GestionUP}/>
         <Route path="/Backup" component={Backup}/>
+        <Route path="/Profil" component={Profil}/>
       </Switch>
   </Router>
 );
