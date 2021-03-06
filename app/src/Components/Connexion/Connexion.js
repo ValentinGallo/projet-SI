@@ -1,6 +1,7 @@
 //Rien d'intéressant ici du pur affichage html/css
 import React from 'react';
 import API from '../../utils/API';
+import Crypto from 'crypto';
 
 //PAS FINI
 
@@ -22,7 +23,10 @@ class Connexion extends React.Component {
   }
   
   handleSubmit(event) {
-    API.checkUser(this.state.identifiant, this.state.motDePasse)
+    var encrypt = Buffer.from(this.state.motDePasse)
+    var mdp = Crypto.publicEncrypt(API.getApiKey(),encrypt).toString('base64')
+
+    API.checkUser(this.state.identifiant, mdp)
     .then(response => response.json())
     .then(response => {
       if(response.Result !== false && response.Result !== null && response.Result !== undefined)  {
