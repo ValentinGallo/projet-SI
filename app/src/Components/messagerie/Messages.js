@@ -1,5 +1,4 @@
 import React from 'react';
-//import UserProfile from '../UserProfile/UserProfile';
 
 const burl = "http://obiwan2.univ-brest.fr:7031";
 
