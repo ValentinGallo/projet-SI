@@ -577,7 +577,7 @@ app.get('/utilisateur_mf_up/:id_utilisateur/:id_module_formation', (req,res) => 
         .then(res => res.json())
         .then(json => res.status(200).json(json))
         .catch(function (error) {
-            res.status(404).send(error)
+            res.status(404).send("{}")
         })
     }).catch(function (error) {
         res.status(404).send(error)
