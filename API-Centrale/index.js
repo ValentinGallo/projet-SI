@@ -46,7 +46,7 @@ app.post('/message', async (req,res) => {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ idExpediteur: req.body.idExpediteur, idsDestinataire: req.body.idsDestinataire, message: req.body.message, dateEnvoi: req.body.dateEnvoi, messageLu: false })
+        body: JSON.stringify(req.body)
     };
 
     fetch('http://obiwan2.univ-brest.fr:7033/message', requestOptions)
