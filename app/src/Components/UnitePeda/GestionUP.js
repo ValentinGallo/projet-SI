@@ -10,7 +10,6 @@ class GestionUP extends React.Component {
         return(
         <div>
             <ListViewUP/>
-            <UnitePedaForm/>
         </div>
         )
     }

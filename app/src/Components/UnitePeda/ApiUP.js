@@ -8,13 +8,13 @@ export default {
     },
     afficherUP_MF : function(id,idMF) {
         return fetch(burl+'/utilisateur_mf_up/'+id+'/'+idMF);
-    }
-    /*postUser : function(id, mdp, id_Role) {
+    },
+    ajouterUP : function(id_NF, id_MF, id_User,nom,url) {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ identifiant: id, motDePasse:  mdp, idRole: id_Role})
+            body: JSON.stringify({ id_nf: id_NF, id_mf: id_MF, id_utilisateur: id_User, nom:nom, url:url})
         };
-        return fetch(burl+'/user', requestOptions)
-    },*/
+        return fetch(burl+'/unitePeda', requestOptions)
+    }
 }

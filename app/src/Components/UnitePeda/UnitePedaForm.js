@@ -1,13 +1,14 @@
 //Rien d'intéressant ici du pur affichage html/css
 import React from 'react';
 import API from '../../utils/API';
+import ApiUP from './ApiUP';
 
 class UnitePedaForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       error: null,
-      identifiant: 1,
+      identifiant: parseInt(localStorage.getItem("id")),
       nom: '',
       url: '',
       id_mf: 1,
@@ -17,13 +18,12 @@ class UnitePedaForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.selectChange = this.selectChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.refresh = this.refresh.bind(this);
+
   }    
   
   componentDidMount() {       
-    API.loadNF()
-    .then(response => response.json())
-    .then(response => this.setState({niveauxForma:response}))
-    .catch(err => console.error(err));
+    this.refresh();
   }
   
   handleChange(event) {
@@ -32,15 +32,22 @@ class UnitePedaForm extends React.Component {
     });
   }
 
+  refresh(){
+    API.loadNF()
+    .then(response => response.json())
+    .then(response => this.setState({niveauxForma:response}))
+    .catch(err => console.error(err));
+  }
+
   selectChange(event){
-    this.state.id_nf = parseInt(event.target.value)
+    this.setState({id_nf:parseInt(event.target.value)})
   }
   
   handleSubmit(event) {
-    API.postUP(this.state.identifiant, this.state.nom, this.state.url)
+    ApiUP.ajouterUP(this.state.id_nf, this.state.id_mf, this.state.identifiant,this.state.nom,this.state.url)
     .catch(err => console.error(err));
-    
     event.preventDefault();
+    this.refresh();
   }
   
   render() {
@@ -64,7 +71,7 @@ class UnitePedaForm extends React.Component {
                 <div className="col-auto">
                 <label>niveau formation :</label>
                 <select className="form-select" aria-label="Default select example" onChange={this.selectChange}>
-                  {this.state.niveauxForma.map(item => (<option  key={item.id} value={item.id}>{item.nom}</option>))}
+                  {this.state.niveauxForma.map(item => (<option  key={item.id} name="id_nf" value={item.id}>{item.nom}</option>))}
                 </select>
                 </div>
                 <div className="col-auto">

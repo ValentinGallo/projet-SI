@@ -39,8 +39,7 @@ class UserForm extends React.Component {
   }
 
   selectChange(event){
-    this.state.idRole = parseInt(event.target.value);
-    console.log(this.state.idRole);
+    this.setState({idRole:event.target.value});
   }
   
   handleSubmit(event) {

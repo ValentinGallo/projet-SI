@@ -6,11 +6,11 @@ import ModalListUP_MF from './ModalListUP_MF';
 class ListViewMF extends React.Component {
     constructor(props) {
         super(props);
+        this.child  = React.createRef();
         this.state = {
             identifiant: parseInt(localStorage.getItem("id")),
             modulesFormation:[],
-            idMF:null,
-            nomMF:null
+            nomMF:null,
         };
         this.tabSelect = this.tabSelect.bind(this);
     }    
@@ -23,10 +23,9 @@ class ListViewMF extends React.Component {
     }
 
     tabSelect(event){
-        this.state.idMF = parseInt(event.target.value);
-        this.state.nomMF = event.target.name;
-        console.log(this.state.idMF);
-        console.log(this.state.nomMF);
+        this.setState({nomMF:event.target.name});
+        this.child.current.refresh(event.target.value);
+
     }
     
     render() {
@@ -55,9 +54,7 @@ class ListViewMF extends React.Component {
                             </tbody>
                         </table>
                     </div>
-                        <ModalListUP_MF>
-                            id_MF={this.state.idMF} nom_MF={this.state.nomMF}
-                        </ModalListUP_MF>
+                        <ModalListUP_MF ref={this.child} nom_MF={this.state.nomMF} />
                 </div>
                 );
             }

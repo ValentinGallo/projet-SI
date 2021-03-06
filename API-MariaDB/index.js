@@ -165,20 +165,28 @@ app.use(cors());
     app.post('/unitePeda', (req,res)=>{
         const nom = req.body.nom
         const url = req.body.url
-        var sql = "INSERT INTO up (nom,url) VALUES ("+nom+","+url+")";
+        console.log("DATA------:nom :"+req.body.nom+" url:"+req.body.url+" ")
+
+        var sql = "INSERT INTO up (nom,url) VALUES ('"+nom+"','"+url+"')";
         var sql2 = "SELECT id FROM up WHERE nom='"+nom+"' AND url='"+url+"';";
         connection.query(sql, function (error, results) {
-            if (error){
-                res.status(404).json(results)
-            };
+            console.log("q1-----:"+results)
 
-            console.log('result :', results);
+            if (error){
+                console.log("q1-----:"+results)
+                res.status(404).json()
+                return
+            };
             connection.query(sql2, function (error, results) {
+                console.log("q2-----:"+results)
+
                 if (error){
-                    res.status(404).json(results)
+                    console.log("q2-----:"+results)
+                    res.status(404).json()
+                    return
                 };
-                    console.log('result :', results.get('id'));
-                    res.status(200).json(results.get('id'))
+                res.status(200).json(results)
+                return
             });
         });
     })
