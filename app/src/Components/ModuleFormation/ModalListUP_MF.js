@@ -45,7 +45,7 @@ class ModalListUP_MF extends React.Component {
                 <th scope="row">{element.id}</th>
                 <td >{element.nom}</td>
                 <td >{element.url}</td>
-                <td><button className="btn btn-danger fas fa-trash-alt" onClick={() => this.deleteUser(element)}/></td>
+                <td><button className="btn btn-danger fas fa-trash-alt" onClick={() => this.deleteUP(element)}/></td>
                 </tr>
                 );
         }
