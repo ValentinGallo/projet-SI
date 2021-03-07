@@ -45,7 +45,7 @@ class UserForm extends React.Component {
   handleSubmit(event) {
     API.postUser(this.state.identifiant, this.state.motDePasse, this.state.idRole)
     .then(response => response.json())
-    .then(response => alert('L\'utilisateur : ' + this.state.identifiant + ' a été enregistré, réponse du serveur : '+response))
+    .then(response => alert('L\'utilisateur : ' + this.state.identifiant + ' a été enregistré'))
     .catch(err => console.error(err));
     
     event.preventDefault();
