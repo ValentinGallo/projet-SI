@@ -174,7 +174,7 @@ app.post('/unitePeda', (req,res) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nom: req.body.nom, url: req.body.url })
     };
-
+    console.log("id-mf:"+ req.body.id_mf)
     // Création de l'UP dans MariaDB
     fetch('http://obiwan2.univ-brest.fr:7032/unitePeda', requestOptions)
     .then(res => res.json())
@@ -182,6 +182,7 @@ app.post('/unitePeda', (req,res) => {
         // Création de l'UP dans Neo4j
         var id_up = json[0].id
         fetch('http://obiwan2.univ-brest.fr:7034/unite_pedagogique/' + id_up, requestOptions)
+        console.log("id-up:"+id_up)
         .then(json => {
             // Fait la relation avec l'utilisateur dans Neo4j
             fetch('http://obiwan2.univ-brest.fr:7034/utilisateur_up/' + req.body.id_utilisateur + '/' + id_up, requestOptions)

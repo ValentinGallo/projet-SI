@@ -11,7 +11,7 @@ class UnitePedaForm extends React.Component {
       identifiant: parseInt(localStorage.getItem("id")),
       nom: '',
       url: '',
-      id_mf: 1,
+      id_mf: null,
       id_nf: 1,
       niveauxForma:[]
     };
@@ -24,6 +24,7 @@ class UnitePedaForm extends React.Component {
   
   componentDidMount() {       
     this.refresh();
+    console.log("id MF=:"+this.state.id_mf);
   }
   
   handleChange(event) {
@@ -32,10 +33,10 @@ class UnitePedaForm extends React.Component {
     });
   }
 
-  refresh(){
+  refresh(idMF){
     API.loadNF()
     .then(response => response.json())
-    .then(response => this.setState({niveauxForma:response}))
+    .then(response => this.setState({niveauxForma:response,id_mf:idMF}))
     .catch(err => console.error(err));
   }
 

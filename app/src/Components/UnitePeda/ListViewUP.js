@@ -15,6 +15,7 @@ class ListViewUP extends React.Component {
         ApiUP.afficherUP(this.state.identifiant)
         .then(response => response.json())
         .then(response => this.setState({unitePeda:response}))
+        .then(response => console.log("liste UP"+response))
         .catch(err => console.error(err));
     }
     

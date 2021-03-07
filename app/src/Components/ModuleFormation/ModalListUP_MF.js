@@ -6,6 +6,7 @@ import UnitePedaForm from '../UnitePeda/UnitePedaForm';
 class ModalListUP_MF extends React.Component {
     constructor(props) {
         super(props);
+        this.child  = React.createRef();
         this.state = {
             identifiant:parseInt(localStorage.getItem("id")),
             unitePeda:[],
@@ -15,7 +16,7 @@ class ModalListUP_MF extends React.Component {
     }    
     
     componentDidMount() {    
-      //this.refresh();
+      //this.refresh(idModuleForm);
     }
     
     refresh(idModuleForm){
@@ -23,6 +24,7 @@ class ModalListUP_MF extends React.Component {
         .then(response => response.json())
         .then(response => this.setState({unitePeda:response,idMF:idModuleForm}))
         .catch(err => console.error(err));
+        this.child.current.refresh(idModuleForm);
     }
 
     deleteUP(up){
@@ -73,7 +75,7 @@ class ModalListUP_MF extends React.Component {
                                 </table>
                             </div>
                             <div className="modal-footer">
-                            <UnitePedaForm id_mf={this.props.idMF}/>
+                            <UnitePedaForm ref={this.child}/>
                                 <button type="button" className="btn btn-light mx-auto col-12" data-bs-dismiss="modal">Fermer</button>
                             </div>
                         </div>
