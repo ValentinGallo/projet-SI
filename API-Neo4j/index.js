@@ -36,7 +36,7 @@ app.delete('/module_formation/:id', (req,res) => {
     
     session.run('MATCH (a:GRP2_module_formation {id: $id}) DETACH DELETE a', { id: id })
     .then(function () {
-        res.status(200).send();
+        res.status(200).json(json)
     })
     .catch(function (error) {
         res.status(404).send(error)
@@ -64,7 +64,7 @@ app.delete('/unite_pedagogique/:id', (req,res) => {
     
     session.run('MATCH (a:GRP2_unite_pedagogique {id: $id}) DETACH DELETE a', { id: id })
     .then(function () {
-        res.status(200).send();
+        res.status(200).json(json)
     })
     .catch(function (error) {
         res.status(404).send(error)
@@ -92,7 +92,7 @@ app.delete('/niveau_formation/:id', (req,res) => {
     
     session.run('MATCH (a:GRP2_niveau_formation {id: $id}) DETACH DELETE a', { id: id })
     .then(function () {
-        res.status(200).send();
+        res.status(200).json(json)
     })
     .catch(function (error) {
         res.status(404).send(error)
@@ -120,7 +120,7 @@ app.delete('/utilisateur/:id', (req,res) => {
     
     session.run('MATCH (a:GRP2_utilisateur {id: $id}) DETACH DELETE a', { id: id })
     .then(function () {
-        res.status(200).send()
+        res.status(200).json(json)
     }).catch(function (error) {
         res.status(404).send(error)
     })

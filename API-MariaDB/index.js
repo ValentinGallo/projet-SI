@@ -212,7 +212,7 @@ app.use(cors());
         const motDePasse = req.body.motDePasse
         const idRole = req.body.idRole
 
-        var sql = "UPDATE users SET identifiant='"+identifiant+"', motDePasse='"+motDePasse+"', idRole='"+idRole+"' WHERE id='"+id+"'";
+        var sql = "UPDATE users SET identifiant='"+identifiant+"', motDePasse='"+motDePasse+"', idRole="+idRole+" WHERE id="+id+"";
         connection.query(sql, function (error, results) {
             if (error) throw error;
                 console.log('result :', results);
@@ -224,7 +224,7 @@ app.use(cors());
 
         const id = parseInt(req.params.id)
 
-        var sql = "Delete FROM users WHERE id='"+id+"'";
+        var sql = "Delete FROM users WHERE id="+id+"";
         connection.query(sql, function (error, results) {
             if (error) throw error;
                 console.log('result :', results);
@@ -236,7 +236,7 @@ app.use(cors());
 
         const id = parseInt(req.params.id)
 
-        var sql = "Delete FROM role WHERE id='"+id+"'";
+        var sql = "Delete FROM role WHERE id="+id+"";
         connection.query(sql, function (error, results) {
             if (error) throw error;
                 console.log('result :', results);
@@ -248,11 +248,13 @@ app.use(cors());
 
         const id = parseInt(req.params.id)
 
-        var sql = "Delete FROM up WHERE id='"+id+"'";
+        var sql = "Delete FROM up WHERE id="+id+"";
         connection.query(sql, function (error, results) {
-            if (error) throw error;
-                console.log('result :', results);
-                res.status(200).json(results)
+            if (error){
+                res.status(404).json(results)
+            };
+            console.log('result :', results);
+            res.status(200).json(results)
         });
     })
 
@@ -260,7 +262,7 @@ app.use(cors());
 
         const id = parseInt(req.params.id)
 
-        var sql = "Delete FROM mf WHERE id='"+id+"'";
+        var sql = "Delete FROM mf WHERE id="+id+"";
         connection.query(sql, function (error, results) {
             if (error) throw error;
                 console.log('result :', results);
@@ -272,7 +274,7 @@ app.use(cors());
 
         const id = parseInt(req.params.id)
 
-        var sql = "Delete FROM nf WHERE id='"+id+"'";
+        var sql = "Delete FROM nf WHERE id="+id+"";
         connection.query(sql, function (error, results) {
             if (error) throw error;
                 console.log('result :', results);
