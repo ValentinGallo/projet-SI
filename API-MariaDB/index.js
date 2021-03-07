@@ -244,6 +244,42 @@ app.use(cors());
         });
     })
 
+    app.delete('/unitePeda/:id', (req,res)=>{
+
+        const id = parseInt(req.params.id)
+
+        var sql = "Delete FROM up WHERE id='"+id+"'";
+        connection.query(sql, function (error, results) {
+            if (error) throw error;
+                console.log('result :', results);
+                res.status(200).json(results)
+        });
+    })
+
+    app.delete('/moduleFormation/:id', (req,res)=>{
+
+        const id = parseInt(req.params.id)
+
+        var sql = "Delete FROM mf WHERE id='"+id+"'";
+        connection.query(sql, function (error, results) {
+            if (error) throw error;
+                console.log('result :', results);
+                res.status(200).json(results)
+        });
+    })
+
+    app.delete('/niveauForm/:id', (req,res)=>{
+
+        const id = parseInt(req.params.id)
+
+        var sql = "Delete FROM nf WHERE id='"+id+"'";
+        connection.query(sql, function (error, results) {
+            if (error) throw error;
+                console.log('result :', results);
+                res.status(200).json(results)
+        });
+    })
+
 //REACT
 app.get('/formulaire',(req,res)=>{
 	res.sendFile(path.join(__dirname,"reactFetch.html"))

@@ -544,55 +544,79 @@ app.get('/utilisateur_mf_up/:id_utilisateur/:id_module_formation', (req,res) => 
 })
 
 // Permet de supprimer une UP
-app.delete('/unite_pedagogique/:id', (req,res) => {
-    const id = req.params.id
+app.delete('/unite_pedagogique/:id', (req,res)=>{
+    const id = parseInt(req.params.id)
 
     const requestOptions = {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' }
     };
 
-    fetch('http://obiwan2.univ-brest.fr:7034/unite_pedagogique/' + id, requestOptions)
+    fetch('http://obiwan2.univ-brest.fr:7032/unitePeda/'+id, requestOptions)
     .then(res => res.json())
-    .then(json => res.status(200).json(json))
+    .then(json => 
+        //Suppresion de l'up dans Neo4J
+        fetch('http://obiwan2.univ-brest.fr:7034/unite_pedagogique/' + id, requestOptions)
+        .then(res => res.json())
+        .then(json => res.status(200).json(json))
         .catch(function (error) {
             res.status(404).send(error)
         })
-}) 
+    )
+    .catch(function (error) {
+        res.status(404).send(error)
+    });
+})
 
 // Permet de supprimer un MF
-app.delete('/module_formation/:id', (req,res) => {
-    const id = req.params.id
+app.delete('/module_formation/:id', (req,res)=>{
+    const id = parseInt(req.params.id)
 
     const requestOptions = {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' }
     };
 
-    fetch('http://obiwan2.univ-brest.fr:7034/module_formation/' + id, requestOptions)
+    fetch('http://obiwan2.univ-brest.fr:7032/moduleFormation/'+id, requestOptions)
     .then(res => res.json())
-    .then(json => res.status(200).json(json))
+    .then(json => 
+        //Suppresion de l'up dans Neo4J
+        fetch('http://obiwan2.univ-brest.fr:7034/module_formation/' + id, requestOptions)
+        .then(res => res.json())
+        .then(json => res.status(200).json(json))
         .catch(function (error) {
             res.status(404).send(error)
         })
-}) 
+    )
+    .catch(function (error) {
+        res.status(404).send(error)
+    });
+})
 
 // Permet de supprimer un Niveau de Formation
-app.delete('/niveau_formation/:id', (req,res) => {
-    const id = req.params.id
+app.delete('/niveau_formation/:id', (req,res)=>{
+    const id = parseInt(req.params.id)
 
     const requestOptions = {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' }
     };
 
-    fetch('http://obiwan2.univ-brest.fr:7034/niveau_formation/' + id, requestOptions)
+    fetch('http://obiwan2.univ-brest.fr:7032/niveauForm/'+id, requestOptions)
     .then(res => res.json())
-    .then(json => res.status(200).json(json))
+    .then(json => 
+        //Suppresion de l'up dans Neo4J
+        fetch('http://obiwan2.univ-brest.fr:7034/niveau_formation/' + id, requestOptions)
+        .then(res => res.json())
+        .then(json => res.status(200).json(json))
         .catch(function (error) {
             res.status(404).send(error)
         })
-}) 
+    )
+    .catch(function (error) {
+        res.status(404).send(error)
+    });
+})
 
 app.listen(7031, () => {
     console.log('API Centrale à l\'écoute')
