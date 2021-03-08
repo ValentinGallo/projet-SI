@@ -23,5 +23,12 @@ export default {
             headers: { 'Content-Type': 'application/json' }
         };
         return fetch(burl+'/unite_pedagogique/'+idUP, requestOptions)
+    },
+    updateUP : function(idUP) {
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' }
+        };
+        return fetch(burl+'/unite_pedagogique/'+idUP, requestOptions)
     }
 }

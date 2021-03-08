@@ -27,8 +27,17 @@ class ModalListUP_MF extends React.Component {
         this.child.current.refresh(idModuleForm);
     }
 
-    deleteUP(up){
-        ApiUP.deleteUP(up.id)
+    deleteUP = (index,e) =>{
+        const unites = Object.assign([],this.state.unitePeda)
+        unites.splice(index,1)
+        this.setState({unitePeda:unites})
+        console.log(index)
+        console.log(e.target.value)
+        ApiUP.deleteUP(e.target.value)
+    }
+
+    updateUP(e){
+        ApiUP.updateUP(e.target.value)
     }
 
     render() {
@@ -42,12 +51,13 @@ class ModalListUP_MF extends React.Component {
                 </tr>
                 
         }else{
-            bodyTab = this.state.unitePeda.map(element => 
+            bodyTab = this.state.unitePeda.map((element, index) => 
                 <tr key={element.id}>
                 <th scope="row">{element.id}</th>
                 <td >{element.nom}</td>
                 <td >{element.url}</td>
-                <td><button className="btn btn-danger fas fa-trash-alt" onClick={() => this.deleteUP(element)}/></td>
+                <td><button value={element.id} className="btn btn-danger fas fa-trash-alt" onClick={this.deleteUP.bind(this, index)}/></td>
+                <td><button value={element.id} className="btn btn-warning fas fa-pencil-alt"/></td>
                 </tr>
                 );
         }
@@ -60,12 +70,13 @@ class ModalListUP_MF extends React.Component {
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div className="modal-body">
-                                <table className="table table-striped table-dark">
+                                <table className="table table-striped table-dark col-6">
                                     <thead>
                                         <tr>
                                             <th scope="col">id</th>
                                             <th scope="col">nom</th>
                                             <th scope="col">URL</th>
+                                            <th scope="col"/>
                                             <th scope="col"/>
                                         </tr>
                                     </thead>
