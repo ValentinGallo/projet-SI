@@ -1,6 +1,7 @@
 //Rien d'intéressant ici du pur affichage html/css
 import React from 'react';
 import API from '../../utils/API';
+import Crypto from 'crypto';
 
 class UserForm extends React.Component {
   constructor(props) {
@@ -12,7 +13,8 @@ class UserForm extends React.Component {
       identifiant: '',
       motDePasse: '',
       roles:[],
-      idRole:1
+      idRole:1,
+      users: this.props.users
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,9 +45,11 @@ class UserForm extends React.Component {
   }
   
   handleSubmit(event) {
-    API.postUser(this.state.identifiant, this.state.motDePasse, this.state.idRole)
-    .then(response => response.json())
-    .then(response => alert('L\'utilisateur : ' + this.state.identifiant + ' a été enregistré'))
+    var encrypt = Buffer.from(this.state.motDePasse)
+    var mdp = Crypto.publicEncrypt(API.getApiKey(),encrypt).toString('base64')
+
+    API.postUser(this.state.identifiant, mdp, this.state.idRole)
+    .then(alert('L\'utilisateur : ' + this.state.identifiant + ' a été enregistré'))
     .catch(err => console.error(err));
     
     event.preventDefault();
@@ -71,7 +75,7 @@ class UserForm extends React.Component {
 
             <div className="col-auto">
             Mot De Passe :
-            <input className="form-control" name="motDePasse" type="text" value={this.state.motDePasse} onChange={this.handleChange} />
+            <input className="form-control" name="motDePasse" type="password" value={this.state.motDePasse} onChange={this.handleChange} />
             </div>
 
             <div className="col-auto mt-3">

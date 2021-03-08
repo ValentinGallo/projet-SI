@@ -2,30 +2,20 @@
 import React from 'react';
 import API from '../../utils/API';
 
-class ListViewUsers extends React.Component {
+class ListViewUsers extends React.Component { 
     constructor(props) {
         super(props);
         this.state = {
-            users:[]
+            users: this.props.users
         };
-    }    
+    }   
     
-    componentDidMount() {       
-      this.refresh();
-    }
-    
-    deleteUser(user) {
-        API.deleteUser(user.id)
+    deleteUser = (index, e) => {
+        const users = Object.assign([], this.state.users)
+        users.splice(index, 1)
+        this.setState({users:users})
+        API.deleteUser(e.target.value)
         .then(response => response.json())
-        .then(response => alert('L\'utilisateur : ' + user.identifiant + ' a été supprimé '+response))
-        .then(()=>this.refresh())
-        .catch(err => console.error(err));
-    }
-
-    refresh(){
-        API.afficherUsers()
-        .then(response => response.json())
-        .then(response => this.setState({users:response}))
         .catch(err => console.error(err));
     }
 
@@ -39,13 +29,13 @@ class ListViewUsers extends React.Component {
 
     
     render() {
-        const bodyTab = this.state.users.map(element => 
+        const bodyTab = this.state.users.map((element,index) => 
             <tr key={element.id}>
             <th scope="row">{element.id}</th>
             <td>{element.identifiant}</td>
             <td>
-            <button className="btn btn-danger fas fa-trash-alt" onClick={() => this.deleteUser(element)}/>
-            <button className="btn btn-warning fas fa-pencil-alt" onClick={this.updateUser} name={element.id}/>
+            <button value={element.id} className="btn btn-danger fas fa-trash-alt" onClick={this.deleteUser.bind(this,index)}/>
+            <button value={element.id} className="btn btn-warning fas fa-pencil-alt" onClick={this.updateUser} name={element.id}/>
             </td>
             </tr>
             );
