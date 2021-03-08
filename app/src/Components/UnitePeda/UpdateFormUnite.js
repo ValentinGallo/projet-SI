@@ -11,8 +11,7 @@ class UnitePedaForm extends React.Component {
       identifiant: parseInt(localStorage.getItem("id")),
       nom: '',
       url: '',
-      id_mf: null,
-      id_nf: 1,
+      id_nf: 0,
       niveauxForma:[]
     };
     this.handleChange = this.handleChange.bind(this);
@@ -32,10 +31,10 @@ class UnitePedaForm extends React.Component {
     });
   }
 
-  refresh(idMF){
+  refresh(id_NF){
     API.loadNF()
     .then(response => response.json())
-    .then(response => this.setState({niveauxForma:response,id_mf:idMF}))
+    .then(response => this.setState({niveauxForma:response,id_nf:id_NF}))
     .catch(err => console.error(err));
   }
 
@@ -45,7 +44,7 @@ class UnitePedaForm extends React.Component {
   
   handleSubmit(event) {
     var idmf = parseInt(this.state.id_mf)
-    ApiUP.ajouterUP(this.state.id_nf, idmf, this.state.identifiant,this.state.nom,this.state.url)
+    ApiUP.updateUP(this.state.id_nf,this.state.nom,this.state.url)
     .catch(err => console.error(err));
     event.preventDefault();
     this.refresh();
@@ -63,11 +62,11 @@ class UnitePedaForm extends React.Component {
               <div className="row g-3 align-items-center">
                 <div className="col-auto">
                   <label>nom:</label>
-                  < input name="nom" type="text" className="form-control" value={this.state.nom} onChange={this.handleChange} />
+                  < input name="nom" type="text" className="form-control" placeholder={this.state.nom} value={this.state.nom} onChange={this.handleChange} />
                 </div>
                 <div className="col-auto">
                   <label>url:</label>
-                  <input name="url" type="text" className="form-control" value={this.state.url} onChange={this.handleChange} />
+                  <input name="url" type="text" className="form-control" placeholder={this.state.ulr} value={this.state.url} onChange={this.handleChange} />
                 </div>
                 <div className="col-auto">
                 <label>niveau formation :</label>
@@ -76,7 +75,7 @@ class UnitePedaForm extends React.Component {
                 </select>
                 </div>
                 <div className="col-auto">
-                  <button type="submit" className="btn btn-success mt-4">Ajouter</button>
+                  <button type="submit" className="btn btn-warning mt-4"> <i class="fas fa-pencil-alt"/> Modifier</button>
                 </div>
               </div>
             </form>

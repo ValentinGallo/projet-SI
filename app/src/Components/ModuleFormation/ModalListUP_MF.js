@@ -15,10 +15,6 @@ class ModalListUP_MF extends React.Component {
         this.refresh = this.refresh.bind(this);
     }    
     
-    componentDidMount() {    
-      //this.refresh(idModuleForm);
-    }
-    
     refresh(idModuleForm){
         ApiUP.afficherUP_MF(this.state.identifiant,idModuleForm)
         .then(response => response.json())
@@ -36,10 +32,6 @@ class ModalListUP_MF extends React.Component {
         ApiUP.deleteUP(e.target.value)
     }
 
-    updateUP(e){
-        ApiUP.updateUP(e.target.value)
-    }
-
     render() {
         var bodyTab
         if(this.state.unitePeda.length==null){
@@ -47,7 +39,8 @@ class ModalListUP_MF extends React.Component {
                 <tr key="0">
                 <th scope="row">-</th>
                 <td >Pas d'Up dans ce module de formation</td>
-                <td >#</td>
+                <td >-</td>
+                <td ></td>
                 </tr>
                 
         }else{
@@ -57,7 +50,6 @@ class ModalListUP_MF extends React.Component {
                 <td >{element.nom}</td>
                 <td >{element.url}</td>
                 <td><button value={element.id} className="btn btn-danger fas fa-trash-alt" onClick={this.deleteUP.bind(this, index)}/></td>
-                <td><button value={element.id} className="btn btn-warning fas fa-pencil-alt"/></td>
                 </tr>
                 );
         }
@@ -76,7 +68,6 @@ class ModalListUP_MF extends React.Component {
                                             <th scope="col">id</th>
                                             <th scope="col">nom</th>
                                             <th scope="col">URL</th>
-                                            <th scope="col"/>
                                             <th scope="col"/>
                                         </tr>
                                     </thead>

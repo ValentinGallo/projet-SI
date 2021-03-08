@@ -24,11 +24,12 @@ export default {
         };
         return fetch(burl+'/unite_pedagogique/'+idUP, requestOptions)
     },
-    updateUP : function(idUP) {
+    updateUP : function(id_UP,id_NF,nom,url) {
         const requestOptions = {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id_nf: id_NF, nom:nom, url:url})
         };
-        return fetch(burl+'/unite_pedagogique/'+idUP, requestOptions)
+        return fetch(burl+'/unite_pedagogique/'+id_UP, requestOptions)
     }
 }
