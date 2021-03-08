@@ -174,7 +174,7 @@ app.post('/unitePeda', (req,res) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nom: req.body.nom, url: req.body.url })
     };
-    console.log("id-mf:"+ req.body.id_mf)
+
     // Création de l'UP dans MariaDB
     fetch('http://obiwan2.univ-brest.fr:7032/unitePeda', requestOptions)
     .then(res => res.json())
@@ -182,7 +182,6 @@ app.post('/unitePeda', (req,res) => {
         // Création de l'UP dans Neo4j
         var id_up = json[0].id
         fetch('http://obiwan2.univ-brest.fr:7034/unite_pedagogique/' + id_up, requestOptions)
-        console.log("id-up:"+id_up)
         .then(json => {
             // Fait la relation avec l'utilisateur dans Neo4j
             fetch('http://obiwan2.univ-brest.fr:7034/utilisateur_up/' + req.body.id_utilisateur + '/' + id_up, requestOptions)
@@ -195,7 +194,7 @@ app.post('/unitePeda', (req,res) => {
                     .then(json => {
                         res.status(200).send()
                     })
-                })    
+                })  
             })
         })
     })
@@ -266,7 +265,7 @@ app.post('/user', (req,res)=>{
     .then(json => {
         // Création de l'utilisateur dans Neo4j
         var id_utilisateur = json[0].id
-        fetch('http://obiwan2.univ-brest.fr:7034/utilisateur/' + id_utilisateur)
+        fetch('http://obiwan2.univ-brest.fr:7034/utilisateur/' + id_utilisateur, requestOptions)
         res.status(200).send()
     })
     .catch(function (error) {
@@ -589,6 +588,31 @@ app.delete('/module_formation/:id', (req,res)=>{
             res.status(404).send(error)
         })
     )
+    .catch(function (error) {
+        res.status(404).send(error)
+    });
+})
+
+// Permet d'ajouter un Niveau de Formation
+app.post('/niveau_formation', (req,res)=>{
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nom: req.body.nom })
+    };
+
+    fetch('http://obiwan2.univ-brest.fr:7032/niveauForm/', requestOptions)
+    .then(res => res.json())
+    .then(json => {
+        //Ajout du niveau de formation dans Neo4J
+        var id_nf = json[0].id
+        fetch('http://obiwan2.univ-brest.fr:7034/niveau_formation/' + id_nf, requestOptions)
+        .then(res => res.json())
+        .then(json => res.status(200).json(json))
+        .catch(function (error) {
+            res.status(404).send(error)
+        })
+    })
     .catch(function (error) {
         res.status(404).send(error)
     });
