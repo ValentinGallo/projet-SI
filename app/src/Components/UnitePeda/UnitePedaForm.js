@@ -45,7 +45,8 @@ class UnitePedaForm extends React.Component {
   }
   
   handleSubmit(event) {
-    ApiUP.ajouterUP(this.state.id_nf, this.state.id_mf, this.state.identifiant,this.state.nom,this.state.url)
+    var idmf = parseInt(this.state.id_mf)
+    ApiUP.ajouterUP(this.state.id_nf, idmf, this.state.identifiant,this.state.nom,this.state.url)
     .catch(err => console.error(err));
     event.preventDefault();
     this.refresh();

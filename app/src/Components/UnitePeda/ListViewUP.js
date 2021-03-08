@@ -22,13 +22,12 @@ class ListViewUP extends React.Component {
     render() {
         var bodyTab 
         if(this.state.unitePeda.length==null){
-            bodyTab = this.state.unitePeda.map(element => 
+            bodyTab =
                 <tr key="0">
                 <th scope="row">-</th>
                 <td >Pas d'unité pédagogique</td>
                 <td >-</td>
                 </tr>
-                );
         }else{
             bodyTab = this.state.unitePeda.map(element => 
                 <tr key={element.id}>
