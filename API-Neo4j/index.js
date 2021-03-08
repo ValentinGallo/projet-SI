@@ -108,7 +108,7 @@ app.post('/utilisateur/:id', (req,res) => {
         const singleRecord = result.records[0]
         const node = singleRecord.get(0)
 
-        res.send(node.properties);
+        res.status(200).json(node.properties);
     })
     .catch(function (error) {
         res.status(404).send(error)
