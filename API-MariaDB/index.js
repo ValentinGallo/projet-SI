@@ -124,9 +124,8 @@ app.use(cors());
                 if (error){
                     res.status(404).json(results)
                 };
-                    console.log('result :', results.get('id'));
-                    res.status(200).json(results.get('id'))
-            });
+                res.status(200).json(results)
+                });
         });
     })
 
@@ -226,6 +225,19 @@ app.use(cors());
         const nom = req.body.nom
 
         var sql = "UPDATE role SET nom = '"+nom+"' WHERE id='"+id+"'";
+        connection.query(sql, function (error, results) {
+            if (error) throw error;
+                console.log('result :', results);
+                res.status(200).json(results)
+        });
+    })
+
+    app.put('/unite_pedagogique', (req,res)=>{
+
+        const id = req.body.id
+        const nom = req.body.nom
+
+        var sql = "UPDATE up SET nom = '"+nom+"' WHERE id='"+id+"'";
         connection.query(sql, function (error, results) {
             if (error) throw error;
                 console.log('result :', results);
