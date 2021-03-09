@@ -49,8 +49,10 @@ class UserForm extends React.Component {
     var mdp = Crypto.publicEncrypt(API.getApiKey(),encrypt).toString('base64')
 
     API.postUser(this.state.identifiant, mdp, this.state.idRole)
-    .then(alert('L\'utilisateur : ' + this.state.identifiant + ' a été enregistré'))
+    .then(() => this.props.refresh())
     .catch(err => console.error(err));
+
+    this.props.refresh()
     
     event.preventDefault();
   }
@@ -83,7 +85,7 @@ class UserForm extends React.Component {
               {this.state.roles.map(item => (<option  key={item.id} value={item.id}>{item.nom}</option>))}
             </select>
             </div>
-            <button type="submit" className="btn btn-success mt-2">Ajouter</button>
+            <button type="button" onClick={this.handleSubmit} className="btn btn-success mt-2">Ajouter</button>
             </form>
           </div>
         </div>

@@ -229,21 +229,14 @@ app.post('/moduleFormation', (req,res) => {
     });
 })
 
-app.get('/selectUP', (req,res) => {
-    const requestOptions = {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ param: req.body.param })
-    };
-
-    fetch('http://obiwan2.univ-brest.fr:7032/selectUP', requestOptions)
+app.get('/selectUP/:id', (req,res) => {
+    fetch('http://obiwan2.univ-brest.fr:7032/selectUP/'+req.params.id)
     .then(res => res.json())
     .then(json => res.status(200).json(json))
     .catch(function (error) {
         res.status(404).send(error)
     });
 })
-
 app.get('/role', (req,res) => {
     fetch('http://obiwan2.univ-brest.fr:7032/role')
     .then(res => res.json())
@@ -311,6 +304,21 @@ app.put('/user', (req,res)=>{
     };
 
     fetch('http://obiwan2.univ-brest.fr:7032/user', requestOptions)
+    .then(res => res.json())
+    .then(json => res.status(200).json(json))
+    .catch(function (error) {
+        res.status(404).send(error)
+    });
+})
+
+app.put('/unite_pedagogique', (req,res)=>{
+    const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: req.body.id, nom: req.body.nom, url: req.body.url})
+    };
+
+    fetch('http://obiwan2.univ-brest.fr:7032/unite_pedagogique', requestOptions)
     .then(res => res.json())
     .then(json => res.status(200).json(json))
     .catch(function (error) {

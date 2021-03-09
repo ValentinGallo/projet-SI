@@ -9,25 +9,41 @@ class GestionUserPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            users:[]
+            users:[],
+            isLoading:false
         };
+        this.refresh = this.refresh.bind(this);
     }   
 
 componentDidMount() {       
+    this.refresh()
+}
+
+refresh() {
     API.afficherUsers()
     .then(response => response.json())
-    .then(response => this.setState({isLoaded: true, items: response}))
+    .then(response => this.setState({users: response, isLoading:true}))
     .catch(err => console.error(err));
 }
 
 
+
     render() {
-        return(
-        <div className="container">
-            <ListViewUsers users={this.state.users}/>
-            <UserForm users={this.state.users}/>
-        </div>
-        )
+        if(!this.state.isLoading) {
+            return(
+                <div className="container">
+                    <p>Chargement</p>
+                </div> 
+            );
+        }
+        else {
+            return(
+                <div className="container">
+                    <ListViewUsers users={this.state.users} refresh={this.refresh}/>
+                    <UserForm refresh={this.refresh}/>
+                </div> 
+            )
+        }
     }
 }
 export default GestionUserPage;

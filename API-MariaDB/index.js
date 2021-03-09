@@ -236,8 +236,9 @@ app.use(cors());
 
         const id = req.body.id
         const nom = req.body.nom
+        const url = req.body.url
 
-        var sql = "UPDATE up SET nom = '"+nom+"' WHERE id='"+id+"'";
+        var sql = "UPDATE up SET nom ='"+nom+"',url ='"+url+"' WHERE id='"+id+"'";
         connection.query(sql, function (error, results) {
             if (error) throw error;
                 console.log('result :', results);
@@ -247,10 +248,10 @@ app.use(cors());
 
     app.put('/user', (req,res)=>{
 
-        const id = req.body.id
+        const id = parseInt(req.body.id)
         const identifiant = req.body.identifiant
         const motDePasse = req.body.motDePasse
-        const idRole = req.body.idRole
+        const idRole = parseInt(req.body.idRole)
 
         var sql = "UPDATE users SET identifiant='"+identifiant+"', motDePasse='"+motDePasse+"', idRole="+idRole+" WHERE id="+id+"";
         connection.query(sql, function (error, results) {
@@ -321,11 +322,6 @@ app.use(cors());
                 res.status(200).json(results)
         });
     })
-
-//REACT
-app.get('/formulaire',(req,res)=>{
-	res.sendFile(path.join(__dirname,"reactFetch.html"))
-});
 
 //////////////////
 //Serveur

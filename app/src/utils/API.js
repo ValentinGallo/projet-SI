@@ -17,6 +17,14 @@ export default {
         };
         return fetch(burl+'/user', requestOptions)
     },
+    putUser : function(id, identifiant, mdp, id_Role) {
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: id, identifiant: identifiant, motDePasse:  mdp, idRole: id_Role})
+        };
+        return fetch(burl+'/user', requestOptions)
+    },
     checkUser : function(id, mdp) {
         const requestOptions = {
             method: 'POST',
