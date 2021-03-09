@@ -18,7 +18,7 @@ class Profil extends React.Component {
         
     }
     render() {
-        const listeUP= this.state.listeUp.map((up) =>  <li class="list-group-item">- {up.nom}</li>)
+        const listeUP= this.state.listeUp.map((up) =>  <li className="list-group-item">- {up.nom}</li>)
         return (
             <div className="container">
             <div className="row">
@@ -36,7 +36,7 @@ class Profil extends React.Component {
             <div className="card-header">Mes unités pédagogiques :</div>
             <div className="card-body">
             <p className="card-text">
-            <ul class="list-group">
+            <ul className="list-group">
             {listeUP}
             </ul></p>
             <a className="btn btn-dark" href="/UnitePedagogique"><i className="fas fa-book"></i> Consulter mes unités pédagogiques</a>

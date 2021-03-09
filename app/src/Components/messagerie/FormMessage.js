@@ -45,7 +45,7 @@ export default class FormMessage extends React.Component {
             <textarea className="form-control" value={this.state.value} onChange={this.handleChange} rows="3"></textarea>
             </div>
             <div className="d-grid gap-2 col-md-3">
-            <button type="submit" className="btn btn-primary">Envoyer <i class="fas fa-paper-plane"></i></button>
+            <button type="submit" className="btn btn-primary">Envoyer <i className="fas fa-paper-plane"></i></button>
             </div>
 
         </div>
