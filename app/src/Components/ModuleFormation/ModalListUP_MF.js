@@ -18,9 +18,12 @@ class ModalListUP_MF extends React.Component {
     refresh(idModuleForm){
         ApiUP.afficherUP_MF(this.state.identifiant,idModuleForm)
         .then(response => response.json())
-        .then(response => this.setState({unitePeda:response,idMF:idModuleForm}))
+        .then(response => this.setState({unitePeda:response}))
+        .then(response => this.setState({idMF:idModuleForm}))
+        .then(this.child.current.refresh(idModuleForm))
         .catch(err => console.error(err));
-        this.child.current.refresh(idModuleForm);
+        
+        
     }
 
     deleteUP = (index,e) =>{
@@ -48,14 +51,14 @@ class ModalListUP_MF extends React.Component {
                 <tr key={element.id}>
                 <th scope="row">{element.id}</th>
                 <td >{element.nom}</td>
-                <td >{element.url}</td>
+                <td ><a className="text-light" href={element.url}>{element.url}</a></td>
                 <td><button value={element.id} className="btn btn-danger fas fa-trash-alt" onClick={this.deleteUP.bind(this, index)}/></td>
                 </tr>
                 );
         }
             return (
                 <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div className="modal-dialog">
+                    <div className="modal-dialog modal-lg">
                         <div className="modal-content bg-secondary text-white">
                             <div className="modal-header">
                                 <h5 className="modal-title" id="exampleModalLabel">Unité pédagogique : {this.props.nom_MF}</h5>
@@ -77,7 +80,7 @@ class ModalListUP_MF extends React.Component {
                                 </table>
                             </div>
                             <div className="modal-footer">
-                            <UnitePedaForm ref={this.child}/>
+                            <UnitePedaForm refresh={this.refresh} ref={this.child}/>
                                 <button type="button" className="btn btn-light mx-auto col-12" data-bs-dismiss="modal">Fermer</button>
                             </div>
                         </div>

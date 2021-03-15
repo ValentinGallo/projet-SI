@@ -27,8 +27,6 @@ class ListViewUP extends React.Component {
         const unites = Object.assign([],this.state.unitePeda)
         unites.splice(index,1)
         this.setState({unitePeda:unites})
-        console.log(index)
-        console.log(e.target.value)
         ApiUP.deleteUP(e.target.value)
     }
 
@@ -53,7 +51,7 @@ class ListViewUP extends React.Component {
                 <tr key={element.id}>
                     <th scope="row">{element.id}</th>
                     <td >{element.nom}</td>
-                    <td >{element.url}</td>
+                    <td><a href={element.url}>{element.url}</a></td>
                     <td><button value={element.id} className="btn btn-danger fas fa-trash-alt" onClick={this.deleteUP.bind(this, index)}/></td>
                     <td><button  data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={this.tableSelect}  value={element.id} className="btn btn-warning fas fa-pencil-alt"/></td>
                 </tr>
