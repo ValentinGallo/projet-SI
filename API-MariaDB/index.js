@@ -322,7 +322,15 @@ app.use(cors());
                 res.status(200).json(results)
         });
     })
-
+    //Statistique
+    app.get('/role_stat', (req,res) => {
+        connection.query('SELECT role.nom, COUNT(*) nbUsers FROM role JOIN users ON role.id=users.idRole GROUP By role.nom', function (error, results) {
+            if (error) throw error;
+                console.log('result :', results);
+                res.status(200).json(results)
+        });
+       
+    })
 //////////////////
 //Serveur
 //////////////////

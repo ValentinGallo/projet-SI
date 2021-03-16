@@ -650,6 +650,15 @@ app.delete('/niveau_formation/:id', (req,res)=>{
         res.status(404).send(error)
     });
 })
+//Statistique
+app.get('/role_stat', (req,res) => {
+    fetch('http://obiwan2.univ-brest.fr:7032/role_stat')
+    .then(res => res.json())
+    .then(json => res.status(200).json(json))
+    .catch(function (error) {
+        res.status(404).send(error)
+    });
+})
 
 app.listen(7031, () => {
     console.log('API Centrale à l\'écoute')
