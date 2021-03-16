@@ -651,6 +651,7 @@ app.delete('/niveau_formation/:id', (req,res)=>{
     });
 })
 //Statistique
+//affiche le nombre de user par role
 app.get('/role_stat', (req,res) => {
     fetch('http://obiwan2.univ-brest.fr:7032/role_stat')
     .then(res => res.json())
@@ -659,6 +660,28 @@ app.get('/role_stat', (req,res) => {
         res.status(404).send(error)
     });
 })
+
+//affiche le nombre de messages pour un user
+app.get('/stats_messages/:id', (req,res) => {
+    const id = req.params.id
+    fetch('http://obiwan2.univ-brest.fr:7033/stats_messages/'+id)
+    .then(res => res.json())
+    .then(json => res.status(200).json(json))
+    .catch(function (error) {
+        res.status(404).send(error)
+    });
+})
+//affiche le nombre d'up pour un user
+app.get('/stat_utilisateur_up/:id_utilisateur', (req,res) => {
+    const id_utilisateur = parseInt(req.params.id_utilisateur)
+    fetch('http://obiwan2.univ-brest.fr:7034/stat_utilisateur_up/'+id_utilisateur)
+    .then(res => res.json())
+    .then(json => res.status(200).json(json[0].low))
+    .catch(function (error) {
+        res.status(404).send(error)
+    });
+})
+
 
 app.listen(7031, () => {
     console.log('API Centrale à l\'écoute')
