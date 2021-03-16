@@ -676,7 +676,7 @@ app.get('/stat_utilisateur_up/:id_utilisateur', (req,res) => {
     const id_utilisateur = parseInt(req.params.id_utilisateur)
     fetch('http://obiwan2.univ-brest.fr:7034/stat_utilisateur_up/'+id_utilisateur)
     .then(res => res.json())
-    .then(json => res.status(200).json(json[0].low))
+    .then(json => res.status(200).json(json))
     .catch(function (error) {
         res.status(404).send(error)
     });
