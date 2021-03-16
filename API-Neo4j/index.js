@@ -328,10 +328,7 @@ app.get('/stat_utilisateur_up/:id_utilisateur', (req,res) => {
     // Permet d'obtenir les unités pédagogique d'un utilisateur
     session.run('MATCH (a:GRP2_utilisateur {id: $id_utilisateur})-[b]-(c:GRP2_unite_pedagogique) WITH count(c) as total RETURN total', {id_utilisateur: id_utilisateur})
     .then(function (result) {
-        const singleRecord = result.records[0]
-        const node = singleRecord.get(0)
-
-        res.send(node.properties);
+        res.send(result.records.map((record) => record.get("total")));
     })
     .catch(function (error) {
         res.status(404).send(error)
