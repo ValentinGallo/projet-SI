@@ -393,10 +393,10 @@ app.get('/utilisateur_up/:id', (req,res) => {
         .then(res => res.json())
         .then(json => res.status(200).json(json))
         .catch(function (error) {
-            res.status(404).send("[]")
+            res.status(200).send("[]")
         })
     }).catch(function (error) {
-        res.status(404).send("[]")
+        res.status(200).send("[]")
     })
 }) 
 
