@@ -25,7 +25,6 @@ class ListViewMF extends React.Component {
     tabSelect(event){
         this.setState({nomMF:event.target.name});
         this.child.current.refresh(event.target.value);
-        console.log("idMF recupe depuis le bouton:"+event.target.value)
     }
     
     render() {

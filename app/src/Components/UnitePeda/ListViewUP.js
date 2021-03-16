@@ -19,7 +19,6 @@ class ListViewUP extends React.Component {
         ApiUP.afficherUP(this.state.identifiant)
         .then(response => response.json())
         .then(response => this.setState({unitePeda:response}))
-        .then(response => console.log("liste UP"+response))
         .catch(err => console.error(err));
     }
 
@@ -34,7 +33,6 @@ class ListViewUP extends React.Component {
     tabSelect(event){
         this.setState({idUP:event.target.value});
         this.child.current.refresh(event.target.value);
-        console.log("idMF recupe depuis le bouton:"+event.target.value)
     }
     
     render() {
@@ -51,7 +49,7 @@ class ListViewUP extends React.Component {
                 <tr key={element.id}>
                     <th scope="row">{element.id}</th>
                     <td >{element.nom}</td>
-                    <td><a href={element.url}>{element.url}</a></td>
+                    <td><a className="text-light" href={element.url}>{element.url}</a></td>
                     <td><button value={element.id} className="btn btn-danger fas fa-trash-alt" onClick={this.deleteUP.bind(this, index)}/></td>
                     <td><button  data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={this.tableSelect}  value={element.id} className="btn btn-warning fas fa-pencil-alt"/></td>
                 </tr>

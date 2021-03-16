@@ -30,8 +30,6 @@ class ModalListUP_MF extends React.Component {
         const unites = Object.assign([],this.state.unitePeda)
         unites.splice(index,1)
         this.setState({unitePeda:unites})
-        console.log(index)
-        console.log(e.target.value)
         ApiUP.deleteUP(e.target.value)
     }
 

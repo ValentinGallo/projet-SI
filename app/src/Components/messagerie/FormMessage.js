@@ -13,7 +13,6 @@ export default class FormMessage extends React.Component {
         this.setState({value: event.target.value});
     }
     handleSubmit(event) {
-        console.log('envoie mess')
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

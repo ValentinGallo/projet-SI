@@ -16,7 +16,6 @@ export default class Messages extends React.Component {
             method: 'DELETE',
         })
         .then(res => res.text()) // or res.json()
-        .then(res => console.log(res))
         .then(() => this.props.refreshMessage(this.props.userSelected))
     }
     handleChange = () => {

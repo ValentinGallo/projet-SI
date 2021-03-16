@@ -44,12 +44,6 @@ class ModalUserEdit extends React.Component {
         else {
           nouvMdp = this.props.user.motDePasse
         }
-
-        console.log(this.props.user.id)
-        console.log(this.state.identifiantUser != null && this.state.identifiantUser != undefined ? this.state.identifiantUser : this.props.user.identifiant)
-        console.log(nouvMdp)
-        console.log(this.state.idRole != null && this.state.idRole != undefined ? this.state.idRole : this.props.user.idRole)
-
         API.putUser(
           this.props.user.id, 
           this.state.identifiantUser != null && this.state.identifiantUser != undefined ? this.state.identifiantUser : this.props.user.identifiant,
@@ -87,8 +81,7 @@ class ModalUserEdit extends React.Component {
                 </div>
                 <div className="col-auto">
                 <label>Role :</label>
-                {}
-                <select defaultValue={this.props.user.idRole} className="form-select" aria-label="Default select example" onChange={this.selectChange}>
+                <select defaultValue='1' className="form-select" aria-label="Default select example" onChange={this.selectChange}>
                   {this.state.roles.map(item => (
                   <option  key={item.id} value={item.id}>{item.nom}</option>))}
                 </select>

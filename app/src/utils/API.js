@@ -51,6 +51,15 @@ export default {
     loadNF : function(){
         return fetch(burl+'/niveauForm')
     },
+    getRoleStat : function() {
+        return fetch(burl+'/role_stat')
+    },
+    getStatsMessages : function(id) {
+        return fetch(burl+'/stats_messages/'+id)
+    },
+    getStatsUp : function(id) {
+        return fetch(burl+'/stat_utilisateur_up/'+id)
+    },
     getApiKey : function() {
         return "-----BEGIN PUBLIC KEY-----MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtO+WkhYFnk0H6j7R8tztsHuN0dkrFJHzZM2Vd06x7tWy4fI4GZxfv/4RQ8WuFU+A+uCi9ykKpTMdkeWT7MJeYoaY9uthkOsNoExjqhDRB5UseLORRcWcHXFAXm40a7wXQ2mk+jGBd6VsPEWY7BmtHrR1GCZZrH8GBMBy4w2rmiL3ilC6TfTtTDqpkrBCBLgr41r7g7bp20uGk+5CwijV2c3qsobVe2h9nt3dTvEUzAhEeFGz818mxoneX+yIfSubBz9l/eKM8GOLXxWHhhKYdSEjy24kqQ1Zuv++mg43TP90wioLuq7RaEQJ43r7gdwoLWauO83I0g9XNg28Lz7YqQIDAQAB-----END PUBLIC KEY-----"
     }
