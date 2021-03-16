@@ -321,6 +321,23 @@ app.post('/mf_up/:id_mf/:id_up', (req,res) => {
     })
 })
 
+/* Statistiques */
+app.get('/stat_utilisateur_up/:id_utilisateur', (req,res) => {
+    const id_utilisateur = parseInt(req.params.id_utilisateur)
+
+    // Permet d'obtenir les unités pédagogique d'un utilisateur
+    session.run('MATCH (a:GRP2_utilisateur {id: $id_utilisateur})-[b]-(c:GRP2_unite_pedagogique) WITH count(c) as total RETURN total', {id_utilisateur: id_utilisateur})
+    .then(function (result) {
+        const singleRecord = result.records[0]
+        const node = singleRecord.get(0)
+
+        res.send(node.properties);
+    })
+    .catch(function (error) {
+        res.status(404).send(error)
+    })
+})
+
 /* Backup Neo4j */
 app.get('/backup', (req,res) => {
     session.run('CALL apoc.export.csv.all(null, {stream:true}) YIELD data RETURN data')
