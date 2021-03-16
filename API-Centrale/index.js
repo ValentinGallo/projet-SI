@@ -27,7 +27,7 @@ app.get('/message', (req,res) => {
     .then(res => res.json())
     .then(json => res.status(200).json(json))
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -38,7 +38,7 @@ app.get('/message/:id', (req,res) => {
     .then(res => res.json())
     .then(json => res.status(200).json(json))
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -53,7 +53,7 @@ app.post('/message', async (req,res) => {
     .then(res => res.json())
     .then(json => res.status(200).json(json))
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -69,7 +69,7 @@ app.delete('/message/:id', async (req,res) => {
     .then(res => res.json())
     .then(json => res.status(200).json(json))
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -81,7 +81,7 @@ app.get('/disscussion/:idExpediteur/:idsDestinataire', async (req,res) => {
     .then(res => res.json())
     .then(json => res.status(200).json(json))
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -94,7 +94,7 @@ app.get('/user', (req,res) => {
     .then(res => res.json())
     .then(json => res.status(200).json(json))
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -112,7 +112,7 @@ app.post('/check/:identifiant', (req,res) => {
         }
     })
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -121,7 +121,7 @@ app.get('/cp', (req,res) => {
     .then(res => res.json())
     .then(json => res.status(200).json(json))
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -130,7 +130,7 @@ app.get('/moduleForm', (req,res) => {
     .then(res => res.json())
     .then(json => res.status(200).json(json))
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -145,7 +145,7 @@ app.get('/selectMF', (req,res) => {
     .then(res => res.json())
     .then(json => res.status(200).json(json))
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -154,7 +154,7 @@ app.get('/niveauForm', (req,res) => {
     .then(res => res.json())
     .then(json => res.status(200).json(json))
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -163,7 +163,7 @@ app.get('/unitePeda', (req,res) => {
     .then(res => res.json())
     .then(json => res.status(200).json(json))
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -199,7 +199,7 @@ app.post('/unitePeda', (req,res) => {
         })
     })
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -225,7 +225,7 @@ app.post('/moduleFormation', (req,res) => {
         })
     })
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -234,7 +234,7 @@ app.get('/selectUP/:id', (req,res) => {
     .then(res => res.json())
     .then(json => res.status(200).json(json))
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 app.get('/role', (req,res) => {
@@ -242,7 +242,7 @@ app.get('/role', (req,res) => {
     .then(res => res.json())
     .then(json => res.status(200).json(json))
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -262,7 +262,7 @@ app.post('/user', (req,res)=>{
         res.status(200).send()
     })
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -277,7 +277,7 @@ app.post('/role', (req,res)=>{
     .then(res => res.json())
     .then(json => res.status(200).json(json))
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -292,7 +292,7 @@ app.put('/role', (req,res)=>{
     .then(res => res.json())
     .then(json => res.status(200).json(json))
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -307,7 +307,7 @@ app.put('/user', (req,res)=>{
     .then(res => res.json())
     .then(json => res.status(200).json(json))
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -322,7 +322,7 @@ app.put('/unite_pedagogique', (req,res)=>{
     .then(res => res.json())
     .then(json => res.status(200).json(json))
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -342,11 +342,11 @@ app.delete('/user/:id', (req,res)=>{
         .then(res => res.json())
         .then(json => res.status(200).json(json))
         .catch(function (error) {
-            res.status(404).send("[]")
+            res.status(404).send(error)
         })
     )
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -362,7 +362,7 @@ app.delete('/role/:id', (req,res)=>{
     .then(res => res.json())
     .then(json => res.status(200).json(json))
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -423,10 +423,10 @@ app.get('/utilisateur_mf/:id', (req,res) => {
         .then(res => res.json())
         .then(json => res.status(200).json(json))
         .catch(function (error) {
-            res.status(404).send("[]")
+            res.status(404).send(error)
         })
     }).catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     })
 }) 
 
@@ -453,10 +453,10 @@ app.get('/utilisateur_nf/:id', (req,res) => {
         .then(res => res.json())
         .then(json => res.status(200).json(json))
         .catch(function (error) {
-            res.status(404).send("[]")
+            res.status(404).send(error)
         })
     }).catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     })
 }) 
 
@@ -483,10 +483,10 @@ app.get('/up_mf/:id', (req,res) => {
         .then(res => res.json())
         .then(json => res.status(200).json(json))
         .catch(function (error) {
-            res.status(404).send("[]")
+            res.status(404).send(error)
         })
     }).catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     })
 })
 
@@ -513,10 +513,10 @@ app.get('/up_mf/:id', (req,res) => {
         .then(res => res.json())
         .then(json => res.status(200).json(json))
         .catch(function (error) {
-            res.status(404).send("[]")
+            res.status(404).send(error)
         })
     }).catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     })
 })
 
@@ -547,7 +547,7 @@ app.get('/utilisateur_mf_up/:id_utilisateur/:id_module_formation', (req,res) => 
             res.status(200).send("{}")
         })
     }).catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     })
 })
 
@@ -568,11 +568,11 @@ app.delete('/unite_pedagogique/:id', (req,res)=>{
         .then(res => res.json())
         .then(json => res.status(200).json(json))
         .catch(function (error) {
-            res.status(404).send("[]")
+            res.status(404).send(error)
         })
     )
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -593,11 +593,11 @@ app.delete('/module_formation/:id', (req,res)=>{
         .then(res => res.json())
         .then(json => res.status(200).json(json))
         .catch(function (error) {
-            res.status(404).send("[]")
+            res.status(404).send(error)
         })
     )
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -618,11 +618,11 @@ app.post('/niveau_formation', (req,res)=>{
         .then(res => res.json())
         .then(json => res.status(200).json(json))
         .catch(function (error) {
-            res.status(404).send("[]")
+            res.status(404).send(error)
         })
     })
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -643,11 +643,11 @@ app.delete('/niveau_formation/:id', (req,res)=>{
         .then(res => res.json())
         .then(json => res.status(200).json(json))
         .catch(function (error) {
-            res.status(404).send("[]")
+            res.status(404).send(error)
         })
     )
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 //Statistique
@@ -657,7 +657,7 @@ app.get('/role_stat', (req,res) => {
     .then(res => res.json())
     .then(json => res.status(200).json(json))
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
@@ -668,7 +668,7 @@ app.get('/stats_messages/:id', (req,res) => {
     .then(res => res.json())
     .then(json => res.status(200).json(json))
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 //affiche le nombre d'up pour un user
@@ -678,7 +678,7 @@ app.get('/stat_utilisateur_up/:id_utilisateur', (req,res) => {
     .then(res => res.json())
     .then(json => res.status(200).json(json))
     .catch(function (error) {
-        res.status(404).send("[]")
+        res.status(404).send(error)
     });
 })
 
