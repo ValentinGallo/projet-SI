@@ -13,7 +13,13 @@ class Profil extends React.Component {
     refreshUP(){
         fetch(burl+'/utilisateur_up/'+localStorage.getItem("id"))
         .then(response => response.json())
-        .then(response => this.setState({listeUp: response}))
+        .then(response => {
+            console.log(response)
+            if(response.length != 0){
+                this.setState({listeUp: response})
+            }
+            
+        })
         .catch(err => console.error(err));
         
     }
