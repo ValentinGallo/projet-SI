@@ -12,6 +12,7 @@ import Backup from './Components/Backup/Backup.js'
 import GestionModule from './Components/ModuleFormation/GestionModule';
 import GestionUP from './Components/UnitePeda/GestionUP';
 import Profil from './Components/Profil/Profil';
+import Statistiques from './Components/Statistiques/Statistiques';
 
 var routeUtlisateur;
 if (localStorage.getItem("nomRole") == "Admin") {
@@ -33,6 +34,7 @@ const App = () => (
         <Route path="/Messagerie" component={Messagerie}/>
         <Route path="/ModuleFormation" component={GestionModule}/>
         <Route path="/UnitePedagogique" component={GestionUP}/>
+        <Route path="/Statistiques" component={Statistiques}/>
         {routeUtlisateur}
         {routeBackup}
       </Switch>

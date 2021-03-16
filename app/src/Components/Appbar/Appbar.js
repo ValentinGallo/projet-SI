@@ -15,7 +15,8 @@ class Appbar extends React.Component {
     
     var routeBackup;
     if (localStorage.getItem("nomRole") == "Admin") {
-      routeBackup =  <a className="nav-item nav-link active" href="/Backup"><i className="far fa-save"></i> Sauvegarde</a>;
+      routeBackup =  <><a className="nav-item nav-link active" href="/Backup"><i className="far fa-save"></i> Sauvegarde</a>
+      <a className="nav-item nav-link active" href="/Statistiques"><i class="fas fa-signal"></i> Statistiques</a></>;
     }
 
           if (localStorage.getItem("id") == null) {

@@ -84,6 +84,17 @@ app.get('/disscussion/:idExpediteur/:idDestinataire', async (req,res) => {
     }
 })
 
+app.get('/stats_messages/:id', async (req,res) => {
+    const id = parseInt(req.params.id);
+    try {
+        const messageRecus = await db.collection('messages').find( { idDestinataire:id } ).toArray()
+        const messageEnvoye = await db.collection('messages').find( { idExpediteur:id } ).toArray()
+        res.status(200).json({nbMessageRecu:messageRecus.length,nbMessageEnvoye:messageEnvoye.length})
+    } catch (err) {
+        console.log(err)
+        throw err
+    }
+})
 
 app.listen(PORT, () => {
     console.log("Serveur à l'écoute sur le port "+PORT)
