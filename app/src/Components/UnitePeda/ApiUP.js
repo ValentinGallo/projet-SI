@@ -9,6 +9,9 @@ export default {
     afficherUP_MF : function(id,idMF) {
         return fetch(burl+'/utilisateur_mf_up/'+id+'/'+idMF);
     },
+    get_up_mf : function(idMF) {
+        return fetch(burl+'/up_mf/'+idMF);
+    },
     ajouterUP : function(id_NF, id_MF, id_User,nom,url) {
         const requestOptions = {
             method: 'POST',

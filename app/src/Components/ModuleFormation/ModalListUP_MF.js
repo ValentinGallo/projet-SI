@@ -16,7 +16,7 @@ class ModalListUP_MF extends React.Component {
     }    
     
     refresh(idModuleForm){
-        ApiUP.afficherUP_MF(this.state.identifiant,idModuleForm)
+        ApiUP.get_up_mf(idModuleForm)
         .then(response => response.json())
         .then(response => this.setState({unitePeda:response}))
         .then(response => this.setState({idMF:idModuleForm}))

@@ -46,7 +46,7 @@ class Appbar extends React.Component {
                     {routeUtlisateur}
 
                     <a className="nav-item nav-link active" href="/ModuleFormation"><i className="fas fa-cubes"></i> Module formation</a>
-                    <a className="nav-item nav-link active" href="/UnitePedagogique"><i className="fas fa-book"></i> Unités pédagogiques</a>
+                    <a className="nav-item nav-link active" href="/UnitePedagogique"><i className="fas fa-book"></i> Mes unités pédagogiques</a>
 
                     {routeBackup}
 
