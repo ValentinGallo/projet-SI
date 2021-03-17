@@ -155,8 +155,8 @@ app.use(cors());
                 if (error){
                     res.status(404).json(results)
                 };
-                    console.log('result :', results.get('id'));
-                    res.status(200).json(results.get('id'))
+                
+                res.status(200).json(results)
             });
         });
     })

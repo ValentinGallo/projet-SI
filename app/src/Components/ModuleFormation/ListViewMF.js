@@ -1,6 +1,7 @@
 //Rien d'intéressant ici du pur affichage html/css
 import React from 'react';
 import ApiMF from './ApiMF';
+import API from '../../utils/API';
 import ModalListUP_MF from './ModalListUP_MF';
 
 class ListViewMF extends React.Component {
@@ -11,11 +12,36 @@ class ListViewMF extends React.Component {
             identifiant: parseInt(localStorage.getItem("id")),
             modulesFormation:[],
             nomMF:null,
+            nom:''
         };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.tabSelect = this.tabSelect.bind(this);
     }    
     
     componentDidMount() {       
+        ApiMF.afficherMF()
+        .then(response => response.json())
+        .then(response => this.setState({modulesFormation:response}))
+        .catch(err => console.error(err));
+    }
+
+    handleChange(event) {
+        this.setState({
+          [event.target.name]: event.target.value
+        });
+    }
+
+    handleSubmit(event) {
+        API.postMF(this.state.nom)
+        .then(() => this.refresh())
+        .catch(err => console.error(err));
+    
+        this.refresh()
+        event.preventDefault();
+    }
+
+    refresh() {
         ApiMF.afficherMF()
         .then(response => response.json())
         .then(response => this.setState({modulesFormation:response}))
@@ -52,8 +78,25 @@ class ListViewMF extends React.Component {
                                 {bodyTab}
                             </tbody>
                         </table>
-                    </div>
-                        <ModalListUP_MF ref={this.child} nom_MF={this.state.nomMF} />
+
+                        <div className="card text-white bg-dark mb-3 col-12 mx-auto">
+                            <div className="card-body">
+                                <form onSubmit={this.handleSubmit}>
+                                    <div className="row g-3 align-items-center">
+                                        <div className="col-auto">
+                                            <label>Nom:</label>
+                                            <input name="nom" type="text" className="form-control" value={this.state.nom} onChange={this.handleChange} />
+                                        </div>
+
+                                        <div className="col-auto">
+                                            <button type="submit" onClick={this.handleSubmit} className="btn btn-success mt-4">Ajouter</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>    
+                    </div>                
+                    <ModalListUP_MF ref={this.child} nom_MF={this.state.nomMF} />
                 </div>
                 );
             }

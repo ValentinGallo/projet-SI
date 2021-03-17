@@ -9,6 +9,7 @@ class ModalListUP_MF extends React.Component {
         this.child  = React.createRef();
         this.state = {
             identifiant:parseInt(localStorage.getItem("id")),
+            role: localStorage.getItem("nomRole"),
             unitePeda:[],
             idMF:null
         };
@@ -22,8 +23,6 @@ class ModalListUP_MF extends React.Component {
         .then(response => this.setState({idMF:idModuleForm}))
         .then(this.child.current.refresh(idModuleForm))
         .catch(err => console.error(err));
-        
-        
     }
 
     deleteUP = (index,e) =>{
@@ -43,14 +42,14 @@ class ModalListUP_MF extends React.Component {
                 <td >-</td>
                 <td ></td>
                 </tr>
-                
         }else{
             bodyTab = this.state.unitePeda.map((element, index) => 
                 <tr key={element.id}>
                 <th scope="row">{element.id}</th>
                 <td >{element.nom}</td>
                 <td ><a className="text-light" href={element.url}>{element.url}</a></td>
-                <td><button value={element.id} className="btn btn-danger fas fa-trash-alt" onClick={this.deleteUP.bind(this, index)}/></td>
+                { this.state.role === "Admin" ? <td><button value={element.id} className="btn btn-danger fas fa-trash-alt" onClick={this.deleteUP.bind(this, index)}/></td>: <td></td>}
+                
                 </tr>
                 );
         }

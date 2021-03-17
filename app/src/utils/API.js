@@ -17,6 +17,14 @@ export default {
         };
         return fetch(burl+'/user', requestOptions)
     },
+    postMF : function(nom) {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nom:nom})
+        };
+        return fetch(burl+'/moduleFormation', requestOptions)
+    },
     putUser : function(id, identifiant, mdp, id_Role) {
         const requestOptions = {
             method: 'PUT',

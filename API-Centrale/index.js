@@ -467,7 +467,7 @@ app.get('/up_mf/:id', (req,res) => {
     var nbElement = 0;
     var id_unite_pedagogique = "";
 
-    fetch('http://obiwan2.univ-brest.fr:7034/up_mf/' + id)
+    fetch('http://obiwan2.univ-brest.fr:7034/mf_up/' + id)
     .then(res => res.json())
     .then(json => {
         json.forEach(unite_pedagogique => {
