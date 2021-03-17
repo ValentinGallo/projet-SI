@@ -69,7 +69,7 @@ class ListViewMF extends React.Component {
                     data-bs-toggle="modal" data-bs-target="#exampleModal">{element.nom}
                 </button>
             </td>
-            <td><button value={element.id} className="btn btn-danger fas fa-trash-alt" onClick={this.deleteMF.bind(this, index)}/></td>
+            <td className="text-center"><button value={element.id} className="btn btn-danger fas fa-trash-alt" onClick={this.deleteMF.bind(this, index)}/></td>
             </tr>
             );
             return (
