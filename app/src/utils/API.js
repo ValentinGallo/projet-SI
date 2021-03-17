@@ -56,6 +56,13 @@ export default {
         };
         return fetch(burl+'/user/'+id, requestOptions)
     },
+    deleteMF : function(id) {
+        const requestOptions = {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+        };
+        return fetch(burl+'/module_formation/'+id, requestOptions)
+    },
     loadNF : function(){
         return fetch(burl+'/niveauForm')
     },

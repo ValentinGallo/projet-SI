@@ -48,13 +48,20 @@ class ListViewMF extends React.Component {
         .catch(err => console.error(err));
     }
 
+    deleteMF = (index,e) =>{
+        const mf = Object.assign([],this.state.modulesFormation)
+        mf.splice(index,1)
+        this.setState({modulesFormation:mf})
+        API.deleteMF(e.target.value)
+    }
+
     tabSelect(event){
         this.setState({nomMF:event.target.name});
         this.child.current.refresh(event.target.value);
     }
     
     render() {
-        const bodyTab = this.state.modulesFormation.map(element => 
+        const bodyTab = this.state.modulesFormation.map((element, index) => 
             <tr key={element.id}>
             <th scope="row">{element.id}</th>
             <td >
@@ -62,6 +69,7 @@ class ListViewMF extends React.Component {
                     data-bs-toggle="modal" data-bs-target="#exampleModal">{element.nom}
                 </button>
             </td>
+            <td><button value={element.id} className="btn btn-danger fas fa-trash-alt" onClick={this.deleteMF.bind(this, index)}/></td>
             </tr>
             );
             return (
@@ -72,6 +80,7 @@ class ListViewMF extends React.Component {
                                 <tr>
                                     <th scope="col">id</th>
                                     <th scope="col">nom</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                                 <tbody>

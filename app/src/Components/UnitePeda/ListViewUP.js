@@ -29,7 +29,6 @@ class ListViewUP extends React.Component {
         ApiUP.deleteUP(e.target.value)
     }
 
-    
     tabSelect(event){
         this.setState({idUP:event.target.value});
         this.child.current.refresh(event.target.value);
