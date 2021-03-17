@@ -33,7 +33,7 @@ class ListViewMF extends React.Component {
     }
 
     handleSubmit(event) {
-        API.postMF(this.state.nom)
+        API.postMF(this.state.nom, this.state.identifiant)
         .then(() => this.refresh())
         .catch(err => console.error(err));
     
@@ -69,7 +69,7 @@ class ListViewMF extends React.Component {
                     data-bs-toggle="modal" data-bs-target="#exampleModal">{element.nom}
                 </button>
             </td>
-            <td className="text-center"><button value={element.id} className="btn btn-danger fas fa-trash-alt" onClick={this.deleteMF.bind(this, index)}/></td>
+            { localStorage.getItem("nomRole") === "Admin" ? <td><button value={element.id} className="btn btn-danger fas fa-trash-alt" onClick={this.deleteMF.bind(this, index)}/></td>: <td></td>} 
             </tr>
             );
             return (
@@ -88,22 +88,27 @@ class ListViewMF extends React.Component {
                             </tbody>
                         </table>
 
+                        { localStorage.getItem("nomRole") === "Admin" ? 
                         <div className="card text-white bg-dark mb-3 col-12 mx-auto">
-                            <div className="card-body">
-                                <form onSubmit={this.handleSubmit}>
-                                    <div className="row g-3 align-items-center">
-                                        <div className="col-auto">
-                                            <label>Nom:</label>
-                                            <input name="nom" type="text" className="form-control" value={this.state.nom} onChange={this.handleChange} />
-                                        </div>
-
-                                        <div className="col-auto">
-                                            <button type="submit" onClick={this.handleSubmit} className="btn btn-success mt-4">Ajouter</button>
-                                        </div>
+                        <div className="card-body">
+                            <form onSubmit={this.handleSubmit}>
+                                <div className="row g-3 align-items-center">
+                                    <div className="col-auto">
+                                        <label>Nom:</label>
+                                        <input name="nom" type="text" className="form-control" value={this.state.nom} onChange={this.handleChange} />
                                     </div>
-                                </form>
-                            </div>
-                        </div>    
+
+                                    <div className="col-auto">
+                                        <button type="submit" onClick={this.handleSubmit} className="btn btn-success mt-4">Ajouter</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div> 
+                        :
+                        null
+                        } 
+                           
                     </div>                
                     <ModalListUP_MF ref={this.child} nom_MF={this.state.nomMF} />
                 </div>

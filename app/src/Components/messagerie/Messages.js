@@ -54,11 +54,14 @@ export default class Messages extends React.Component {
                 <h3><i className="fas fa-sync-alt" style={{cursor:'pointer'}} onClick={() => this.props.refreshMessage(this.props.userSelected)}></i></h3>
                     </div>
             </div>
-       
-        <div className="form-check text-white">
-        <input className="form-check-input" type="checkbox" id="defaultCheck1" defaultChecked={this.state.isChecked} onChange={this.handleChange} style={{cursor:'pointer'}}/>
-        <label className="form-check-label" htmlFor="defaultCheck1" style={{cursor:'pointer'}}> Mode Edition</label>
-        </div>
+            { localStorage.getItem("nomRole") === "Admin" ? 
+             <div className="form-check text-white">
+             <input className="form-check-input" type="checkbox" id="defaultCheck1" defaultChecked={this.state.isChecked} onChange={this.handleChange} style={{cursor:'pointer'}}/>
+             <label className="form-check-label" htmlFor="defaultCheck1" style={{cursor:'pointer'}}> Mode Edition</label>
+             </div>
+            :
+            null
+            }
         <div className="container mb-2" style={{maxHeight:'500px',overflow:'auto'}}>
         {listMessages}
         </div>

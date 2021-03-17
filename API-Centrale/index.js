@@ -217,16 +217,13 @@ app.post('/moduleFormation', (req,res) => {
     .then(json => {
         // Création du MF dans Neo4j
         var id_mf = json[0].id
-        fetch('http://obiwan2.univ-brest.fr:7034/module_formation/' + id_mf)
+        fetch('http://obiwan2.univ-brest.fr:7034/module_formation/' + id_mf, requestOptions)
         .then(json => {
             // Fait la relation avec l'utilisateur dans Neo4j
-            fetch('http://obiwan2.univ-brest.fr:7034/utilisateur_mf/' + req.body.id_utilisateur + '/' + id_mf)
+            fetch('http://obiwan2.univ-brest.fr:7034/utilisateur_mf/' + req.body.id_utilisateur + '/' + id_mf, requestOptions)
             res.status(200).send()
         })
     })
-    .catch(function (error) {
-        res.status(404).send(error)
-    });
 })
 
 app.get('/selectUP/:id', (req,res) => {

@@ -17,11 +17,11 @@ export default {
         };
         return fetch(burl+'/user', requestOptions)
     },
-    postMF : function(nom) {
+    postMF : function(nom, id_utilisateur) {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nom:nom})
+            body: JSON.stringify({ nom:nom, id_utilisateur: id_utilisateur})
         };
         return fetch(burl+'/moduleFormation', requestOptions)
     },
